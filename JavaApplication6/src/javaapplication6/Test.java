@@ -12,4 +12,6 @@ package javaapplication6;
 public class Test {
 
     // Ejemplo 1
+
+    // Ejemplo 2
 }
