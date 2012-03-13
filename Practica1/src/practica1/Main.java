@@ -5,6 +5,8 @@
 
 package practica1;
 
+import p1.*;
+
 /**
  *
  * @author gerardo
@@ -16,6 +18,15 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+
+
+        CromosomaF1 a = new CromosomaF1();
+        a.Aleatorizar();
+        System.out.println(a);
+
+        a.Aleatorizar();
+        System.out.println(a);
+
     }
 
 }
