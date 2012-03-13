@@ -12,6 +12,17 @@ import practica1.*;
 /**
  *
  * @author gerardo
+ *
+ * TODO:
+ *  Meter una lista ordenada en AlgoritmoGenetico.java, para la _poblacion
+ *  Definir la interfaz Seleccion, que tendrá un método "Seleccionar(n)"
+ *  Implementar SeleccionRuleta.java
+ *  Implementar SeleccionTorneo.java
+ *  Introducir un método Calcular() en AlgoritmoGenetico
+ *  Introducir un cromosoma 'Mejor' en AlgoritmoGenetico
+ *  Introducir la estadística correspondiente en Genetico
+ *  Meter la interfaz gráfica
+ * 
  */
 public class Main {
 
