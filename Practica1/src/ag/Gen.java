@@ -8,6 +8,9 @@ package ag;
 /**
  *
  * @author gerardo
+ *
+ * Este gen codifica un rango de valores enteros utilizando l bits
+ *
  */
 public class Gen {
     public int[] datos;

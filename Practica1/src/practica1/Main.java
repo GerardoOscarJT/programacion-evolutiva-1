@@ -5,6 +5,7 @@
 
 package practica1;
 
+import ag.AlgoritmoGenetico;
 import practica1.funcion1.*;
 
 /**
@@ -20,12 +21,20 @@ public class Main {
         // TODO code application logic here
 
 
-        CromosomaF1 a = new CromosomaF1();
-        a.Aleatorizar();
-        System.out.println(a);
+        AlgoritmoGenetico ag = new AlgoritmoGenetico<CromosomaF1>();
+        ag.tamano = 100;
+        ag.num_generaciones = 100;
+        ag.prob_cruce = 0.1;
+        ag.prob_mutacion = 0.01;
 
-        a.Aleatorizar();
-        System.out.println(a);
+        ag.inicializa();
+
+
+
+
+
+
+
 
     }
 
