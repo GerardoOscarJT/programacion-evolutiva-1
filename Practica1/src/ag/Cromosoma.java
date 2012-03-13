@@ -3,7 +3,9 @@
  * and open the template in the editor.
  */
 
-package p1;
+package ag;
+
+import ag.Gen;
 
 /**
  *
@@ -27,6 +29,19 @@ public abstract class Cromosoma {
                 genes[i].datos[j] = utiles.Aleatorio.getRandomInt(2); // TODO: comprobar que nºs genera
             }
         }
+    }
+
+    public String toString() {
+
+        String r = "";
+
+        for (int i=0; i<genes.length; i++) {
+            r += "Gen"+i+" = "+genes[i].getInt()+"; ";
+        }
+
+
+
+        return r;
     }
 
 
