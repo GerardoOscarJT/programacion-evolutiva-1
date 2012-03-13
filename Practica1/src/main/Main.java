@@ -3,10 +3,10 @@
  * and open the template in the editor.
  */
 
-package practica1;
+package main;
 
-import ag.AlgoritmoGenetico;
-import practica1.funcion1.*;
+import ag.*;
+import practica1.funcion1.CromosomaF1;
 
 /**
  *
