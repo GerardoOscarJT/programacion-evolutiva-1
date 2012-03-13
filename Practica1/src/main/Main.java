@@ -6,7 +6,7 @@
 package main;
 
 import ag.*;
-import practica1.funcion1.CromosomaF1;
+import practica1.*;
 
 /**
  *
