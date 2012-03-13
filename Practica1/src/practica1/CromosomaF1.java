@@ -15,15 +15,19 @@ import ag.Gen;
 public class CromosomaF1 extends Cromosoma {
     
     public CromosomaF1() {
+        
         genes = new Gen[1];
         genes[0] = new Gen(16);
 
         Aleatorizar();
+
+        
     }
 
 
 
     public double Fitness() {
+        
         double min=0;
         double max=1;
 
@@ -31,5 +35,11 @@ public class CromosomaF1 extends Cromosoma {
 
         return x+Math.abs(Math.sin(32*4*Math.atan(1)*x));
     }
+
+    public CromosomaF1 crearNuevo() {
+        return new CromosomaF1();
+    }
+
+
 
 }

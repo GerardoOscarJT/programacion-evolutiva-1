@@ -6,6 +6,7 @@
 package main;
 
 import ag.*;
+import ag.seleccion.*;
 import practica1.*;
 
 /**
@@ -21,17 +22,17 @@ public class Main {
         // TODO code application logic here
 
 
-        AlgoritmoGenetico ag = new AlgoritmoGenetico<CromosomaF1>();
-        ag.tamano = 100;
+        CromosomaF1 c = new CromosomaF1();
+        SeleccionRuleta s = new SeleccionRuleta();
+
+
+        AlgoritmoGenetico ag = new AlgoritmoGenetico(c,s);
+        ag.tamano = 10;
         ag.num_generaciones = 100;
         ag.prob_cruce = 0.1;
         ag.prob_mutacion = 0.01;
 
         ag.inicializa();
-
-
-
-
 
 
 
