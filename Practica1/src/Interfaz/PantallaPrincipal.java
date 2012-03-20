@@ -5,7 +5,10 @@
 package Interfaz;
 
 import ag.AlgoritmoGenetico;
+import ag.Cromosoma;
+import ag.seleccion.Seleccion;
 import ag.seleccion.SeleccionRuleta;
+import javax.swing.JOptionPane;
 import practica1.CromosomaF1;
 
 /**
@@ -20,6 +23,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     public PantallaPrincipal() {
         initComponents();
     }
+    
+
+     public boolean esEntero(String cad){
+        for(int i = 0; i<cad.length(); i++){
+             if(!Character.isDigit(cad.charAt(i)))  return false;
+                 }
+        return true;
+ }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,14 +42,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Error = new javax.swing.JDialog();
         PanelPrincipal = new javax.swing.JPanel();
         funcion = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         numGen = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        poblacion = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        probCruce = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         probMutacion = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -51,6 +64,17 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         calcular = new javax.swing.JButton();
 
+        javax.swing.GroupLayout ErrorLayout = new javax.swing.GroupLayout(Error.getContentPane());
+        Error.getContentPane().setLayout(ErrorLayout);
+        ErrorLayout.setHorizontalGroup(
+            ErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        ErrorLayout.setVerticalGroup(
+            ErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         PanelPrincipal.setBackground(new java.awt.Color(51, 102, 255));
@@ -60,6 +84,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jLabel1.setText("Función");
 
         jLabel2.setText("Num. generaciones");
+
+        poblacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                poblacionActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Tam. población");
 
@@ -109,8 +139,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(funcion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(numGen)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
+                            .addComponent(poblacion)
+                            .addComponent(probCruce)
                             .addComponent(probMutacion)
                             .addComponent(valorN)
                             .addComponent(cruce)
@@ -136,11 +166,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(poblacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(probCruce, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -182,22 +212,46 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularActionPerformed
-        CromosomaF1 c = new CromosomaF1();
-        SeleccionRuleta s = new SeleccionRuleta();
-
-
+        Cromosoma c = null;
+        Seleccion s = null;
+        Boolean valido=true;
+        //Selecccionamos que funcion ha escogido el usuario
+        switch(funcion.getSelectedIndex()){
+            case 0 : c = new CromosomaF1();
+        } 
+        switch(seleccion.getSelectedIndex()){
+            case 0 : s = new SeleccionRuleta();
+        }
         int v = 0;
-
         AlgoritmoGenetico ag = new AlgoritmoGenetico(c, s);
-        ag.num_generaciones = 3;
-        ag.tamano = 100;
-        ag.prob_cruce = 0.02;
-        ag.prob_mutacion = 0.001;
-        ag.inicializa();
-
-
-
+        String aux = numGen.getText();
+        if (!numGen.getText().isEmpty()) 
+            try{ag.num_generaciones=Integer.parseInt(numGen.getText());}
+            catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(rootPane, "Numero de generaciones incorrecto.\n Debe ser un número entero.");
+                valido=false;}
+        if (!poblacion.getText().isEmpty())
+            try{ag.tamano=Integer.parseInt(poblacion.getText());}
+            catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(rootPane, "Tamaño de población incorrecto.\n Debe ser un número entero.");
+                valido=false;}
+        if (!probCruce.getText().isEmpty())
+            try{ag.prob_cruce=Double.valueOf(probCruce.getText());}
+            catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(rootPane, "Probabilidad de cruce incorrecta.\n Debe ser un número real.");
+                valido=false;}
+        if (!probMutacion.getText().isEmpty())
+            try{ag.prob_cruce=Double.valueOf(probMutacion.getText());}
+            catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(rootPane, "Probabilidad de mutación incorrecta.\n Debe ser un número real.");
+                valido=false;}
+        if (valido){
+            ag.inicializa();}
     }//GEN-LAST:event_calcularActionPerformed
+
+    private void poblacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_poblacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_poblacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,6 +295,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog Error;
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JButton calcular;
     private javax.swing.JTextField cruce;
@@ -255,9 +310,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField numGen;
+    private javax.swing.JTextField poblacion;
+    private javax.swing.JTextField probCruce;
     private javax.swing.JTextField probMutacion;
     private javax.swing.JComboBox seleccion;
     private javax.swing.JTextField valorN;
