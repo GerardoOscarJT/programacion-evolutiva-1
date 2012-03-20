@@ -41,7 +41,7 @@ public class Main {
 
         AlgoritmoGenetico ag = new AlgoritmoGenetico(c,s);
         ag.tamano = 10;
-        ag.num_generaciones = 100;
+        ag.num_generaciones = 3;
         ag.prob_cruce = 0.1;
         ag.prob_mutacion = 0.01;
 
