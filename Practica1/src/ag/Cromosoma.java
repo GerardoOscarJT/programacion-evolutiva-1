@@ -11,7 +11,7 @@ import ag.Gen;
  *
  * @author gerardo
  */
-public abstract class Cromosoma implements Comparable<Cromosoma>{
+public abstract class Cromosoma implements Comparable<Cromosoma> {
 
     protected Gen genes[];
 
@@ -21,9 +21,31 @@ public abstract class Cromosoma implements Comparable<Cromosoma>{
 
     public int compareTo(Cromosoma o) {
         if (Fitness() < o.Fitness())
-            return -1;
-        else
             return 1;
+        else
+            return -1;
+    }
+
+    public void Cruce(Cromosoma c) {
+        // Elegimos un gen de todos los que tenemos
+        int g = utiles.Aleatorio.getRandomInt(genes.length);
+
+        // Intercambio los genes que hay a la izquierda
+        for (int i=0; i<g; i++) {
+            Gen aux = c.genes[i];
+            c.genes[i] = genes[i];
+            genes[i] = aux;
+        }
+
+        // Del gen g elijo un bit e intercambio a nivel de bit
+        int b = utiles.Aleatorio.getRandomInt(genes[g].datos.length);
+
+        // Intercambio todos los bits que están a la izquierda
+        for (int i=0; i<b; i++) {
+            int aux = c.genes[g].datos[i];
+            c.genes[g].datos[i] = genes[g].datos[i];
+            genes[g].datos[i] = aux;
+        }
     }
 
     public Cromosoma(Cromosoma c) {

@@ -4,6 +4,10 @@
  */
 package Interfaz;
 
+import ag.AlgoritmoGenetico;
+import ag.seleccion.SeleccionRuleta;
+import practica1.CromosomaF1;
+
 /**
  *
  * @author Alberto
@@ -74,6 +78,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jLabel9.setText("Elitismo");
 
         calcular.setText("Calcular");
+        calcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calcularActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelPrincipalLayout = new javax.swing.GroupLayout(PanelPrincipal);
         PanelPrincipal.setLayout(PanelPrincipalLayout);
@@ -83,7 +92,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
                         .addGap(221, 221, 221)
-                        .addComponent(calcular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(calcular, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,6 +180,24 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularActionPerformed
+        CromosomaF1 c = new CromosomaF1();
+        SeleccionRuleta s = new SeleccionRuleta();
+
+
+        int v = 0;
+
+        AlgoritmoGenetico ag = new AlgoritmoGenetico(c, s);
+        ag.num_generaciones = 3;
+        ag.tamano = 100;
+        ag.prob_cruce = 0.02;
+        ag.prob_mutacion = 0.001;
+        ag.inicializa();
+
+
+
+    }//GEN-LAST:event_calcularActionPerformed
 
     /**
      * @param args the command line arguments

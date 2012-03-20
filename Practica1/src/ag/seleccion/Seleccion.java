@@ -14,6 +14,6 @@ import java.util.ArrayList;
  */
 public interface Seleccion {
 
-    ArrayList<Cromosoma> Selecciona(ArrayList<Cromosoma> poblacion);
+    ArrayList<Cromosoma> Selecciona(int n, ArrayList<Cromosoma> poblacion);
 
 }
