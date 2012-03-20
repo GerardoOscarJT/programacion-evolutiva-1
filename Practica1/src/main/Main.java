@@ -1,5 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this template, choose Tools | Templates   fffffff
  * and open the template in the editor.
  */
 
@@ -8,6 +8,7 @@ package main;
 import ag.*;
 import ag.seleccion.*;
 import practica1.*;
+import Interfaz.*;
 
 /**
  *
@@ -30,9 +31,10 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // TODO code application logic here   
 
-
+        PantallaPrincipal ventana = new PantallaPrincipal();
+        ventana.setVisible(true);
         CromosomaF1 c = new CromosomaF1();
         SeleccionRuleta s = new SeleccionRuleta();
 
