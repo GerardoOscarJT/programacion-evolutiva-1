@@ -27,7 +27,11 @@ public class CromosomaF1 extends Cromosoma {
 
 
     public double Fitness() {
-        
+        return Fenotipo();
+    }
+
+
+    public double Fenotipo() {
         double min=0;
         double max=1;
 

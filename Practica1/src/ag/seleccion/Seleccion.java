@@ -5,14 +5,15 @@
 
 package ag.seleccion;
 
+import ag.Cromosoma;
+import java.util.ArrayList;
+
 /**
  *
  * @author gerardo
  */
 public interface Seleccion {
 
-    
-
-
+    ArrayList<Cromosoma> Selecciona(ArrayList<Cromosoma> poblacion);
 
 }
