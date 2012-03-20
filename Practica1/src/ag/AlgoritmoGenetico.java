@@ -6,6 +6,7 @@
 package ag;
 
 import ag.seleccion.*;
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 import practica1.CromosomaF1;
 
@@ -22,7 +23,7 @@ public class AlgoritmoGenetico {
     protected Cromosoma _c;
     protected Seleccion _s;
 
-    protected PriorityQueue<Cromosoma> _poblacion;
+    protected ArrayList<Cromosoma> _poblacion;
 
     public AlgoritmoGenetico(Cromosoma c, Seleccion s) {
         _c = c;
@@ -30,7 +31,7 @@ public class AlgoritmoGenetico {
     }
 
     public void inicializa() {
-        _poblacion = new PriorityQueue<Cromosoma>(tamano);
+        _poblacion = new ArrayList<Cromosoma>(tamano);
 
         Cromosoma c;
         for (int i = 0; i<tamano; i++) {
@@ -38,9 +39,19 @@ public class AlgoritmoGenetico {
             _poblacion.add(c);
         }
 
-        while (!_poblacion.isEmpty()) {
-            c = _poblacion.element();
-            _poblacion.remove();
+
+
+        while (num_generaciones>0) {
+
+
+
+
+
+
+
+
+
+            num_generaciones--;
         }
     }
     

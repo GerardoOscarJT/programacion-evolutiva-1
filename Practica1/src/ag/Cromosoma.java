@@ -34,6 +34,8 @@ public abstract class Cromosoma implements Comparable<Cromosoma>{
         }
     }
 
+    public abstract double Fenotipo();
+
     public abstract double Fitness();
 
     public abstract Cromosoma crearNuevo();
