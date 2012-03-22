@@ -46,8 +46,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         Error = new javax.swing.JDialog();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         PanelPrincipal = new javax.swing.JPanel();
         funcion = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
@@ -81,19 +79,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             ErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -212,7 +197,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(elitismo)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(calcular)
                 .addContainerGap())
         );
@@ -246,7 +231,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         Cromosoma c = null;
         Seleccion s = null;
         Boolean valido=true;
-        modelotabla.addColumn("Columna1");
         //Selecccionamos que funcion ha escogido el usuario
         switch(funcion.getSelectedIndex()){
             case 0 : c = new CromosomaF1();
@@ -280,6 +264,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 valido=false;}
         if (valido){
             ag.inicializa();
+            modelotabla.setRowCount(200);
+            for (int i=0; i<=ag.num_generaciones;i++)
+                modelotabla.addColumn("Generacion "+i);
+            /*for (int i=0; i<ag.tamano; i++){
+                for (int j=0; j<ag.tamano; j++){
+                    modelotabla.setValueAt(ag.historial.get(j).get(i), i, j);
+                }
+            }*/
         }
     }//GEN-LAST:event_calcularActionPerformed
 
@@ -345,9 +337,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField numGen;
     private javax.swing.JTextField poblacion;
