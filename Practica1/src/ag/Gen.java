@@ -31,4 +31,10 @@ public class Gen {
         return r;
     }
 
+    public void copyFrom(Gen g) {
+        datos = new int[g.datos.length];
+        for (int i = 0; i<datos.length; i++)
+            datos[i] = g.datos[i];
+    }
+
 }
