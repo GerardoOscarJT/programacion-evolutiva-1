@@ -77,6 +77,8 @@ public class AlgoritmoGenetico {
                 if (r<prob_cruce) 
                     seleccionados.get(i).Cruce(seleccionados.get(i-1));
             }
+            for (int i =0;i<_poblacion.size();i++)
+                _poblacion.get(i).mutacion(prob_mutacion);
 
 
             evaluarPoblacion();
