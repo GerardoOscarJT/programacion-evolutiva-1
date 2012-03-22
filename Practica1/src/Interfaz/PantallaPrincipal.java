@@ -25,7 +25,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
      */
     public PantallaPrincipal() {
         modelotabla = new DefaultTableModel();
+
+
+
         initComponents();
+
+        if (!utiles.Configuracion.debugMode()) {
+            
+        }
+        jTable2.setVisible(false);
     }
     
 
@@ -262,16 +270,19 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         if (valido){
             ag.inicializa();
 
-            //
-            for (int i=0; i<ag.historial.size();i++)
-                modelotabla.addColumn("Generacion "+i);
+            if (utiles.Configuracion.debugMode()) {
+                for (int i=0; i<ag.historial.size();i++)
+                    modelotabla.addColumn("Generacion "+i);
 
-            modelotabla.setRowCount(ag.historial.get(0).size());
+                modelotabla.setRowCount(ag.historial.get(0).size());
 
-            for (int i=0; i<ag.historial.size(); i++){
-                for (int j=0; j<ag.historial.get(i).size(); j++){
-                    modelotabla.setValueAt(ag.historial.get(i).get(j), j, i);
+                for (int i=0; i<ag.historial.size(); i++){
+                    for (int j=0; j<ag.historial.get(i).size(); j++){
+                        modelotabla.setValueAt(ag.historial.get(i).get(j), j, i);
+                    }
                 }
+                
+                jTable2.setVisible(true);
             }
         }
     }//GEN-LAST:event_calcularActionPerformed

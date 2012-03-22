@@ -35,14 +35,14 @@ public class AlgoritmoGenetico {
 
     public void evaluarPoblacion() {
 
+        if (utiles.Configuracion.debugMode()) {
+            ArrayList<String> historial_generacion = new ArrayList<String>();
 
-        ArrayList<String> historial_generacion = new ArrayList<String>();
+            for(Cromosoma c : _poblacion)
+                historial_generacion.add(c.Fitness()+"|"+c.Fenotipo());
 
-        for(Cromosoma c : _poblacion) {
-            historial_generacion.add(c.Fitness()+"|"+c.Fenotipo());
+            historial.add(historial_generacion);
         }
-
-        historial.add(historial_generacion);
 
         Cromosoma mejor = Collections.max(_poblacion);
         System.out.println(mejor.Fenotipo(0));
