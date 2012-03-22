@@ -26,6 +26,11 @@ public class AlgoritmoGenetico {
 
     public ArrayList<ArrayList<String>> historial;
 
+    public ArrayList<Double> mejor_absoluto;
+    public ArrayList<Double> mejor_generacion;
+    public ArrayList<Double> media_generacion;
+
+
     public AlgoritmoGenetico(Cromosoma c, Seleccion s) {
         _c = c;
         _s = s;
@@ -43,6 +48,8 @@ public class AlgoritmoGenetico {
 
             historial.add(historial_generacion);
         }
+
+        
 
         Cromosoma mejor = Collections.max(_poblacion);
         System.out.println(mejor.Fenotipo(0));

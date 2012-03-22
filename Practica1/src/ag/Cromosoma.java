@@ -6,12 +6,14 @@
 package ag;
 
 import ag.Gen;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author gerardo
  */
-public abstract class Cromosoma implements Comparable<Cromosoma> {
+public abstract class Cromosoma implements Comparable<Cromosoma>{
 
     protected Gen genes[];
 
@@ -19,6 +21,15 @@ public abstract class Cromosoma implements Comparable<Cromosoma> {
 
     public Cromosoma() {
         
+    }
+
+    public void copyFrom(Cromosoma c) {
+        genes = new Gen[c.genes.length];
+        for (int i = 0; i<genes.length; i++) {
+            Gen g = new Gen(0);
+            g.copyFrom(c.genes[i]);
+            genes[i] = g;
+        }
     }
 
     public int compareTo(Cromosoma o) {
@@ -50,13 +61,7 @@ public abstract class Cromosoma implements Comparable<Cromosoma> {
         }
     }
 
-    public Cromosoma(Cromosoma c) {
-        genes = new Gen[c.genes.length];
 
-        for (int i=0; i<genes.length; i++) {
-            genes[i] = new Gen(c.genes[i].datos.length);
-        }
-    }
 
     public abstract double Fenotipo(int i);
 
