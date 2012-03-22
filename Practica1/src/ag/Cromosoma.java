@@ -65,10 +65,7 @@ public abstract class Cromosoma implements Comparable<Cromosoma>{
             for (int j=0;j<genes[i].datos.length;j++){
                 double r = (double) utiles.Aleatorio.getRandomInt(10000)/10000;
                 if (r<prob_mutacion)
-                    if(genes[i].datos[j]==1) 
-                        genes[i].datos[j]=0;
-                    else genes[i].datos[j]=1;
-                    
+                    genes[i].datos[j]=1-genes[i].datos[j];
             }
         }
     }
