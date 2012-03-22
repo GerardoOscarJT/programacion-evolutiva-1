@@ -23,9 +23,9 @@ public abstract class Cromosoma implements Comparable<Cromosoma> {
 
     public int compareTo(Cromosoma o) {
         if (Fitness() < o.Fitness())
-            return 1;
-        else
             return -1;
+        else
+            return 1;
     }
 
     public void Cruce(Cromosoma c) {
