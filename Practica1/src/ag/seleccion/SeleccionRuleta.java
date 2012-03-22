@@ -32,6 +32,7 @@ public class SeleccionRuleta implements Seleccion {
             sumaTotal += v.Fitness();
 
         Collections.sort(poblacion);
+        Collections.reverse(poblacion);
 
 
         double[] acumulado = new double[poblacion.size()+1];

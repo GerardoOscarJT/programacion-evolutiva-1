@@ -15,20 +15,16 @@ import ag.Gen;
 public class CromosomaF1 extends Cromosoma {
     
     public CromosomaF1() {
-        
         genes = new Gen[1];
         genes[0] = new Gen(16);
 
         Aleatorizar();
-
-        
     }
-
-
 
     public double Fitness() {
         double x = Fenotipo(0);
-        return x+Math.abs(Math.sin(32*4*Math.atan(1)*x));
+
+        return x+Math.abs(Math.sin(32*Math.PI*x));
     }
 
     public double Fenotipo(int n) {
@@ -38,7 +34,7 @@ public class CromosomaF1 extends Cromosoma {
             double min=0;
             double max=1;
 
-            double x = min+(max-min)*genes[0].getInt()/(2^16-1);
+            double x = min+(max-min)*genes[0].getInt()/(Math.pow(2,16));
             return x;
         }
 
