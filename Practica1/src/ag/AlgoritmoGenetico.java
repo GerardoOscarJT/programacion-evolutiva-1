@@ -16,7 +16,7 @@ import java.util.Collections;
 public class AlgoritmoGenetico {
     public int tamano = 100;
     public int num_generaciones = 100;
-    public double prob_cruce = 0.1;
+    public double prob_cruce = 0.8;
     public double prob_mutacion = 0.01;
 
     protected Cromosoma _c;
@@ -60,7 +60,7 @@ public class AlgoritmoGenetico {
 
         evaluarPoblacion();
 
-        int num_seleccionados = 80;
+        int num_seleccionados = tamano * 10 / 6;
 
         while (num_generaciones>0) {
             ArrayList<Cromosoma> seleccionados = _s.Selecciona(num_seleccionados, _poblacion);
