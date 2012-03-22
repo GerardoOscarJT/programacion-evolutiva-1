@@ -49,7 +49,7 @@ public class SeleccionRuleta implements Seleccion {
         for (int i = 0; i<n; i++) {
             double r = (double) Aleatorio.getRandomInt(10000)/10000;
             boolean encontrado = false;
-            for (int j=0; i<poblacion.size() && !encontrado; j++) {
+            for (int j=0; j<poblacion.size() && !encontrado; j++) {
                 if (acumulado[j]<r && r<acumulado[j+1]) {
                     encontrado = true;
                     resultado.add(poblacion.get(j));
