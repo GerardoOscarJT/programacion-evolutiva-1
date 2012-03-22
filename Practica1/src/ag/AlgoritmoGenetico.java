@@ -67,7 +67,7 @@ public class AlgoritmoGenetico {
 
         evaluarPoblacion();
 
-        int num_seleccionados = tamano * 10 / 6;
+        int num_seleccionados = tamano * 6 / 10;
 
         while (num_generaciones>0) {
             ArrayList<Cromosoma> seleccionados = _s.Selecciona(num_seleccionados, _poblacion);
