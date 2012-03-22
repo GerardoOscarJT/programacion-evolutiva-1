@@ -8,11 +8,14 @@ import ag.AlgoritmoGenetico;
 import ag.Cromosoma;
 import ag.seleccion.Seleccion;
 import ag.seleccion.SeleccionRuleta;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.DefaultTableModel;
 import practica1.CromosomaF1;
+import org.math.plot.*;
 
 /**
  *
@@ -26,15 +29,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     public PantallaPrincipal() {
         modelotabla = new DefaultTableModel();
 
-
-
         initComponents();
-
+        frameGrafica.setVisible(false);
         if (!utiles.Configuracion.debugMode()) {
             
         }
-        jTable2.setVisible(false);
-    }
+      }
     
 
      public boolean esEntero(String cad){
@@ -76,8 +76,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         calcular = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        frameGrafica = new javax.swing.JInternalFrame();
 
         javax.swing.GroupLayout ErrorLayout = new javax.swing.GroupLayout(Error.getContentPane());
         Error.getContentPane().setLayout(ErrorLayout);
@@ -225,8 +224,18 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         .addGap(28, 28, 28))))
         );
 
-        jTable2.setModel(modelotabla);
-        jScrollPane2.setViewportView(jTable2);
+        frameGrafica.setVisible(true);
+
+        javax.swing.GroupLayout frameGraficaLayout = new javax.swing.GroupLayout(frameGrafica.getContentPane());
+        frameGrafica.getContentPane().setLayout(frameGraficaLayout);
+        frameGraficaLayout.setHorizontalGroup(
+            frameGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 422, Short.MAX_VALUE)
+        );
+        frameGraficaLayout.setVerticalGroup(
+            frameGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -234,13 +243,17 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(frameGrafica)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(frameGrafica)
+                .addContainerGap())
         );
 
         pack();
@@ -250,6 +263,27 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         Cromosoma c = null;
         Seleccion s = null;
         Boolean valido=true;
+       
+                // define your data
+		double[] x = { 1, 2, 3, 4, 5, 6 };
+		double[] y = { 45, 89, 6, 32, 63, 12 };
+                double[] z = {1,2,3,4,5,6};
+                double[] t = {34,56,78,89,34,67};
+ 
+		// create your PlotPanel (you can use it as a JPanel)
+		Plot2DPanel plot = new Plot2DPanel(); 
+ 
+		// define the legend position
+		plot.addLegend("SOUTH");
+ 
+		// add a line plot to the PlotPanel
+		plot.addLinePlot("my plot", x, y);
+                plot.addLinePlot(" plot 2",z,t);
+ 
+		// put the PlotPanel in a JFrame like a JPanel
+                
+		frameGrafica.setContentPane(plot);
+		frameGrafica.setVisible(true);
         //Selecccionamos que funcion ha escogido el usuario
         switch(funcion.getSelectedIndex()){
             case 0 : c = new CromosomaF1();
@@ -295,8 +329,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         modelotabla.setValueAt(ag.historial.get(i).get(j), j, i);
                     }
                 }
-                
-                jTable2.setVisible(true);
+               
             }
         }
     }//GEN-LAST:event_calcularActionPerformed
@@ -360,6 +393,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton calcular;
     private javax.swing.JTextField cruce;
     private javax.swing.JCheckBox elitismo;
+    private javax.swing.JInternalFrame frameGrafica;
     private javax.swing.JComboBox funcion;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -371,8 +405,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField numGen;
     private javax.swing.JTextField poblacion;
     private javax.swing.JTextField probCruce;
