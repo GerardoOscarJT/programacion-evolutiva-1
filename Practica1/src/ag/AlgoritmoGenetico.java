@@ -14,7 +14,7 @@ import java.util.Collections;
  * @author gerardo
  */
 public class AlgoritmoGenetico {
-    public int tamano = 10;
+    public int tamano = 100;
     public int num_generaciones = 100;
     public double prob_cruce = 0.1;
     public double prob_mutacion = 0.01;
@@ -24,15 +24,28 @@ public class AlgoritmoGenetico {
 
     protected ArrayList<Cromosoma> _poblacion;
 
+    public ArrayList<ArrayList<String>> historial;
+
     public AlgoritmoGenetico(Cromosoma c, Seleccion s) {
         _c = c;
         _s = s;
+
+        historial = new ArrayList<ArrayList<String>>();
     }
 
     public void evaluarPoblacion() {
 
+
+        ArrayList<String> historial_generacion = new ArrayList<String>();
+
+        for(Cromosoma c : _poblacion) {
+            historial_generacion.add(c.Fitness()+"|"+c.Fenotipo());
+        }
+
+        historial.add(historial_generacion);
+
         Cromosoma mejor = Collections.max(_poblacion);
-        System.out.println(mejor.Fenotipo());
+        System.out.println(mejor.Fenotipo(0));
 
     }
 
@@ -47,7 +60,7 @@ public class AlgoritmoGenetico {
 
         evaluarPoblacion();
 
-        int num_seleccionados = 6;
+        int num_seleccionados = 80;
 
         while (num_generaciones>0) {
             ArrayList<Cromosoma> seleccionados = _s.Selecciona(num_seleccionados, _poblacion);
