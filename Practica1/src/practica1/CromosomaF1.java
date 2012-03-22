@@ -27,17 +27,22 @@ public class CromosomaF1 extends Cromosoma {
 
 
     public double Fitness() {
-        return Fenotipo();
+        double x = Fenotipo(0);
+        return x+Math.abs(Math.sin(32*4*Math.atan(1)*x));
     }
 
+    public double Fenotipo(int n) {
+        switch (n) {
+            case 0:
 
-    public double Fenotipo() {
-        double min=0;
-        double max=1;
+            double min=0;
+            double max=1;
 
-        double x = min+(max-min)*genes[0].getInt()/(2^16-1);
+            double x = min+(max-min)*genes[0].getInt()/(2^16-1);
+            return x;
+        }
 
-        return x+Math.abs(Math.sin(32*4*Math.atan(1)*x));
+        return 0;
     }
 
     public CromosomaF1 crearNuevo() {

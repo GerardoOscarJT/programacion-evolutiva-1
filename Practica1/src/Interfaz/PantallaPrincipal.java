@@ -9,6 +9,7 @@ import ag.Cromosoma;
 import ag.seleccion.Seleccion;
 import ag.seleccion.SeleccionRuleta;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableColumn;
 import javax.swing.table.DefaultTableModel;
 import practica1.CromosomaF1;
 
@@ -211,7 +212,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(elitismo)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(calcular)
                 .addContainerGap())
         );
@@ -278,7 +279,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Probabilidad de mutación incorrecta.\n Debe ser un número real.");
                 valido=false;}
         if (valido){
-            ag.inicializa();}
+            ag.inicializa();
+        }
     }//GEN-LAST:event_calcularActionPerformed
 
     private void poblacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_poblacionActionPerformed

@@ -35,11 +35,6 @@ public class Main {
 
         PantallaPrincipal ventana = new PantallaPrincipal();
         ventana.setVisible(true);
-
-
-
-
-
     }
 
 }

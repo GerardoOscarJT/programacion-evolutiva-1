@@ -15,6 +15,8 @@ public abstract class Cromosoma implements Comparable<Cromosoma> {
 
     protected Gen genes[];
 
+    public String alelo;
+
     public Cromosoma() {
         
     }
@@ -56,7 +58,16 @@ public abstract class Cromosoma implements Comparable<Cromosoma> {
         }
     }
 
-    public abstract double Fenotipo();
+    public abstract double Fenotipo(int i);
+
+    public String Fenotipo() {
+        String resultado = "";
+        for (int i = 0; i<genes.length; i++) {
+            resultado += "[Gen "+i+" = "+Fenotipo(i)+"] ";
+        }
+
+        return resultado;
+    }
 
     public abstract double Fitness();
 
@@ -73,14 +84,11 @@ public abstract class Cromosoma implements Comparable<Cromosoma> {
     }
 
     public String toString() {
-
         String r = "";
 
         for (int i=0; i<genes.length; i++) {
             r += "Gen"+i+" = "+genes[i].getInt()+"; ";
         }
-
-
 
         return r;
     }
