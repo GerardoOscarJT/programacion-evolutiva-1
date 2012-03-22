@@ -35,17 +35,7 @@ public class Main {
 
         PantallaPrincipal ventana = new PantallaPrincipal();
         ventana.setVisible(true);
-        CromosomaF1 c = new CromosomaF1();
-        SeleccionRuleta s = new SeleccionRuleta();
 
-
-        AlgoritmoGenetico ag = new AlgoritmoGenetico(c,s);
-        ag.tamano = 10;
-        ag.num_generaciones = 3;
-        ag.prob_cruce = 0.1;
-        ag.prob_mutacion = 0.01;
-
-        ag.inicializa();
 
 
 

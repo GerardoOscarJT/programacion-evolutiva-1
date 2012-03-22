@@ -9,6 +9,7 @@ import ag.Cromosoma;
 import ag.seleccion.Seleccion;
 import ag.seleccion.SeleccionRuleta;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import practica1.CromosomaF1;
 
 /**
@@ -21,6 +22,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
      * Creates new form PantallaPrincipal
      */
     public PantallaPrincipal() {
+        modelotabla = new DefaultTableModel();
         initComponents();
     }
     
@@ -43,6 +45,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         Error = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         PanelPrincipal = new javax.swing.JPanel();
         funcion = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
@@ -63,6 +67,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         elitismo = new javax.swing.JCheckBox();
         jLabel9 = new javax.swing.JLabel();
         calcular = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         javax.swing.GroupLayout ErrorLayout = new javax.swing.GroupLayout(Error.getContentPane());
         Error.getContentPane().setLayout(ErrorLayout);
@@ -74,6 +80,19 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             ErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,7 +141,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
                         .addGap(221, 221, 221)
-                        .addComponent(calcular, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
+                        .addComponent(calcular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +167,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                             .addGroup(PanelPrincipalLayout.createSequentialGroup()
                                 .addGap(22, 22, 22)
                                 .addComponent(elitismo)))))
-                .addGap(93, 93, 93))
+                .addGap(19, 19, 19))
         );
         PanelPrincipalLayout.setVerticalGroup(
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,15 +216,26 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jTable2.setModel(modelotabla);
+        jScrollPane2.setViewportView(jTable2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -215,11 +245,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         Cromosoma c = null;
         Seleccion s = null;
         Boolean valido=true;
+        modelotabla.addColumn("Columna1");
         //Selecccionamos que funcion ha escogido el usuario
         switch(funcion.getSelectedIndex()){
             case 0 : c = new CromosomaF1();
         } 
         switch(seleccion.getSelectedIndex()){
+            
             case 0 : s = new SeleccionRuleta();
         }
         int v = 0;
@@ -294,6 +326,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
     }
+    private DefaultTableModel modelotabla;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog Error;
     private javax.swing.JPanel PanelPrincipal;
@@ -310,6 +343,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField numGen;
     private javax.swing.JTextField poblacion;
     private javax.swing.JTextField probCruce;
