@@ -501,7 +501,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             double max=Double.valueOf(cotaSup.getText());
             double paso=Double.valueOf(intervalo.getText());
             int indice=0;
-            int n=(int)Math.ceil((double)(max-min)/paso)+1;
+            int n=(int)Math.floor((double)(max-min)/paso)+1;
             double[] ejex = new double[n];
             double[] maximoAbsolutoVarias = new double[n];
             double[] minimoAbsolutoVarias = new double[n];
