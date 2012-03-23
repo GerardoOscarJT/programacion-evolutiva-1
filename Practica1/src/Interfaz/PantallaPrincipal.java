@@ -9,6 +9,7 @@ import ag.Cromosoma;
 import ag.Gen;
 import ag.seleccion.Seleccion;
 import ag.seleccion.SeleccionRuleta;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -140,7 +141,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(calcular, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                    .addGroup(PanelPrincipalLayout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(calcular, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
                         .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -241,8 +244,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
             .addComponent(frameGrafica)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
         );
 
         pack();
@@ -292,17 +295,27 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         if (valido){
             ag.inicializa();
-        double[] regla = new double[ag.num_generaciones];
-        for (int i=0;i<ag.num_generaciones;i++)
-            regla[i]=ag.mejor_generacion.get(i);
+        double[] regla = new double[ag.mejor_generacion.size()];
+        double[] mejorGeneracion = new double[ag.mejor_generacion.size()];
+        double[] mejorAbsoluto = new double[ag.mejor_absoluto.size()];
+        for (int i=0;i<ag.mejor_generacion.size();i++){
+            regla[i]=(double)i;
+            mejorGeneracion[i]=ag.mejor_generacion.get(i);
+            mejorAbsoluto[i]=ag.mejor_absoluto.get(i);
+        }
 		// create your PlotPanel (you can use it as a JPanel)
 	Plot2DPanel plot = new Plot2DPanel(); 
  
 		// define the legend position
 	plot.addLegend("SOUTH");
+        plot.getAxis(0).setLabelText("Generación");
+        plot.getAxis(1).setLabelText("Evaluación");
  
 		// add a line plot to the PlotPanel
-	plot.addLinePlot("my plot", regla, regla);
+	plot.addLinePlot("Mejor Generacion",Color.red, regla, mejorGeneracion);
+        plot.addLinePlot("Mejor Absoluto", Color.GREEN,regla, mejorAbsoluto);
+        
+
  
 		// put the PlotPanel in a JFrame like a JPanel
                 
