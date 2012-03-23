@@ -399,7 +399,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 break;
             }
             case 4: {
-                c = new CromosomaFake();
+                c = new CromosomaF5();
                 frameGrafica.setTitle("Grafica Función 5");
                 break;
             }
@@ -437,6 +437,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Precisión incorrecta.\n Debe ser un número real.");
                 valido=false;
             }
+        if (!valorN.getText().isEmpty())
+            try{CromosomaF5.v = Integer.valueOf(valorN.getText());}
+            catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(rootPane, "Número de variables incorrecto.");
+                valido=false;
+            }
+
         if (valido){
             if (variable.getSelectedIndex()==0){
             ag.inicializa();
