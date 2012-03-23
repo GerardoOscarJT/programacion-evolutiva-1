@@ -18,6 +18,7 @@ public class AlgoritmoGenetico {
     public int num_generaciones = 100;
     public double prob_cruce = 0.8;
     public double prob_mutacion = 0.01;
+    public double numMejorAbsoluto = 0.0;
 
     protected Cromosoma _c;
     protected Seleccion _s;
@@ -37,6 +38,7 @@ public class AlgoritmoGenetico {
 
         historial = new ArrayList<ArrayList<String>>();
         mejor_generacion = new ArrayList<Double>();
+        mejor_absoluto = new ArrayList<Double>();
     }
 
     public void evaluarPoblacion() {
@@ -54,6 +56,12 @@ public class AlgoritmoGenetico {
 
         Cromosoma mejor = Collections.max(_poblacion);
         mejor_generacion.add(mejor.Fitness());
+        if (mejor.Fitness()> numMejorAbsoluto){
+            numMejorAbsoluto = mejor.Fitness();
+            mejor_absoluto.add(numMejorAbsoluto);
+                    }
+        else 
+            mejor_absoluto.add(numMejorAbsoluto);
         System.out.println(mejor.Fenotipo(0));
 
     }
