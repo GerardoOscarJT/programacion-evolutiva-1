@@ -34,7 +34,7 @@ public class CromosomaF1 extends Cromosoma {
             double min=0;
             double max=1;
 
-            double x = min+(max-min)*genes[0].getInt()/(Math.pow(2,16));
+            double x = min+(max-min)*genes[0].getInt()/(Math.pow(2,Gen.bits));
             return x;
         }
 
