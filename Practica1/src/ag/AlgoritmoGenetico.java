@@ -36,6 +36,7 @@ public class AlgoritmoGenetico {
         _s = s;
 
         historial = new ArrayList<ArrayList<String>>();
+        mejor_generacion = new ArrayList<Double>();
     }
 
     public void evaluarPoblacion() {
@@ -52,6 +53,7 @@ public class AlgoritmoGenetico {
         
 
         Cromosoma mejor = Collections.max(_poblacion);
+        mejor_generacion.add(mejor.Fitness());
         System.out.println(mejor.Fenotipo(0));
 
     }

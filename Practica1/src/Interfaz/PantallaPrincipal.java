@@ -8,6 +8,7 @@ import ag.AlgoritmoGenetico;
 import ag.Cromosoma;
 import ag.seleccion.Seleccion;
 import ag.seleccion.SeleccionRuleta;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -263,27 +264,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         Cromosoma c = null;
         Seleccion s = null;
         Boolean valido=true;
-       
-                // define your data
-		double[] x = { 1, 2, 3, 4, 5, 6 };
-		double[] y = { 45, 89, 6, 32, 63, 12 };
-                double[] z = {1,2,3,4,5,6};
-                double[] t = {34,56,78,89,34,67};
- 
-		// create your PlotPanel (you can use it as a JPanel)
-		Plot2DPanel plot = new Plot2DPanel(); 
- 
-		// define the legend position
-		plot.addLegend("SOUTH");
- 
-		// add a line plot to the PlotPanel
-		plot.addLinePlot("my plot", x, y);
-                plot.addLinePlot(" plot 2",z,t);
- 
-		// put the PlotPanel in a JFrame like a JPanel
-                
-		frameGrafica.setContentPane(plot);
-		frameGrafica.setVisible(true);
+      
         //Selecccionamos que funcion ha escogido el usuario
         switch(funcion.getSelectedIndex()){
             case 0 : c = new CromosomaF1();
@@ -317,6 +298,22 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 valido=false;}
         if (valido){
             ag.inicializa();
+        double[] regla = new double[ag.num_generaciones];
+        for (int i=0;i<ag.num_generaciones;i++)
+            regla[i]=ag.mejor_generacion.get(i);
+		// create your PlotPanel (you can use it as a JPanel)
+	Plot2DPanel plot = new Plot2DPanel(); 
+ 
+		// define the legend position
+	plot.addLegend("SOUTH");
+ 
+		// add a line plot to the PlotPanel
+	plot.addLinePlot("my plot", regla, regla);
+ 
+		// put the PlotPanel in a JFrame like a JPanel
+                
+		frameGrafica.setContentPane(plot);
+		frameGrafica.setVisible(true);
 
             if (utiles.Configuracion.debugMode()) {
                 for (int i=0; i<ag.historial.size();i++)
