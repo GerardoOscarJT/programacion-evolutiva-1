@@ -21,22 +21,11 @@ public class SeleccionTorneo implements Seleccion {
         ArrayList<Cromosoma> resultado = new ArrayList<Cromosoma>(n);
         numIndividuos=n;
         while (numIndividuos>0){
-            int x1=utiles.Aleatorio.getRandomInt(numIndividuos);
-            int x2=utiles.Aleatorio.getRandomInt(numIndividuos);
-            while(x1==x2){
-                x2=utiles.Aleatorio.getRandomInt(numIndividuos);
-            }
-            double numIntervalo=(double)utiles.Aleatorio.getRandomInt(10)/10;
-            if (numIntervalo>intervalo){
-                if (poblacion.get(x1).Fitness()>poblacion.get(x2).Fitness())
+            int x1=utiles.Aleatorio.getRandomInt(poblacion.size());
+            int x2=utiles.Aleatorio.getRandomInt(poblacion.size());
+            if (poblacion.get(x1).Fitness()>poblacion.get(x2).Fitness())
                     resultado.add(poblacion.get(x1));
-                else 
-                    resultado.add(poblacion.get(x2));
-            }
-            else
-                if(poblacion.get(x1).Fitness()<poblacion.get(x2).Fitness())
-                    resultado.add(poblacion.get(x1));
-                else
+            else 
                     resultado.add(poblacion.get(x2));
             numIndividuos--;
         }
