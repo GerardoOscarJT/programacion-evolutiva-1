@@ -15,8 +15,10 @@ package ag;
 public class Gen {
     public int[] datos;
 
-    public Gen(int l) {
-        datos = new int[l];
+    public static int bits = 16;
+
+    public Gen() {
+        datos = new int[bits];
     }
 
     public int getInt() {

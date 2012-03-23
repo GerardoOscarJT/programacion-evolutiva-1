@@ -19,6 +19,7 @@ public abstract class Cromosoma implements Comparable<Cromosoma>{
 
     public String alelo;
 
+
     public Cromosoma() {
         
     }
@@ -26,7 +27,7 @@ public abstract class Cromosoma implements Comparable<Cromosoma>{
     public void copyFrom(Cromosoma c) {
         genes = new Gen[c.genes.length];
         for (int i = 0; i<genes.length; i++) {
-            Gen g = new Gen(0);
+            Gen g = new Gen();
             g.copyFrom(c.genes[i]);
             genes[i] = g;
         }
@@ -35,8 +36,10 @@ public abstract class Cromosoma implements Comparable<Cromosoma>{
     public int compareTo(Cromosoma o) {
         if (Fitness() < o.Fitness())
             return -1;
-        else
+        else if (Fitness() > o.Fitness())
             return 1;
+        else
+            return 0;
     }
 
     public void Cruce(Cromosoma c) {

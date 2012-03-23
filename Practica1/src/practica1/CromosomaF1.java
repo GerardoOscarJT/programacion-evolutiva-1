@@ -16,7 +16,7 @@ public class CromosomaF1 extends Cromosoma {
     
     public CromosomaF1() {
         genes = new Gen[1];
-        genes[0] = new Gen(16);
+        genes[0] = new Gen();
 
         Aleatorizar();
     }

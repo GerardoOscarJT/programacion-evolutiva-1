@@ -74,7 +74,7 @@ public class AlgoritmoGenetico {
         while (num_generaciones>0) {
             ArrayList<Cromosoma> seleccionados = _s.Selecciona(num_seleccionados, _poblacion);
 
-            for (int i = 1; i<num_seleccionados; i+=2) {
+            for (int i = 1; i<num_seleccionados-1; i+=2) {
                 double r = (double) utiles.Aleatorio.getRandomInt(10000)/10000;
                 if (r<prob_cruce) 
                     seleccionados.get(i).Cruce(seleccionados.get(i-1));
