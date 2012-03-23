@@ -8,6 +8,7 @@ import ag.AlgoritmoGenetico;
 import ag.Cromosoma;
 import ag.seleccion.Seleccion;
 import ag.seleccion.SeleccionRuleta;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -76,7 +77,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         elitismo = new javax.swing.JCheckBox();
         jLabel9 = new javax.swing.JLabel();
         calcular = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         frameGrafica = new javax.swing.JInternalFrame();
 
         javax.swing.GroupLayout ErrorLayout = new javax.swing.GroupLayout(Error.getContentPane());
@@ -129,13 +129,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout PanelPrincipalLayout = new javax.swing.GroupLayout(PanelPrincipal);
         PanelPrincipal.setLayout(PanelPrincipalLayout);
         PanelPrincipalLayout.setHorizontalGroup(
@@ -144,8 +137,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGap(75, 75, 75)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(73, 73, 73)
+                        .addGap(146, 146, 146)
                         .addComponent(calcular, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
                         .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,14 +207,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(elitismo)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelPrincipalLayout.createSequentialGroup()
-                        .addComponent(calcular)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelPrincipalLayout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(28, 28, 28))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addComponent(calcular)
+                .addContainerGap())
         );
 
         frameGrafica.setVisible(true);
@@ -298,17 +285,27 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 valido=false;}
         if (valido){
             ag.inicializa();
-        double[] regla = new double[ag.num_generaciones];
-        for (int i=0;i<ag.num_generaciones;i++)
-            regla[i]=ag.mejor_generacion.get(i);
+        double[] regla = new double[ag.mejor_generacion.size()];
+        double[] mejorGeneracion = new double[ag.mejor_generacion.size()];
+        double[] mejorAbsoluto = new double[ag.mejor_absoluto.size()];
+        for (int i=0;i<ag.mejor_generacion.size();i++){
+            regla[i]=(double)i;
+            mejorGeneracion[i]=ag.mejor_generacion.get(i);
+            mejorAbsoluto[i]=ag.mejor_absoluto.get(i);
+        }
 		// create your PlotPanel (you can use it as a JPanel)
 	Plot2DPanel plot = new Plot2DPanel(); 
  
 		// define the legend position
 	plot.addLegend("SOUTH");
+        plot.getAxis(0).setLabelText("Generación");
+        plot.getAxis(1).setLabelText("Evaluación");
  
 		// add a line plot to the PlotPanel
-	plot.addLinePlot("my plot", regla, regla);
+	plot.addLinePlot("Mejor Generacion",Color.red, regla, mejorGeneracion);
+        plot.addLinePlot("Mejor Absoluto", Color.GREEN,regla, mejorAbsoluto);
+        
+
  
 		// put the PlotPanel in a JFrame like a JPanel
                 
@@ -334,13 +331,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void poblacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_poblacionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_poblacionActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-
-       
-
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -392,7 +382,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JCheckBox elitismo;
     private javax.swing.JInternalFrame frameGrafica;
     private javax.swing.JComboBox funcion;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
