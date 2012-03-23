@@ -21,6 +21,7 @@ public class AlgoritmoGenetico {
     public double mejorAbsoluto = 0.0;
     public double peorAbsoluto = 1000.0; 
     public String fenotipoMejor;
+    public String fenotipoPeor;
 
     protected Cromosoma _c;
     protected Seleccion _s;
@@ -78,6 +79,7 @@ public class AlgoritmoGenetico {
             mejor_absoluto.add(mejorAbsoluto);
         if (peor.Fitness()< peorAbsoluto){
             peorAbsoluto=peor.Fitness();
+            fenotipoPeor=peor.Fenotipo();
             peor_absoluto.add(peorAbsoluto);
                     }
         else 

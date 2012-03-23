@@ -35,7 +35,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         
         initComponents();
         frameGrafica.setVisible(false);
-//        etiquetaResultados.setVisible(false);
+        scrollResultados.setVisible(false);
+        //etiquetaResultados.setVisible(false);
         if (!utiles.Configuracion.debugMode()) {
             
         }
@@ -83,6 +84,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         precision = new javax.swing.JTextField();
         frameGrafica = new javax.swing.JInternalFrame();
+        scrollResultados = new javax.swing.JScrollPane();
+        resultados = new javax.swing.JTextArea();
 
         javax.swing.GroupLayout ErrorLayout = new javax.swing.GroupLayout(Error.getContentPane());
         Error.getContentPane().setLayout(ErrorLayout);
@@ -249,19 +252,24 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        frameGrafica.setResizable(true);
         frameGrafica.setVisible(true);
 
         javax.swing.GroupLayout frameGraficaLayout = new javax.swing.GroupLayout(frameGrafica.getContentPane());
         frameGrafica.getContentPane().setLayout(frameGraficaLayout);
         frameGraficaLayout.setHorizontalGroup(
             frameGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 458, Short.MAX_VALUE)
+            .addGap(0, 448, Short.MAX_VALUE)
         );
         frameGraficaLayout.setVerticalGroup(
             frameGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 389, Short.MAX_VALUE)
+            .addGap(0, 227, Short.MAX_VALUE)
         );
+
+        scrollResultados.setEnabled(false);
+
+        resultados.setColumns(20);
+        resultados.setRows(5);
+        scrollResultados.setViewportView(resultados);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -269,13 +277,23 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(frameGrafica))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(frameGrafica)
+                    .addComponent(scrollResultados))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(frameGrafica)
-            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(51, 51, 51))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(frameGrafica)
+                .addGap(18, 18, 18)
+                .addComponent(scrollResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -386,9 +404,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 
 	frameGrafica.setContentPane(plot);
 	frameGrafica.setVisible(true);
-        
-        //etiquetaResultados.setText("Máximo "+ag.mejorAbsoluto+" "+ag.fenotipoMejor);
-        //etiquetaResultados.setVisible(true);
+
+        resultados.append("Maximo "+ag.mejorAbsoluto+" "+ag.fenotipoMejor+"\n"+
+                "Minimo "+ag.peorAbsoluto+" "+ag.fenotipoPeor);
+        scrollResultados.setVisible(true);
 
             if (utiles.Configuracion.debugMode()) {
                 for (int i=0; i<ag.historial.size();i++)
@@ -488,6 +507,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField precision;
     private javax.swing.JTextField probCruce;
     private javax.swing.JTextField probMutacion;
+    private javax.swing.JTextArea resultados;
+    private javax.swing.JScrollPane scrollResultados;
     private javax.swing.JComboBox seleccion;
     private javax.swing.JTextField valorN;
     // End of variables declaration//GEN-END:variables
