@@ -22,6 +22,7 @@ import practica1.CromosomaF1;
 import org.math.plot.*;
 import practica1.CromosomaF2;
 import practica1.CromosomaF3;
+import practica1.CromosomaF4;
 
 /**
  *
@@ -280,6 +281,16 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             case 1: {
                 c = new CromosomaF2();
                 frameGrafica.setTitle("Grafica Función 2");
+                break;
+            }
+            case 2: {
+                c = new CromosomaF3();
+                frameGrafica.setTitle("Grafica Función 3");
+                break;
+            }
+            case 3: {
+                c = new CromosomaF4();
+                frameGrafica.setTitle("Grafica Función 4");
                 break;
             }
         } 
