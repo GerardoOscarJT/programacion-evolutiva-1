@@ -507,6 +507,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             double[] minimoAbsolutoVarias = new double[n];
             //ArrayList<Double> mediaVarias = new ArrayList <Double>();
             for (double i=min;i<=max;i+=paso){
+
+                this.setTitle("Completado "+(100*indice/n)+"%");
+
                 switch (variable.getSelectedIndex()){
                     //poblacion
                     case 1:
@@ -523,13 +526,26 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         break;
                 }
                 ag.inicializa();
-                ejex[indice]=i;
-                maximoAbsolutoVarias[indice]=ag.mejorAbsoluto;
-                minimoAbsolutoVarias[indice]=ag.peorAbsoluto;
+                if (indice<n) {
+                    ejex[indice]=i;
+                    maximoAbsolutoVarias[indice]=ag.mejorAbsoluto;
+                    minimoAbsolutoVarias[indice]=ag.peorAbsoluto;
+                }
                 indice++;
                 //TODO: Calcular media para la gráfica
                 //mediaVarias.add(ag.);
             }
+
+            this.setTitle("Completado :D");
+
+
+            if (indice<n) {
+                ejex[indice]=ejex[indice-1];
+                maximoAbsolutoVarias[indice]=maximoAbsolutoVarias[indice-1];
+                minimoAbsolutoVarias[indice]=minimoAbsolutoVarias[indice-1];
+            }
+
+
         Plot2DPanel plot = new Plot2DPanel(); 
  
 		// define the legend position

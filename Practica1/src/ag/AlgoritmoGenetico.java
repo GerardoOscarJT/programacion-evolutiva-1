@@ -92,6 +92,8 @@ public class AlgoritmoGenetico {
 
     public void inicializa() {
         _poblacion = new ArrayList<Cromosoma>(tamano);
+        mejorAbsoluto = -9999999.0;
+        peorAbsoluto = 100000.0;
 
         Cromosoma c;
         for (int i = 0; i<tamano; i++) {
