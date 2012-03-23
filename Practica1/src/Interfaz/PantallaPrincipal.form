@@ -269,6 +269,7 @@
     </Container>
     <Container class="javax.swing.JInternalFrame" name="frameGrafica">
       <Properties>
+        <Property name="resizable" type="boolean" value="true"/>
         <Property name="visible" type="boolean" value="true"/>
       </Properties>
 

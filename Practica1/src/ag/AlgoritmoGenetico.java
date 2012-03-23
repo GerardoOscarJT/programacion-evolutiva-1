@@ -19,6 +19,7 @@ public class AlgoritmoGenetico {
     public double prob_cruce = 0.8;
     public double prob_mutacion = 0.01;
     public double numMejorAbsoluto = 0.0;
+    public double numPeorAbsoluto =1000.0;
 
     protected Cromosoma _c;
     protected Seleccion _s;
@@ -29,7 +30,9 @@ public class AlgoritmoGenetico {
 
     public ArrayList<Double> mejor_absoluto;
     public ArrayList<Double> mejor_generacion;
+    public ArrayList<Double> peor_generacion;
     public ArrayList<Double> media_generacion;
+    public ArrayList<Double> peor_absoluto;
 
 
     public AlgoritmoGenetico(Cromosoma c, Seleccion s) {
@@ -38,7 +41,9 @@ public class AlgoritmoGenetico {
 
         historial = new ArrayList<ArrayList<String>>();
         mejor_generacion = new ArrayList<Double>();
+        peor_generacion = new ArrayList<Double>();
         mejor_absoluto = new ArrayList<Double>();
+        peor_absoluto = new ArrayList<Double>();
     }
 
     public void evaluarPoblacion() {
@@ -55,13 +60,21 @@ public class AlgoritmoGenetico {
         
 
         Cromosoma mejor = Collections.max(_poblacion);
+        Cromosoma peor = Collections.min(_poblacion);
         mejor_generacion.add(mejor.Fitness());
+        peor_generacion.add(peor.Fitness());
         if (mejor.Fitness()> numMejorAbsoluto){
             numMejorAbsoluto = mejor.Fitness();
             mejor_absoluto.add(numMejorAbsoluto);
                     }
         else 
             mejor_absoluto.add(numMejorAbsoluto);
+        if (peor.Fitness()< numPeorAbsoluto){
+            numPeorAbsoluto = peor.Fitness();
+            peor_absoluto.add(numPeorAbsoluto);
+                    }
+        else 
+            peor_absoluto.add(numPeorAbsoluto);
         System.out.println(mejor.Fenotipo(0));
 
     }
