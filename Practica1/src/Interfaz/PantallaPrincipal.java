@@ -275,6 +275,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             case 0 : {
                 c = new CromosomaF1();
                 frameGrafica.setTitle("Grafica Función 1");
+                break;
+            }
+            case 1: {
+                c = new CromosomaF2();
+                frameGrafica.setTitle("Grafica Función 2");
+                break;
             }
         } 
         switch(seleccion.getSelectedIndex()){
