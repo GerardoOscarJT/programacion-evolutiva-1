@@ -34,9 +34,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
      */
     public PantallaPrincipal() {
         modelotabla = new DefaultTableModel();
-
+        
         initComponents();
         frameGrafica.setVisible(false);
+        etiquetaResultados.setVisible(false);
         if (!utiles.Configuracion.debugMode()) {
             
         }
@@ -84,6 +85,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         precision = new javax.swing.JTextField();
         frameGrafica = new javax.swing.JInternalFrame();
+        etiquetaResultados = new javax.swing.JLabel();
 
         javax.swing.GroupLayout ErrorLayout = new javax.swing.GroupLayout(Error.getContentPane());
         Error.getContentPane().setLayout(ErrorLayout);
@@ -214,11 +216,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cruce, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9)
-                    .addComponent(elitismo))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(elitismo)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addComponent(calcular)
                 .addContainerGap())
         );
@@ -243,13 +245,21 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(frameGrafica))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(frameGrafica)
+                    .addComponent(etiquetaResultados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(frameGrafica)
-            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(frameGrafica)
+                .addGap(18, 18, 18)
+                .addComponent(etiquetaResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -262,9 +272,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
       
         //Selecccionamos que funcion ha escogido el usuario
         switch(funcion.getSelectedIndex()){
-            case 0 : c = new CromosomaF1(); break;
-            case 1 : c = new CromosomaF2(); break;
-            case 2 : c = new CromosomaF3(); break;
+            case 0 : {
+                c = new CromosomaF1();
+                frameGrafica.setTitle("Grafica Función 1");
+            }
         } 
         switch(seleccion.getSelectedIndex()){
             case 0 : s = new SeleccionRuleta(); break;
@@ -306,12 +317,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         double[] mejorAbsoluto = new double[ag.mejor_absoluto.size()];
         double[] peorGeneracion = new double[ag.peor_generacion.size()];
         double[] peorAbsoluto = new double[ag.peor_absoluto.size()];
+        double[] mediaGeneracion = new double[ag.media_generacion.size()];
         for (int i=0;i<ag.mejor_generacion.size();i++){
             regla[i]=(double)i;
             mejorGeneracion[i]=ag.mejor_generacion.get(i);
             mejorAbsoluto[i]=ag.mejor_absoluto.get(i);
             peorGeneracion[i]=ag.peor_generacion.get(i);
             peorAbsoluto[i]=ag.peor_absoluto.get(i);
+            mediaGeneracion[i]=ag.media_generacion.get(i);
         }
 		// create your PlotPanel (you can use it as a JPanel)
 	Plot2DPanel plot = new Plot2DPanel(); 
@@ -320,19 +333,25 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 	plot.addLegend("SOUTH");
         plot.getAxis(0).setLabelText("Generación");
         plot.getAxis(1).setLabelText("Evaluación");
+
  
 		// add a line plot to the PlotPanel
 	plot.addLinePlot("Mejor Generacion",Color.red, regla, mejorGeneracion);
         plot.addLinePlot("Mejor Absoluto", Color.GREEN,regla, mejorAbsoluto);
         plot.addLinePlot("Minimo Generacion", Color.BLUE, regla, peorGeneracion);
         plot.addLinePlot("Minimo Absoluto",Color.YELLOW,regla,peorAbsoluto);
+        plot.addLinePlot("Media Generacion", Color.ORANGE, regla, mediaGeneracion);
+
         
 
  
 		// put the PlotPanel in a JFrame like a JPanel
                 
-		frameGrafica.setContentPane(plot);
-		frameGrafica.setVisible(true);
+	frameGrafica.setContentPane(plot);
+	frameGrafica.setVisible(true);
+        
+        etiquetaResultados.setText("Máximo "+ag.mejorAbsoluto+" "+ag.fenotipoMejor);
+        etiquetaResultados.setVisible(true);
 
             if (utiles.Configuracion.debugMode()) {
                 for (int i=0; i<ag.historial.size();i++)
@@ -402,6 +421,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton calcular;
     private javax.swing.JTextField cruce;
     private javax.swing.JCheckBox elitismo;
+    private javax.swing.JLabel etiquetaResultados;
     private javax.swing.JInternalFrame frameGrafica;
     private javax.swing.JComboBox funcion;
     private javax.swing.JLabel jLabel1;

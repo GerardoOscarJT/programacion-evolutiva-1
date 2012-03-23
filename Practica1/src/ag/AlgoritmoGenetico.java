@@ -18,8 +18,9 @@ public class AlgoritmoGenetico {
     public int num_generaciones = 100;
     public double prob_cruce = 0.8;
     public double prob_mutacion = 0.01;
-    public double numMejorAbsoluto = 0.0;
-    public double numPeorAbsoluto =1000.0;
+    public double mejorAbsoluto = 0.0;
+    public double peorAbsoluto = 1000.0; 
+    public String fenotipoMejor;
 
     protected Cromosoma _c;
     protected Seleccion _s;
@@ -44,37 +45,44 @@ public class AlgoritmoGenetico {
         peor_generacion = new ArrayList<Double>();
         mejor_absoluto = new ArrayList<Double>();
         peor_absoluto = new ArrayList<Double>();
+        media_generacion = new ArrayList<Double>();
     }
 
     public void evaluarPoblacion() {
+        double suma=0.0;
 
         if (utiles.Configuracion.debugMode()) {
             ArrayList<String> historial_generacion = new ArrayList<String>();
 
-            for(Cromosoma c : _poblacion)
+            for(Cromosoma c : _poblacion){
                 historial_generacion.add(c.Fitness()+"|"+c.Fenotipo());
-
+            }
             historial.add(historial_generacion);
         }
 
+        for (Cromosoma c : _poblacion)
+            suma+=c.Fitness();
         
-
+        media_generacion.add(suma/tamano);           
+        
         Cromosoma mejor = Collections.max(_poblacion);
         Cromosoma peor = Collections.min(_poblacion);
         mejor_generacion.add(mejor.Fitness());
         peor_generacion.add(peor.Fitness());
-        if (mejor.Fitness()> numMejorAbsoluto){
-            numMejorAbsoluto = mejor.Fitness();
-            mejor_absoluto.add(numMejorAbsoluto);
+        if (mejor.Fitness()>mejorAbsoluto){
+            mejorAbsoluto=mejor.Fitness();
+            fenotipoMejor=mejor.Fenotipo();
+            mejor_absoluto.add(mejorAbsoluto);
                     }
         else 
-            mejor_absoluto.add(numMejorAbsoluto);
-        if (peor.Fitness()< numPeorAbsoluto){
-            numPeorAbsoluto = peor.Fitness();
-            peor_absoluto.add(numPeorAbsoluto);
+            mejor_absoluto.add(mejorAbsoluto);
+        if (peor.Fitness()< peorAbsoluto){
+            peorAbsoluto=peor.Fitness();
+            peor_absoluto.add(peorAbsoluto);
                     }
         else 
-            peor_absoluto.add(numPeorAbsoluto);
+            peor_absoluto.add(peorAbsoluto);
+        
         System.out.println(mejor.Fenotipo(0));
 
     }
@@ -87,7 +95,7 @@ public class AlgoritmoGenetico {
             c = _c.crearNuevo();
             _poblacion.add(c);
         }
-
+        
         evaluarPoblacion();
 
         int num_seleccionados = tamano * 6 / 10;
