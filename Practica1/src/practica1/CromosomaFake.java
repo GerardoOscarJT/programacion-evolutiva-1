@@ -17,6 +17,7 @@ public class CromosomaFake extends Cromosoma {
     public CromosomaFake() {
         genes = new Gen[1];
         genes[0] = new Gen();
+        Aleatorizar();
     }
 
     @Override
@@ -26,7 +27,7 @@ public class CromosomaFake extends Cromosoma {
 
     @Override
     public double Fitness() {
-        return utiles.Aleatorio.getRandomInt(1000) - 1100;
+        return genes[0].getInt() - 1000000;
     }
 
     @Override
