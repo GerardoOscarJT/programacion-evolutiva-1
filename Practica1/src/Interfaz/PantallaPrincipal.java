@@ -11,18 +11,15 @@ import ag.seleccion.Seleccion;
 import ag.seleccion.SeleccionRuleta;
 import ag.seleccion.SeleccionTorneo;
 import java.awt.Color;
-import java.util.ArrayList;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.table.TableColumn;
 import javax.swing.table.DefaultTableModel;
 import practica1.CromosomaF1;
 import org.math.plot.*;
 import practica1.CromosomaF2;
 import practica1.CromosomaF3;
 import practica1.CromosomaF4;
+import practica1.CromosomaF5;
+import practica1.CromosomaFake;
 
 /**
  *
@@ -38,7 +35,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         
         initComponents();
         frameGrafica.setVisible(false);
-        etiquetaResultados.setVisible(false);
+//        etiquetaResultados.setVisible(false);
         if (!utiles.Configuracion.debugMode()) {
             
         }
@@ -86,7 +83,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         precision = new javax.swing.JTextField();
         frameGrafica = new javax.swing.JInternalFrame();
-        etiquetaResultados = new javax.swing.JLabel();
 
         javax.swing.GroupLayout ErrorLayout = new javax.swing.GroupLayout(Error.getContentPane());
         Error.getContentPane().setLayout(ErrorLayout);
@@ -102,11 +98,24 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         funcion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Función 1", "Función 2", "Función 3", "Función 4", "Función 5" }));
+        funcion.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                funcionItemStateChanged(evt);
+            }
+        });
+        funcion.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                funcionPropertyChange(evt);
+            }
+        });
 
         jLabel1.setText("Función");
 
+        numGen.setText("100");
+
         jLabel2.setText("Num. generaciones");
 
+        poblacion.setText("100");
         poblacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 poblacionActionPerformed(evt);
@@ -115,19 +124,33 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jLabel3.setText("Tam. población");
 
+        probCruce.setText("0.8");
+
         jLabel4.setText("Prob. cruce");
+
+        probMutacion.setText("0.01");
 
         jLabel5.setText("Prob. mutación");
 
+        valorN.setText("3");
+        valorN.setEnabled(false);
+
         jLabel6.setText("Valor de n");
+        jLabel6.setEnabled(false);
 
         seleccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ruleta", "Tormeo" }));
 
         jLabel7.setText("Selección");
 
+        cruce.setEnabled(false);
+
         jLabel8.setText("Cruce");
+        jLabel8.setEnabled(false);
+
+        elitismo.setEnabled(false);
 
         jLabel9.setText("Elitismo");
+        jLabel9.setEnabled(false);
 
         calcular.setText("Calcular");
         calcular.addActionListener(new java.awt.event.ActionListener() {
@@ -217,11 +240,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cruce, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(elitismo)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
+                    .addComponent(elitismo))
+                .addGap(18, 18, 18)
                 .addComponent(calcular)
                 .addContainerGap())
         );
@@ -246,21 +269,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(frameGrafica)
-                    .addComponent(etiquetaResultados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(frameGrafica))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(frameGrafica)
-                .addGap(18, 18, 18)
-                .addComponent(etiquetaResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(frameGrafica)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
         );
 
         pack();
@@ -291,6 +306,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             case 3: {
                 c = new CromosomaF4();
                 frameGrafica.setTitle("Grafica Función 4");
+                break;
+            }
+            case 4: {
+                c = new CromosomaFake();
+                frameGrafica.setTitle("Grafica Función 5");
                 break;
             }
         } 
@@ -367,8 +387,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 	frameGrafica.setContentPane(plot);
 	frameGrafica.setVisible(true);
         
-        etiquetaResultados.setText("Máximo "+ag.mejorAbsoluto+" "+ag.fenotipoMejor);
-        etiquetaResultados.setVisible(true);
+        //etiquetaResultados.setText("Máximo "+ag.mejorAbsoluto+" "+ag.fenotipoMejor);
+        //etiquetaResultados.setVisible(true);
 
             if (utiles.Configuracion.debugMode()) {
                 for (int i=0; i<ag.historial.size();i++)
@@ -389,6 +409,19 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void poblacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_poblacionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_poblacionActionPerformed
+
+    private void funcionPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_funcionPropertyChange
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_funcionPropertyChange
+
+    private void funcionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_funcionItemStateChanged
+        // TODO add your handling code here:
+        boolean activo = funcion.getSelectedIndex() == 4;
+        valorN.setEnabled(activo);
+        jLabel6.setEnabled(activo);
+    }//GEN-LAST:event_funcionItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -438,7 +471,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton calcular;
     private javax.swing.JTextField cruce;
     private javax.swing.JCheckBox elitismo;
-    private javax.swing.JLabel etiquetaResultados;
     private javax.swing.JInternalFrame frameGrafica;
     private javax.swing.JComboBox funcion;
     private javax.swing.JLabel jLabel1;
