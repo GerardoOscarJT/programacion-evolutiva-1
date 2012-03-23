@@ -262,7 +262,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         );
         frameGraficaLayout.setVerticalGroup(
             frameGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 227, Short.MAX_VALUE)
+            .addGap(0, 479, Short.MAX_VALUE)
         );
 
         scrollResultados.setEnabled(false);
@@ -280,13 +280,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(frameGrafica)
-                    .addComponent(scrollResultados))
+                    .addComponent(scrollResultados, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
                 .addGap(51, 51, 51))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -327,8 +327,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 break;
             }
             case 4: {
-                c = new CromosomaFake();
+                c = new CromosomaF5();
                 frameGrafica.setTitle("Grafica Función 5");
+                break;
+            }
+            case 5: {
+                c = new CromosomaFake();
+                frameGrafica.setTitle("Grafica Función Fake");
                 break;
             }
         } 
