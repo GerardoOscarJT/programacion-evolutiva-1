@@ -288,10 +288,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         double[] regla = new double[ag.mejor_generacion.size()];
         double[] mejorGeneracion = new double[ag.mejor_generacion.size()];
         double[] mejorAbsoluto = new double[ag.mejor_absoluto.size()];
+        double[] peorGeneracion = new double[ag.peor_generacion.size()];
+        double[] peorAbsoluto = new double[ag.peor_absoluto.size()];
         for (int i=0;i<ag.mejor_generacion.size();i++){
             regla[i]=(double)i;
             mejorGeneracion[i]=ag.mejor_generacion.get(i);
             mejorAbsoluto[i]=ag.mejor_absoluto.get(i);
+            peorGeneracion[i]=ag.peor_generacion.get(i);
+            peorAbsoluto[i]=ag.peor_absoluto.get(i);
         }
 		// create your PlotPanel (you can use it as a JPanel)
 	Plot2DPanel plot = new Plot2DPanel(); 
@@ -304,6 +308,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 		// add a line plot to the PlotPanel
 	plot.addLinePlot("Mejor Generacion",Color.red, regla, mejorGeneracion);
         plot.addLinePlot("Mejor Absoluto", Color.GREEN,regla, mejorAbsoluto);
+        plot.addLinePlot("Minimo Generacion", Color.BLUE, regla, peorGeneracion);
+        plot.addLinePlot("Minimo Absoluto",Color.YELLOW,regla,peorAbsoluto);
         
 
  
