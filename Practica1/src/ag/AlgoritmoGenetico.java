@@ -18,8 +18,8 @@ public class AlgoritmoGenetico {
     public int num_generaciones = 100;
     public double prob_cruce = 0.8;
     public double prob_mutacion = 0.01;
-    public double mejorAbsoluto = 0.0;
-    public double peorAbsoluto = 1000.0; 
+    public double mejorAbsoluto = -9999999.0;
+    public double peorAbsoluto = 100000.0;
     public String fenotipoMejor;
 
     protected Cromosoma _c;
@@ -67,24 +67,25 @@ public class AlgoritmoGenetico {
         
         Cromosoma mejor = Collections.max(_poblacion);
         Cromosoma peor = Collections.min(_poblacion);
+
         mejor_generacion.add(mejor.Fitness());
         peor_generacion.add(peor.Fitness());
+
         if (mejor.Fitness()>mejorAbsoluto){
             mejorAbsoluto=mejor.Fitness();
             fenotipoMejor=mejor.Fenotipo();
             mejor_absoluto.add(mejorAbsoluto);
-                    }
-        else 
+        } else {
             mejor_absoluto.add(mejorAbsoluto);
+        }
+
         if (peor.Fitness()< peorAbsoluto){
             peorAbsoluto=peor.Fitness();
             peor_absoluto.add(peorAbsoluto);
-                    }
-        else 
+        } else {
             peor_absoluto.add(peorAbsoluto);
+        }
         
-        System.out.println(mejor.Fenotipo(0));
-
     }
 
     public void inicializa() {
