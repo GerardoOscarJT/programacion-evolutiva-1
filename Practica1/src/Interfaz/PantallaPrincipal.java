@@ -11,6 +11,7 @@ import ag.seleccion.Seleccion;
 import ag.seleccion.SeleccionRuleta;
 import ag.seleccion.SeleccionTorneo;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import practica1.CromosomaF1;
@@ -36,7 +37,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         initComponents();
         frameGrafica.setVisible(false);
         scrollResultados.setVisible(false);
-        //etiquetaResultados.setVisible(false);
         if (!utiles.Configuracion.debugMode()) {
             
         }
@@ -83,9 +83,17 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         calcular = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         precision = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        variable = new javax.swing.JComboBox();
         frameGrafica = new javax.swing.JInternalFrame();
         scrollResultados = new javax.swing.JScrollPane();
         resultados = new javax.swing.JTextArea();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        cotaSup = new javax.swing.JTextField();
+        cotaInf = new javax.swing.JTextField();
+        intervalo = new javax.swing.JTextField();
 
         javax.swing.GroupLayout ErrorLayout = new javax.swing.GroupLayout(Error.getContentPane());
         Error.getContentPane().setLayout(ErrorLayout);
@@ -166,17 +174,26 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         precision.setText("0.0001");
 
+        jLabel11.setText("Estudio sobre variable");
+
+        variable.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninguno", "Población", "Generaciones", "Prob. cruce", "Prob. mutacion" }));
+        variable.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                variableItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelPrincipalLayout = new javax.swing.GroupLayout(PanelPrincipal);
         PanelPrincipal.setLayout(PanelPrincipalLayout);
         PanelPrincipalLayout.setHorizontalGroup(
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelPrincipalLayout.createSequentialGroup()
+            .addGroup(PanelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PanelPrincipalLayout.createSequentialGroup()
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelPrincipalLayout.createSequentialGroup()
                         .addGap(146, 146, 146)
                         .addComponent(calcular, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
-                    .addGroup(PanelPrincipalLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelPrincipalLayout.createSequentialGroup()
                         .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
@@ -199,7 +216,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                             .addComponent(seleccion, 0, 106, Short.MAX_VALUE)
                             .addComponent(precision, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
                             .addComponent(cruce, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                            .addComponent(elitismo))))
+                            .addComponent(elitismo)))
+                    .addGroup(PanelPrincipalLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(variable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         PanelPrincipalLayout.setVerticalGroup(
@@ -249,9 +270,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     .addComponent(elitismo))
                 .addGap(18, 18, 18)
                 .addComponent(calcular)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(variable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15))
         );
 
+        frameGrafica.setEnabled(false);
         frameGrafica.setVisible(true);
 
         javax.swing.GroupLayout frameGraficaLayout = new javax.swing.GroupLayout(frameGrafica.getContentPane());
@@ -262,7 +288,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         );
         frameGraficaLayout.setVerticalGroup(
             frameGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 479, Short.MAX_VALUE)
+            .addGap(0, 268, Short.MAX_VALUE)
         );
 
         scrollResultados.setEnabled(false);
@@ -271,23 +297,70 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         resultados.setRows(5);
         scrollResultados.setViewportView(resultados);
 
+        jLabel12.setText("Max");
+        jLabel12.setEnabled(false);
+
+        jLabel13.setText("Min");
+        jLabel13.setEnabled(false);
+
+        jLabel14.setText("Intervalo");
+        jLabel14.setEnabled(false);
+
+        cotaSup.setEnabled(false);
+
+        cotaInf.setEnabled(false);
+        cotaInf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cotaInfActionPerformed(evt);
+            }
+        });
+
+        intervalo.setEnabled(false);
+        intervalo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                intervaloActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cotaSup, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cotaInf, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(intervalo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(frameGrafica)
-                    .addComponent(scrollResultados, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
+                    .addComponent(scrollResultados))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
-                .addGap(51, 51, 51))
+                .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14)
+                    .addComponent(cotaSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cotaInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(intervalo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(frameGrafica)
@@ -303,7 +376,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         Cromosoma c = null;
         Seleccion s = null;
         Boolean valido=true;
-      
         //Selecccionamos que funcion ha escogido el usuario
         switch(funcion.getSelectedIndex()){
             case 0 : {
@@ -327,13 +399,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 break;
             }
             case 4: {
-                c = new CromosomaF5();
-                frameGrafica.setTitle("Grafica Función 5");
-                break;
-            }
-            case 5: {
                 c = new CromosomaFake();
-                frameGrafica.setTitle("Grafica Función Fake");
+                frameGrafica.setTitle("Grafica Función 5");
                 break;
             }
         } 
@@ -371,6 +438,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 valido=false;
             }
         if (valido){
+            if (variable.getSelectedIndex()==0){
             ag.inicializa();
         double[] regla = new double[ag.mejor_generacion.size()];
         double[] mejorGeneracion = new double[ag.mejor_generacion.size()];
@@ -428,6 +496,60 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                
             }
         }
+        else{
+            double min=Double.valueOf(cotaInf.getText());
+            double max=Double.valueOf(cotaSup.getText());
+            double paso=Double.valueOf(intervalo.getText());
+            int indice=0;
+            int n=(int)Math.ceil((double)(max-min)/paso)+1;
+            double[] ejex = new double[n];
+            double[] maximoAbsolutoVarias = new double[n];
+            double[] minimoAbsolutoVarias = new double[n];
+            //ArrayList<Double> mediaVarias = new ArrayList <Double>();
+            for (double i=min;i<=max;i+=paso){
+                switch (variable.getSelectedIndex()){
+                    //poblacion
+                    case 1:
+                        ag.tamano=(int)i;
+                        break;
+                    case 2:
+                        ag.num_generaciones=(int)i;
+                        break;
+                    case 3:
+                        ag.prob_cruce=i;
+                        break;
+                    case 4:
+                        ag.prob_mutacion=i;
+                        break;
+                }
+                ag.inicializa();
+                ejex[indice]=i;
+                maximoAbsolutoVarias[indice]=ag.mejorAbsoluto;
+                minimoAbsolutoVarias[indice]=ag.peorAbsoluto;
+                indice++;
+                //TODO: Calcular media para la gráfica
+                //mediaVarias.add(ag.);
+            }
+        Plot2DPanel plot = new Plot2DPanel(); 
+ 
+		// define the legend position
+	plot.addLegend("SOUTH");
+        plot.getAxis(0).setLabelText(variable.getSelectedItem().toString());
+        plot.getAxis(1).setLabelText("Evaluación");
+
+ 
+		// add a line plot to the PlotPanel
+
+        plot.addLinePlot("Maximo Absoluto", Color.GREEN,ejex, maximoAbsolutoVarias);
+        plot.addLinePlot("Minimo Absoluto",Color.YELLOW,ejex,minimoAbsolutoVarias);
+        //plot.addLinePlot("Media Generacion", Color.ORANGE, regla, mediaGeneracion); 
+		// put the PlotPanel in a JFrame like a JPanel
+                
+	frameGrafica.setContentPane(plot);
+	frameGrafica.setVisible(true);
+        }
+        }     
+            
     }//GEN-LAST:event_calcularActionPerformed
 
     private void poblacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_poblacionActionPerformed
@@ -446,6 +568,25 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         valorN.setEnabled(activo);
         jLabel6.setEnabled(activo);
     }//GEN-LAST:event_funcionItemStateChanged
+
+    private void variableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_variableItemStateChanged
+        // TODO add your handling code here:
+        boolean activo = (variable.getSelectedIndex() != 0);
+        jLabel12.setEnabled(activo);
+        jLabel13.setEnabled(activo);
+        jLabel14.setEnabled(activo);
+        cotaSup.setEnabled(activo);
+        cotaInf.setEnabled(activo);
+        intervalo.setEnabled(activo);
+    }//GEN-LAST:event_variableItemStateChanged
+
+    private void cotaInfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cotaInfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cotaInfActionPerformed
+
+    private void intervaloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_intervaloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_intervaloActionPerformed
 
     /**
      * @param args the command line arguments
@@ -493,12 +634,19 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JDialog Error;
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JButton calcular;
+    private javax.swing.JTextField cotaInf;
+    private javax.swing.JTextField cotaSup;
     private javax.swing.JTextField cruce;
     private javax.swing.JCheckBox elitismo;
     private javax.swing.JInternalFrame frameGrafica;
     private javax.swing.JComboBox funcion;
+    private javax.swing.JTextField intervalo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -516,5 +664,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollResultados;
     private javax.swing.JComboBox seleccion;
     private javax.swing.JTextField valorN;
+    private javax.swing.JComboBox variable;
     // End of variables declaration//GEN-END:variables
 }
