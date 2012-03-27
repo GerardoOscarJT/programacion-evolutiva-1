@@ -42,6 +42,10 @@ public class CromosomaF3 extends Cromosoma {
         return Math.sin(x)/(1 + Math.sqrt(x) + (Math.cos(x)/(1+x)));
     }
 
+    public double Evaluacion() {
+        return -Fitness();
+    }
+
     @Override
     public Cromosoma crearNuevo() {
         return new CromosomaF3();

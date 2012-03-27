@@ -30,6 +30,10 @@ public class CromosomaFake extends Cromosoma {
         return genes[0].getInt() - 1000000;
     }
 
+    public double Evaluacion() {
+        return Fitness();
+    }
+
     @Override
     public Cromosoma crearNuevo() {
         return new CromosomaFake();
