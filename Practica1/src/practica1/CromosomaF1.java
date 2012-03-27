@@ -27,6 +27,10 @@ public class CromosomaF1 extends Cromosoma {
         return x+Math.abs(Math.sin(32*Math.PI*x));
     }
 
+    public double Evaluacion() {
+        return Fitness();
+    }
+
     public double Fenotipo(int n) {
         switch (n) {
             case 0:

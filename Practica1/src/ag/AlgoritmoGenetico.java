@@ -52,15 +52,6 @@ public class AlgoritmoGenetico {
     public void evaluarPoblacion() {
         double suma=0.0;
 
-        if (utiles.Configuracion.debugMode()) {
-            ArrayList<String> historial_generacion = new ArrayList<String>();
-
-            for(Cromosoma c : _poblacion){
-                historial_generacion.add(c.Fitness()+"|"+c.Fenotipo());
-            }
-            historial.add(historial_generacion);
-        }
-
         for (Cromosoma c : _poblacion)
             suma+=c.Fitness();
         
@@ -103,7 +94,7 @@ public class AlgoritmoGenetico {
         
         evaluarPoblacion();
 
-        int num_seleccionados = tamano * 6 / 10;
+        int num_seleccionados = tamano *4 / 10;
 
         int ng = num_generaciones;
 
@@ -112,12 +103,13 @@ public class AlgoritmoGenetico {
 
             for (int i = 1; i<num_seleccionados-1; i+=2) {
                 double r = (double) utiles.Aleatorio.getRandomInt(10000)/10000;
-                if (r<prob_cruce) 
+                if (r<prob_cruce) {
                     seleccionados.get(i).Cruce(seleccionados.get(i-1));
+                }
             }
-            for (int i =0;i<_poblacion.size();i++)
+            for (int i =0;i<_poblacion.size();i++) {
                 _poblacion.get(i).mutacion(prob_mutacion);
-
+            }
 
             evaluarPoblacion();
             ng--;
