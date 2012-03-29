@@ -53,17 +53,15 @@ public class AlgoritmoGenetico {
         double suma=0.0;
 
         for (Cromosoma c : _poblacion)
-            suma+=c.Fitness();
+            suma+=c.Evaluacion();
         
         media_generacion.add(suma/tamano);           
         
         Cromosoma mejor = Collections.max(_poblacion);
-        Cromosoma peor = Collections.min(_poblacion);
 
         mejor_generacion.add(mejor.Fitness());
-        peor_generacion.add(peor.Fitness());
 
-        if (mejor.Fitness()>mejorAbsoluto){
+        if (mejor.Evaluacion()>mejorAbsoluto){
             mejorAbsoluto=mejor.Fitness();
             fenotipoMejor=mejor.Fenotipo();
             mejor_absoluto.add(mejorAbsoluto);
@@ -71,14 +69,6 @@ public class AlgoritmoGenetico {
             mejor_absoluto.add(mejorAbsoluto);
         }
 
-        if (peor.Fitness()< peorAbsoluto){
-            peorAbsoluto=peor.Fitness();
-            fenotipoPeor=peor.Fenotipo();
-            peor_absoluto.add(peorAbsoluto);
-        } else {
-            peor_absoluto.add(peorAbsoluto);
-        }
-        
     }
 
     public void inicializa() {
