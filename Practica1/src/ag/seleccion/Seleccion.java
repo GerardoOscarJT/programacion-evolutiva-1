@@ -7,6 +7,7 @@ package ag.seleccion;
 
 import ag.Cromosoma;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -15,5 +16,7 @@ import java.util.ArrayList;
 public interface Seleccion {
 
     ArrayList<Cromosoma> Selecciona(int n, ArrayList<Cromosoma> poblacion);
-
+    
+    
+    
 }

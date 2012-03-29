@@ -158,10 +158,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jLabel8.setText("Cruce");
         jLabel8.setEnabled(false);
 
-        elitismo.setEnabled(false);
-
         jLabel9.setText("Elitismo");
-        jLabel9.setEnabled(false);
 
         calcular.setText("Calcular");
         calcular.addActionListener(new java.awt.event.ActionListener() {
@@ -427,7 +424,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Probabilidad de cruce incorrecta.\n Debe ser un número real.");
                 valido=false;}
         if (!probMutacion.getText().isEmpty())
-            try{ag.prob_cruce=Double.valueOf(probMutacion.getText());}
+            try{ag.prob_mutacion=Double.valueOf(probMutacion.getText());}
             catch(NumberFormatException ex){
                 JOptionPane.showMessageDialog(rootPane, "Probabilidad de mutación incorrecta.\n Debe ser un número real.");
                 valido=false;}
@@ -437,6 +434,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Precisión incorrecta.\n Debe ser un número real.");
                 valido=false;
             }
+        if (elitismo.isSelected())ag.elitismo=true;
+        else ag.elitismo=false;
         if (valido){
             if (variable.getSelectedIndex()==0){
             ag.inicializa();
@@ -478,7 +477,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 	frameGrafica.setContentPane(plot);
 	frameGrafica.setVisible(true);
 
-        resultados.append("Maximo "+ag.mejorAbsoluto+" "+ag.fenotipoMejor+"\n"+
+        resultados.setText("Maximo "+ag.mejorAbsoluto+" "+ag.fenotipoMejor+"\n"+
                 "Minimo "+ag.peorAbsoluto+" "+ag.fenotipoPeor);
         scrollResultados.setVisible(true);
 

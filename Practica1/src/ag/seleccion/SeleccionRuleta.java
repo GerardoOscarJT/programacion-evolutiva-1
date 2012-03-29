@@ -61,4 +61,12 @@ public class SeleccionRuleta implements Seleccion {
         return resultado;
     }
 
+    public ArrayList<Cromosoma> selMejorElite(int elite, ArrayList<Cromosoma> poblacion) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public ArrayList<Cromosoma> selPeorElite(int elite, ArrayList<Cromosoma> poblacion) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

@@ -18,6 +18,7 @@ public class AlgoritmoGenetico {
     public int num_generaciones = 100;
     public double prob_cruce = 0.8;
     public double prob_mutacion = 0.01;
+    public boolean elitismo;
     public double mejorAbsoluto = -9999999.0;
     public double peorAbsoluto = 100000.0;
     public String fenotipoMejor;
@@ -27,6 +28,8 @@ public class AlgoritmoGenetico {
     protected Seleccion _s;
 
     protected ArrayList<Cromosoma> _poblacion;
+    protected ArrayList<Cromosoma> selMejorElite;
+    protected ArrayList<Cromosoma> selPeorElite;
 
     public ArrayList<ArrayList<String>> historial;
 
@@ -51,16 +54,7 @@ public class AlgoritmoGenetico {
 
     public void evaluarPoblacion() {
         double suma=0.0;
-
-        if (utiles.Configuracion.debugMode()) {
-            ArrayList<String> historial_generacion = new ArrayList<String>();
-
-            for(Cromosoma c : _poblacion){
-                historial_generacion.add(c.Fitness()+"|"+c.Fenotipo());
-            }
-            historial.add(historial_generacion);
-        }
-
+        
         for (Cromosoma c : _poblacion)
             suma+=c.Fitness();
         
@@ -104,12 +98,12 @@ public class AlgoritmoGenetico {
         evaluarPoblacion();
 
         int num_seleccionados = tamano * 6 / 10;
-
+        int elite = tamano*2/100;
         int ng = num_generaciones;
 
         while (ng>0) {
             ArrayList<Cromosoma> seleccionados = _s.Selecciona(num_seleccionados, _poblacion);
-
+            
             for (int i = 1; i<num_seleccionados-1; i+=2) {
                 double r = (double) utiles.Aleatorio.getRandomInt(10000)/10000;
                 if (r<prob_cruce) 
@@ -118,11 +112,34 @@ public class AlgoritmoGenetico {
             for (int i =0;i<_poblacion.size();i++)
                 _poblacion.get(i).mutacion(prob_mutacion);
 
-
+            if (elitismo) {
+                selMejorElite = dameMejores(elite,_poblacion);
+                selPeorElite = damePeores(elite,_poblacion);
+                for (int i=0; i<elite;i++){
+                    selPeorElite.get(i).copyFrom(selMejorElite.get(i));
+                }
+            }
             evaluarPoblacion();
             ng--;
         }
     }
+    
+    public ArrayList<Cromosoma> dameMejores(int elite,ArrayList<Cromosoma> poblacion){
+        ArrayList<Cromosoma> seleccionMejores = new ArrayList<Cromosoma>(elite);
+        for (int i=0;i<elite;i++){
+            Cromosoma mejor = Collections.max(poblacion);
+            seleccionMejores.add(mejor);
+        }
+    return seleccionMejores;
+    };
+    public ArrayList<Cromosoma> damePeores(int elite,ArrayList<Cromosoma> poblacion){
+        ArrayList<Cromosoma> seleccionPeores = new ArrayList<Cromosoma>(elite);
+        for (int i=0;i<elite;i++){
+            Cromosoma peor = Collections.min(poblacion);
+            seleccionPeores.add(peor);
+        }
+        return seleccionPeores;
+    };
     
 
 
