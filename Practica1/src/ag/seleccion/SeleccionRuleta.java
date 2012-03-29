@@ -27,19 +27,18 @@ public class SeleccionRuleta implements Seleccion {
     public ArrayList<Cromosoma> Selecciona(int n, ArrayList<Cromosoma> poblacion) {
 
         double sumaTotal = 0;
-
-        for (Cromosoma v : poblacion)
-            sumaTotal += v.Fitness();
-
+        double aux=Math.abs(Collections.min(poblacion).Fitness());
+        for (Cromosoma v : poblacion){
+                sumaTotal+=v.Fitness()+aux;
+        }
         Collections.sort(poblacion);
         Collections.reverse(poblacion);
-
 
         double[] acumulado = new double[poblacion.size()+1];
         acumulado[0] = 0;
 
         for (int i=0; i<poblacion.size(); i++) {
-            acumulado[i+1] = acumulado[i]+poblacion.get(i).Fitness()/sumaTotal;
+            acumulado[i+1] = acumulado[i]+(poblacion.get(i).Fitness()+aux)/sumaTotal;
         }
 
 

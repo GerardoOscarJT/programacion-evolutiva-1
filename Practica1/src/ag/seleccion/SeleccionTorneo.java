@@ -19,33 +19,17 @@ public class SeleccionTorneo implements Seleccion {
 
     public ArrayList<Cromosoma> Selecciona(int n, ArrayList<Cromosoma> poblacion) {
         ArrayList<Cromosoma> resultado = new ArrayList<Cromosoma>(n);
+        Cromosoma mejor;
         numIndividuos=n;
         while (numIndividuos>0){
-            int x1=utiles.Aleatorio.getRandomInt(poblacion.size());
-            int x2=utiles.Aleatorio.getRandomInt(poblacion.size());
-            int x3=utiles.Aleatorio.getRandomInt(poblacion.size());
-
-
-            double f1 = poblacion.get(x1).Evaluacion();
-            double f2 = poblacion.get(x2).Evaluacion();
-            double f3 = poblacion.get(x3).Evaluacion();
-
-
-            if ( (f1 > f2) && (f1 > f3) ) {
-                resultado.add(poblacion.get(x1));
-            } else if (f2 > f1 && f2 > f3) {
-                resultado.add(poblacion.get(x2));
-            } else {
-                resultado.add(poblacion.get(x3));
+            int x=utiles.Aleatorio.getRandomInt(poblacion.size());
+            mejor=poblacion.get(x);
+            for (int i=1;i<numParticipantes;i++){
+                int y=utiles.Aleatorio.getRandomInt(poblacion.size());
+                if (poblacion.get(y).Evaluacion()>mejor.Evaluacion())
+                    mejor=poblacion.get(x);
             }
-
-            /*
-            if (poblacion.get(x1).Fitness()>poblacion.get(x2).Fitness())
-                    resultado.add(poblacion.get(x1));
-            else if ((poblacion.get(x2).Fitness()>poblacion.get(x1).Fitness()) &&
-                    (poblacion.get(x2).Fitness()>poblacion.get(x3).Fitness()))
-                    resultado.add(poblacion.get(x2));
-            */
+            resultado.add(mejor);
             numIndividuos--;
         }
         
