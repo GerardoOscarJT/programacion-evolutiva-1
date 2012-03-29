@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author gerardo
  */
-public abstract class Cromosoma implements Comparable<Cromosoma>{
+public abstract class Cromosoma implements Comparable<Cromosoma>, Cloneable{
 
     protected Gen genes[];
 
@@ -22,6 +22,12 @@ public abstract class Cromosoma implements Comparable<Cromosoma>{
 
     public Cromosoma() {
         
+    }
+
+    public Cromosoma clone() {
+        Cromosoma nuevo = crearNuevo();
+        nuevo.copyFrom(this);
+        return nuevo;
     }
 
     public void copyFrom(Cromosoma c) {
@@ -43,8 +49,6 @@ public abstract class Cromosoma implements Comparable<Cromosoma>{
     }
 
     public void Cruce(Cromosoma c) {
-
-        
         for (int i=0; i<genes.length; i++) {
             // Elegimos un punto de corte
             // Del gen g elijo un bit e intercambio a nivel de bit
