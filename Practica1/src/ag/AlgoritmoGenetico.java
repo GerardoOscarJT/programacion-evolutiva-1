@@ -106,12 +106,13 @@ public class AlgoritmoGenetico {
             
             for (int i = 1; i<num_seleccionados-1; i+=2) {
                 double r = (double) utiles.Aleatorio.getRandomInt(10000)/10000;
-                if (r<prob_cruce) 
+                if (r<prob_cruce) {
                     seleccionados.get(i).Cruce(seleccionados.get(i-1));
+                }
             }
-            for (int i =0;i<_poblacion.size();i++)
+            for (int i =0;i<_poblacion.size();i++) {
                 _poblacion.get(i).mutacion(prob_mutacion);
-
+            }
             if (elitismo) {
                 selMejorElite = dameMejores(elite,_poblacion);
                 selPeorElite = damePeores(elite,_poblacion);
