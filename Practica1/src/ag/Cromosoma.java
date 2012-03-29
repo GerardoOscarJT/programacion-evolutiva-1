@@ -34,15 +34,33 @@ public abstract class Cromosoma implements Comparable<Cromosoma>{
     }
 
     public int compareTo(Cromosoma o) {
-        if (Fitness() < o.Fitness())
+        if (Evaluacion() < o.Evaluacion())
             return -1;
-        else if (Fitness() > o.Fitness())
+        else if (Evaluacion() > o.Evaluacion())
             return 1;
         else
             return 0;
     }
 
     public void Cruce(Cromosoma c) {
+
+        
+        for (int i=0; i<genes.length; i++) {
+            // Elegimos un punto de corte
+            // Del gen g elijo un bit e intercambio a nivel de bit
+            int b = utiles.Aleatorio.getRandomInt(genes[i].datos.length);
+
+            // Intercambio todos los bits que están a la izquierda
+            for (int j=0; j<b; j++) {
+                int aux = c.genes[i].datos[j];
+                c.genes[i].datos[j] = genes[i].datos[j];
+                genes[i].datos[j] = aux;
+            }
+        }
+        
+
+
+        /*
         // Elegimos un gen de todos los que tenemos
         int g = utiles.Aleatorio.getRandomInt(genes.length);
 
@@ -62,6 +80,7 @@ public abstract class Cromosoma implements Comparable<Cromosoma>{
             c.genes[g].datos[i] = genes[g].datos[i];
             genes[g].datos[i] = aux;
         }
+        */
     }
     public void mutacion(double prob_mutacion){
         for (int i=0;i<genes.length;i++){
@@ -86,6 +105,8 @@ public abstract class Cromosoma implements Comparable<Cromosoma>{
     }
 
     public abstract double Fitness();
+
+    public abstract double Evaluacion();
 
     public abstract Cromosoma crearNuevo();
 

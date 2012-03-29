@@ -48,6 +48,10 @@ public class CromosomaF5 extends Cromosoma {
         return -resultado;
     }
 
+    public double Evaluacion() {
+        return -Fitness();
+    }
+
     @Override
     public Cromosoma crearNuevo() {
         return new CromosomaF5();

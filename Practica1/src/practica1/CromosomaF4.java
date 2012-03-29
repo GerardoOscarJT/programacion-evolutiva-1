@@ -45,6 +45,10 @@ public class CromosomaF4 extends Cromosoma {
                 
     }
 
+    public double Evaluacion() {
+        return -Fitness();
+    }
+
     @Override
     public Cromosoma crearNuevo() {
         return new CromosomaF4();
