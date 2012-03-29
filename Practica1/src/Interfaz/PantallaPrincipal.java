@@ -396,7 +396,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 break;
             }
             case 4: {
-                c = new CromosomaFake();
+                c = new CromosomaF5();
                 frameGrafica.setTitle("Grafica Función 5");
                 break;
             }

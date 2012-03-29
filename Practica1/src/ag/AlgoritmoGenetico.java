@@ -98,7 +98,7 @@ public class AlgoritmoGenetico {
         evaluarPoblacion();
 
         int num_seleccionados = tamano * 6 / 10;
-        int elite = tamano*2/100;
+        int elite = tamano*40/100;
         int ng = num_generaciones;
 
         while (ng>0) {
@@ -125,18 +125,22 @@ public class AlgoritmoGenetico {
     }
     
     public ArrayList<Cromosoma> dameMejores(int elite,ArrayList<Cromosoma> poblacion){
+        ArrayList<Cromosoma> aux = (ArrayList<Cromosoma>) poblacion.clone();
         ArrayList<Cromosoma> seleccionMejores = new ArrayList<Cromosoma>(elite);
         for (int i=0;i<elite;i++){
-            Cromosoma mejor = Collections.max(poblacion);
+            Cromosoma mejor = Collections.max(aux);
             seleccionMejores.add(mejor);
+            aux.remove(mejor);
         }
     return seleccionMejores;
     };
     public ArrayList<Cromosoma> damePeores(int elite,ArrayList<Cromosoma> poblacion){
+        ArrayList<Cromosoma> aux = (ArrayList<Cromosoma>) poblacion.clone();
         ArrayList<Cromosoma> seleccionPeores = new ArrayList<Cromosoma>(elite);
         for (int i=0;i<elite;i++){
-            Cromosoma peor = Collections.min(poblacion);
+            Cromosoma peor = Collections.min(aux);
             seleccionPeores.add(peor);
+            aux.remove(peor);
         }
         return seleccionPeores;
     };
