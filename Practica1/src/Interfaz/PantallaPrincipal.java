@@ -440,15 +440,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         double[] regla = new double[ag.mejor_generacion.size()];
         double[] mejorGeneracion = new double[ag.mejor_generacion.size()];
         double[] mejorAbsoluto = new double[ag.mejor_absoluto.size()];
-        double[] peorGeneracion = new double[ag.peor_generacion.size()];
-        double[] peorAbsoluto = new double[ag.peor_absoluto.size()];
         double[] mediaGeneracion = new double[ag.media_generacion.size()];
         for (int i=0;i<ag.mejor_generacion.size();i++){
             regla[i]=(double)i;
             mejorGeneracion[i]=ag.mejor_generacion.get(i);
             mejorAbsoluto[i]=ag.mejor_absoluto.get(i);
-            peorGeneracion[i]=ag.peor_generacion.get(i);
-            peorAbsoluto[i]=ag.peor_absoluto.get(i);
             mediaGeneracion[i]=ag.media_generacion.get(i);
         }
 		// create your PlotPanel (you can use it as a JPanel)
@@ -463,8 +459,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 		// add a line plot to the PlotPanel
 	plot.addLinePlot("Mejor Generacion",Color.red, regla, mejorGeneracion);
         plot.addLinePlot("Mejor Absoluto", Color.GREEN,regla, mejorAbsoluto);
-        plot.addLinePlot("Minimo Generacion", Color.BLUE, regla, peorGeneracion);
-        plot.addLinePlot("Minimo Absoluto",Color.YELLOW,regla,peorAbsoluto);
         plot.addLinePlot("Media Generacion", Color.ORANGE, regla, mediaGeneracion);
 
         
@@ -475,23 +469,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 	frameGrafica.setContentPane(plot);
 	frameGrafica.setVisible(true);
 
-        resultados.setText("Maximo "+ag.mejorAbsoluto+" "+ag.fenotipoMejor+"\n"+
-                "Minimo "+ag.peorAbsoluto+" "+ag.fenotipoPeor);
+        Cromosoma mejor = ag.getMejor();
+
+        resultados.setText("Maximo "+mejor.Fitness()+" "+mejor.Fenotipo());
         scrollResultados.setVisible(true);
 
-            if (utiles.Configuracion.debugMode()) {
-                for (int i=0; i<ag.historial.size();i++)
-                    modelotabla.addColumn("Generacion "+i);
-
-                modelotabla.setRowCount(ag.historial.get(0).size());
-
-                for (int i=0; i<ag.historial.size(); i++){
-                    for (int j=0; j<ag.historial.get(i).size(); j++){
-                        modelotabla.setValueAt(ag.historial.get(i).get(j), j, i);
-                    }
-                }
-               
-            }
         }
         else{
             double min=Double.valueOf(cotaInf.getText());
@@ -523,10 +505,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         break;
                 }
                 ag.inicializa();
+                Cromosoma mejor = ag.getMejor();
                 if (indice<n) {
                     ejex[indice]=i;
-                    maximoAbsolutoVarias[indice]=ag.mejorAbsoluto;
-                    minimoAbsolutoVarias[indice]=ag.peorAbsoluto;
+                    maximoAbsolutoVarias[indice]=mejor.Fitness();
                 }
                 indice++;
                 //TODO: Calcular media para la gráfica
@@ -543,24 +525,24 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
 
 
-        Plot2DPanel plot = new Plot2DPanel(); 
- 
-		// define the legend position
-	plot.addLegend("SOUTH");
-        plot.getAxis(0).setLabelText(variable.getSelectedItem().toString());
-        plot.getAxis(1).setLabelText("Evaluación");
+            Plot2DPanel plot = new Plot2DPanel();
 
- 
-		// add a line plot to the PlotPanel
+                    // define the legend position
+            plot.addLegend("SOUTH");
+            plot.getAxis(0).setLabelText(variable.getSelectedItem().toString());
+            plot.getAxis(1).setLabelText("Evaluación");
 
-        plot.addLinePlot("Maximo Absoluto", Color.GREEN,ejex, maximoAbsolutoVarias);
-        plot.addLinePlot("Minimo Absoluto",Color.YELLOW,ejex,minimoAbsolutoVarias);
-        //plot.addLinePlot("Media Generacion", Color.ORANGE, regla, mediaGeneracion); 
-		// put the PlotPanel in a JFrame like a JPanel
-                
-	frameGrafica.setContentPane(plot);
-	frameGrafica.setVisible(true);
-        }
+
+                    // add a line plot to the PlotPanel
+
+            plot.addLinePlot("Maximo Absoluto", Color.GREEN,ejex, maximoAbsolutoVarias);
+            plot.addLinePlot("Minimo Absoluto",Color.YELLOW,ejex,minimoAbsolutoVarias);
+            //plot.addLinePlot("Media Generacion", Color.ORANGE, regla, mediaGeneracion);
+                    // put the PlotPanel in a JFrame like a JPanel
+
+            frameGrafica.setContentPane(plot);
+            frameGrafica.setVisible(true);
+            }
         }     
             
     }//GEN-LAST:event_calcularActionPerformed
