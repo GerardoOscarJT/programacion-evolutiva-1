@@ -416,6 +416,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             case 4: {
                 c = new CromosomaF5();
                 frameGrafica.setTitle("Grafica Función 5");
+
+                CromosomaF5.v = Integer.valueOf(valorN.getText());
+
                 break;
             }
         }
@@ -571,7 +574,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 if (indice<n) {
                     ejex[indice]=ejex[indice-1];
                     maximoAbsolutoVarias[indice]=maximoAbsolutoVarias[indice-1];
-                    minimoAbsolutoVarias[indice]=minimoAbsolutoVarias[indice-1];
                 }
 
                 Plot2DPanel plot = new Plot2DPanel();
@@ -583,8 +585,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
 
                 // add a line plot to the PlotPanel
-                plot.addLinePlot("Maximo Absoluto", Color.GREEN,ejex, maximoAbsolutoVarias);
-                plot.addLinePlot("Minimo Absoluto",Color.YELLOW,ejex,minimoAbsolutoVarias);
+                plot.addLinePlot("Mejor", Color.GREEN,ejex, maximoAbsolutoVarias);
 
                 frameGrafica.setContentPane(plot);
                 frameGrafica.setVisible(true);
