@@ -14,13 +14,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import practica1.CromosomaF1;
 import org.math.plot.*;
-import practica1.CromosomaF2;
-import practica1.CromosomaF3;
-import practica1.CromosomaF4;
-import practica1.CromosomaF5;
-import practica1.CromosomaFake;
 
 /**
  *
@@ -394,30 +388,28 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         //Selecccionamos que funcion ha escogido el usuario
         switch(funcion.getSelectedIndex()){
             case 0 : {
-                c = new CromosomaF1();
                 frameGrafica.setTitle("Grafica Función 1");
                 break;
             }
-            case 1: {
-                c = new CromosomaF2();
+            case 1:{
                 frameGrafica.setTitle("Grafica Función 2");
                 break;
             }
             case 2: {
-                c = new CromosomaF3();
+         
                 frameGrafica.setTitle("Grafica Función 3");
                 break;
             }
             case 3: {
-                c = new CromosomaF4();
+                
                 frameGrafica.setTitle("Grafica Función 4");
                 break;
             }
             case 4: {
-                c = new CromosomaF5();
+              
                 frameGrafica.setTitle("Grafica Función 5");
 
-                CromosomaF5.v = Integer.valueOf(valorN.getText());
+              
 
                 break;
             }

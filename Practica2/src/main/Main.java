@@ -7,8 +7,10 @@ package main;
 
 import ag.*;
 import ag.seleccion.*;
-import practica1.*;
+import Practica2.*;
 import Interfaz.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  *
@@ -30,11 +32,13 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         // TODO code application logic here   
 
-        PantallaPrincipal ventana = new PantallaPrincipal();
-        ventana.setVisible(true);
+        //PantallaPrincipal ventana = new PantallaPrincipal();
+        //ventana.setVisible(true);
+        LeerArchivo lectura = new LeerArchivo();
+        lectura.leer();
     }
 
 }
