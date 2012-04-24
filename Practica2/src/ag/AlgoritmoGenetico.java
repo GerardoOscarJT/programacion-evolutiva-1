@@ -5,6 +5,7 @@
 
 package ag;
 
+import ag.cromosoma.Cromosoma;
 import ag.seleccion.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,6 +15,7 @@ import java.util.Collections;
  * @author gerardo
  */
 public class AlgoritmoGenetico {
+    /*
     public int tamano = 100;
     public int num_generaciones = 100;
     public double prob_cruce = 0.8;
@@ -129,5 +131,5 @@ public class AlgoritmoGenetico {
         }
     }
 
-
+*/
 }

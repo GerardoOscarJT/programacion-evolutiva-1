@@ -5,14 +5,15 @@
 
 package ag.seleccion;
 
-import ag.Cromosoma;
+import ag.cromosoma.Cromosoma;
 import java.util.ArrayList;
 
 /**
  *
  * @author gerardo
  */
-public class SeleccionTorneo implements Seleccion {
+public class SeleccionTorneo extends Seleccion {
+    /*
     private int numParticipantes=3;
     private double intervalo = 0.6;
     public int numIndividuos;
@@ -43,5 +44,5 @@ public class SeleccionTorneo implements Seleccion {
     public ArrayList<Cromosoma> selPeorElite(int elite, ArrayList<Cromosoma> poblacion) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
+*/
 }

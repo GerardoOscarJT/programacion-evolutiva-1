@@ -7,8 +7,8 @@ package main;
 
 import ag.*;
 import ag.seleccion.*;
-import practica1.*;
 import Interfaz.*;
+import ag.cromosoma.CromosomaAlumnos;
 
 /**
  *
@@ -33,8 +33,11 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here   
 
-        PantallaPrincipal ventana = new PantallaPrincipal();
-        ventana.setVisible(true);
+
+        new CromosomaAlumnos();
+
+        //PantallaPrincipal ventana = new PantallaPrincipal();
+        //ventana.setVisible(true);
     }
 
 }

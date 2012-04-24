@@ -5,7 +5,7 @@
 
 package ag.seleccion;
 
-import ag.Cromosoma;
+import ag.cromosoma.Cromosoma;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -13,9 +13,12 @@ import java.util.Collections;
  *
  * @author gerardo
  */
-public interface Seleccion {
+public abstract class Seleccion {
 
-    ArrayList<Cromosoma> Selecciona(int n, ArrayList<Cromosoma> poblacion);
+    ArrayList<Cromosoma> Selecciona(int n, ArrayList<Cromosoma> poblacion) {
+        // TODO: Esto hay que cambiarlo todo
+        return null;
+    }
     
     
     

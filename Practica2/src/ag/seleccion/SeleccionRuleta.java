@@ -5,7 +5,7 @@
 
 package ag.seleccion;
 
-import ag.Cromosoma;
+import ag.cromosoma.Cromosoma;
 import java.util.ArrayList;
 import java.util.Collections;
 import utiles.Aleatorio;
@@ -22,8 +22,9 @@ public class Compare1 extends Comparable {
  *
  */
 
-public class SeleccionRuleta implements Seleccion {
+public class SeleccionRuleta extends Seleccion {
 
+    /*
     public ArrayList<Cromosoma> Selecciona(int n, ArrayList<Cromosoma> poblacion) {
 
         double sumaTotal = 0;
@@ -67,5 +68,5 @@ public class SeleccionRuleta implements Seleccion {
     public ArrayList<Cromosoma> selPeorElite(int elite, ArrayList<Cromosoma> poblacion) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
+*/
 }

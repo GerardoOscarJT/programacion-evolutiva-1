@@ -3,9 +3,9 @@
  * and open the template in the editor.
  */
 
-package ag;
+package ag.cromosoma;
 
-import ag.Gen;
+import ag.gen.Gen;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,14 +15,48 @@ import java.util.logging.Logger;
  */
 public abstract class Cromosoma implements Comparable<Cromosoma>, Cloneable{
 
-    protected Gen genes[];
-
-    public String alelo;
-
-
-    public Cromosoma() {
+    public int compareTo(Cromosoma o) {
+        if (evaluacion() < o.evaluacion())
+            return -1;
+        else if (evaluacion() > o.evaluacion())
+            return 1;
+        else
+            return 0;
         
     }
+
+    public abstract double evaluacion();
+
+
+    /**
+     * Devuelve una instancia del objeto que hereda
+     */
+    public abstract Cromosoma nuevo();
+
+    /**
+     * Dado un gen devolver la copia
+     * TODO : Hacer comprobación de tipos
+     */
+    public abstract Cromosoma copia(Cromosoma c);
+
+
+
+
+
+    /*
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public Cromosoma clone() {
         Cromosoma nuevo = crearNuevo();
@@ -61,30 +95,6 @@ public abstract class Cromosoma implements Comparable<Cromosoma>, Cloneable{
                 genes[i].datos[j] = aux;
             }
         }
-        
-
-
-        /*
-        // Elegimos un gen de todos los que tenemos
-        int g = utiles.Aleatorio.getRandomInt(genes.length);
-
-        // Intercambio los genes que hay a la izquierda
-        for (int i=0; i<g; i++) {
-            Gen aux = c.genes[i];
-            c.genes[i] = genes[i];
-            genes[i] = aux;
-        }
-
-        // Del gen g elijo un bit e intercambio a nivel de bit
-        int b = utiles.Aleatorio.getRandomInt(genes[g].datos.length);
-
-        // Intercambio todos los bits que están a la izquierda
-        for (int i=0; i<b; i++) {
-            int aux = c.genes[g].datos[i];
-            c.genes[g].datos[i] = genes[g].datos[i];
-            genes[g].datos[i] = aux;
-        }
-        */
     }
     public void mutacion(double prob_mutacion){
         for (int i=0;i<genes.length;i++){
@@ -95,7 +105,6 @@ public abstract class Cromosoma implements Comparable<Cromosoma>, Cloneable{
             }
         }
     }
-
 
     public abstract double Fenotipo(int i);
 
@@ -125,13 +134,12 @@ public abstract class Cromosoma implements Comparable<Cromosoma>, Cloneable{
     }
 
     public String toString() {
-        String r = "";
-
-        for (int i=0; i<genes.length; i++) {
-            r += "Gen"+i+" = "+genes[i].getInt()+"; ";
-        }
+        String r = "TODO: fichero 'Cromosoma.java' linea 103";
 
         return r;
     }
+     *
+     *
+     */
 
 }

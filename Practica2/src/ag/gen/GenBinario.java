@@ -3,21 +3,34 @@
  * and open the template in the editor.
  */
 
-package ag;
+package ag.gen;
 
 /**
  *
  * @author gerardo
- *
- * Este gen codifica un rango de valores enteros utilizando l bits
- *
  */
-public class Gen {
+public class GenBinario extends Gen {
+
+    public Gen nuevo() {
+        return new GenBinario();
+    }
+
+    @Override
+    public Gen copia(Gen g) {
+        // TODO:
+        return null;
+    }
+
+
+
+    // TODO: Reimplementar en un futuro
+/*
+ *
     public int[] datos;
 
     public static int bits = 16;
 
-    public Gen() {
+    public GenBinario() {
         datos = new int[bits];
     }
 
@@ -33,10 +46,12 @@ public class Gen {
         return r;
     }
 
-    public void copyFrom(Gen g) {
+    public void copyFrom(GenBinario g) {
         datos = new int[g.datos.length];
         for (int i = 0; i<datos.length; i++)
             datos[i] = g.datos[i];
     }
-
+ *
+ *
+ */
 }
