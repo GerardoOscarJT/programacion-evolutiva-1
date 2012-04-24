@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.math.plot.*;
-import practica2.CromosomaE1;
 
 /**
  *
@@ -382,8 +381,29 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         //Selecccionamos que funcion ha escogido el usuario
         switch(funcion.getSelectedIndex()){
             case 0 : {
-                c = new CromosomaE1();
                 frameGrafica.setTitle("Grafica Función 1");
+                break;
+            }
+            case 1:{
+                frameGrafica.setTitle("Grafica Función 2");
+                break;
+            }
+            case 2: {
+         
+                frameGrafica.setTitle("Grafica Función 3");
+                break;
+            }
+            case 3: {
+                
+                frameGrafica.setTitle("Grafica Función 4");
+                break;
+            }
+            case 4: {
+              
+                frameGrafica.setTitle("Grafica Función 5");
+
+              
+
                 break;
             }
         }
