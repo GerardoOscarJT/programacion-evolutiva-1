@@ -7,8 +7,10 @@ package main;
 
 import ag.*;
 import ag.seleccion.*;
+import Practica2.*;
 import Interfaz.*;
-import ag.cromosoma.CromosomaAlumnos;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  *
@@ -30,14 +32,13 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         // TODO code application logic here   
-
-
-        new CromosomaAlumnos();
 
         //PantallaPrincipal ventana = new PantallaPrincipal();
         //ventana.setVisible(true);
+        LeerArchivo lectura = new LeerArchivo();
+        lectura.leer();
     }
 
 }
