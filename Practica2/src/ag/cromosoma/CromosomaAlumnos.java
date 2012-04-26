@@ -5,10 +5,17 @@
 
 package ag.cromosoma;
 
+import ag.gen.Gen;
+import ag.gen.GenEntero;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import practica2.Alumno;
+import practica2.*;
+
 
 /**
  *
@@ -19,7 +26,8 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
     /** Alumnos */
     static ArrayList<Alumno> alumnos;
 
-    /** Relación de ids */
+    /** Relación de ids, dado el identificador de fichero, devuelve
+     el indentificador del array*/
     static Map<Integer, Integer> ids;
 
     /** Número de grupos */
@@ -30,7 +38,27 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
 
     /** Factor de desequilibrio (Debe estar entre 0 y 1) */
     public static double a = 0.5;
+    
+    public static int numAlumnos = 0;
+    
+    public GenEntero[] genesA;
 
+    public CromosomaAlumnos() {
+        
+        ArrayList<Integer> aleatorios = new ArrayList<Integer>(numAlumnos);
+        for (int i=0; i<numAlumnos; i++)
+            aleatorios.add(i);
+        Collections.shuffle(aleatorios);
+        
+        genes = new GenEntero[numAlumnos];
+        genesA = (GenEntero[]) genes;
+        for (int i =0; i<numAlumnos;i++){
+            genes[i]= new GenEntero();            
+            genesA[i].valor=aleatorios.get(i);
+        }
+    }
+    
+    
 
     public Cromosoma nuevo() {
         return new CromosomaAlumnos();
@@ -79,19 +107,58 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
         return a*desequilibrio+(1-a)*incompatibilidades;
 
     }
+    public void copyFrom(Cromosoma c) {
+        CromosomaAlumnos ca = (CromosomaAlumnos) c;
+        genes = new Gen[ca.genes.length];
+        for (int i = 0; i<genes.length; i++) {
+            Gen g = new GenEntero();
+            g.copia(ca.genes[i]);
+            genes[i] = g;
+        }
+    }
 
-    public void leer(String ruta) {
+    public static void leer(File f) throws FileNotFoundException, IOException {
 
-        // TODO: leer nº alumnos y leer nº de relaciones
-        int num_alumnos = 8;
-        int num_relaciones = 24;
+        String linea;
+        String[] datos;
+        LeerArchivo manejador = new LeerArchivo();
+        linea=manejador.inicializa(f);
+        datos=linea.split(" ");
+        numAlumnos=Integer.valueOf(datos[0]);
+        int incompatibilidades = Integer.valueOf(datos[1]);
+        ids = new HashMap<Integer, Integer>(numAlumnos);
+        alumnos = new ArrayList<Alumno>(numAlumnos);
+        for (int i=0;i<numAlumnos;i++){
+            linea = manejador.dameLinea();
+            datos=linea.split(" ");
+            int id=Integer.valueOf(datos[0]);
+            int nota= Integer.valueOf(datos[1]);
+            ids.put(id, i);
+            Alumno alumno = new Alumno(id,nota);
+            alumnos.add(i, alumno);
+        }
+        for (int i=0;i<incompatibilidades;i++){
+            linea = manejador.dameLinea();
+            datos=linea.split(" ");
+            int alumno=Integer.valueOf(datos[0]);
+            int enemigo=Integer.valueOf(datos[1]);
+            int idAlumno=ids.get(alumno);
+            int idEnemigo= ids.get(enemigo);
+            alumnos.get(idAlumno).getEnemigos().add(idEnemigo);
+        }
 
-        ids = new HashMap<Integer, Integer>(num_alumnos);
-
-        // TODO: Completar
 
 
+    }
 
+
+    public void aleatoriza() {
+        
+    }
+
+    @Override
+    public String fenotipo() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

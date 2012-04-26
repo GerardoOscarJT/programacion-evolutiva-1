@@ -13,6 +13,11 @@ import java.util.ArrayList;
  * @author gerardo
  */
 public class SeleccionTorneo extends Seleccion {
+
+    @Override
+    public ArrayList<Cromosoma> selecciona(int n, ArrayList<Cromosoma> poblacion) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     /*
     private int numParticipantes=3;
     private double intervalo = 0.6;

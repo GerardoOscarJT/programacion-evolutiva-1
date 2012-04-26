@@ -5,10 +5,17 @@
 
 package ag.cruce;
 
+import ag.cromosoma.Cromosoma;
+
 /**
  *
  * @author gerardo
  */
 public class CrucePMX extends Cruce {
+
+    @Override
+    public void cruza(Cromosoma a, Cromosoma b) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
 }

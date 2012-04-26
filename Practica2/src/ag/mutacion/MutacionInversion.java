@@ -5,10 +5,17 @@
 
 package ag.mutacion;
 
+import ag.cromosoma.Cromosoma;
+
 /**
  *
  * @author gerardo
  */
 public class MutacionInversion extends Mutacion {
+
+    @Override
+    public void muta(Cromosoma c) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
 }

@@ -5,18 +5,14 @@
 
 package ag;
 
-import practica2.LeerArchivo;
-import practica2.Alumno;
 import ag.cromosoma.Cromosoma;
-import ag.seleccion.*;
-import ag.cruce.*;
-import ag.mutacion.*;
-import java.io.File;
+import ag.cruce.Cruce;
+import ag.mutacion.Mutacion;
+import ag.seleccion.Seleccion;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 
 /**
  *
@@ -38,22 +34,19 @@ public class AlgoritmoGenetico {
     protected Seleccion _s;
     protected Cruce _cr;
     protected Mutacion _m;
-    protected File _f;
-    protected HashMap listaAlumnos;
 
-    protected HashMap _alumnos;
+    protected ArrayList<Cromosoma> _poblacion;
     protected ArrayList<Cromosoma> _elite;
 
     public ArrayList<Double> mejor_absoluto;
     public ArrayList<Double> mejor_generacion;
     public ArrayList<Double> media_generacion;
 
-    public AlgoritmoGenetico(Cromosoma c, Seleccion s, Cruce cr, Mutacion m, File archivo) {
+    public AlgoritmoGenetico(Cromosoma c, Seleccion s, Cruce cr, Mutacion m) {
         _c = c;
         _s = s;
         _cr = cr;
         _m = m;
-        _f = archivo;
 
         mejor_generacion = new ArrayList<Double>();
         mejor_absoluto = new ArrayList<Double>();
@@ -65,7 +58,6 @@ public class AlgoritmoGenetico {
         Collections.reverse(_elite);
         return _elite.get(0);
     }
-/*
     public void evaluarPoblacion() {
         //////////////////
         // Elegir élite
@@ -90,46 +82,24 @@ public class AlgoritmoGenetico {
         //////////////////////////
 
 
-        mejor_generacion.add(Collections.max(_poblacion).Fitness());
-        mejor_absoluto.add(_elite.get(0).Fitness());
+        mejor_generacion.add(Collections.max(_poblacion).evaluacion());
+        mejor_absoluto.add(_elite.get(0).evaluacion());
 
         double suma=0.0;        
         for (Cromosoma c : _poblacion)
-            suma+=c.Fitness();
+            suma+=c.evaluacion();
         media_generacion.add(suma/tamano);           
-    }*/
+    }
 
     public void inicializa() throws FileNotFoundException, IOException {
-        String linea;
-        String[] datos;
-        LeerArchivo manejador = new LeerArchivo();
-        linea=manejador.inicializa(_f);
-        datos=linea.split(" ");
-        numAlumnos=Integer.valueOf(datos[0]);
-        incompatibilidades = Integer.valueOf(datos[1]);
-        _alumnos = new HashMap<Integer,Integer>();
-        listaAlumnos = new HashMap<Integer, Integer>();
-        for (int i=0;i<numAlumnos;i++){
-            linea = manejador.dameLinea();
-            datos=linea.split(" ");
-            _alumnos.put(Integer.valueOf(datos[0]), i);
-            Alumno alumno = new Alumno(Integer.valueOf(datos[0]),Integer.valueOf(datos[1]));
-            listaAlumnos.put(i, alumno);
-        }
-        for (int i=0;i<incompatibilidades;i++){
-            linea = manejador.dameLinea();
-            datos=linea.split(" ");
-            Object ind = _alumnos.get(Integer.valueOf(datos[0]));
+        
 
-        }
-/*  
- *  
         // Creamos la población y la élite inicial
         _elite = new ArrayList<Cromosoma>(tamano_elite);
         _poblacion = new ArrayList<Cromosoma>(tamano);
         Cromosoma c;
         for (int i = 0; i<tamano; i++) {
-            c = _c.crearNuevo();
+            c = _c.nuevo();
             _poblacion.add(c);
         }
         
@@ -148,17 +118,18 @@ public class AlgoritmoGenetico {
             }
 
             // 1) SELECCIONAR POBLACION A CRUZAR
-            ArrayList<Cromosoma> seleccionados = _s.Selecciona(num_seleccionados, _poblacion);
+            ArrayList<Cromosoma> seleccionados = _s.selecciona(num_seleccionados, _poblacion);
 
             // 2) CRUZAMOS LA POBLACIÓN SUSTITUYENDO A LOS PADRES
             for (int i = 1; i<num_seleccionados-1; i+=2) 
                 if (utiles.Aleatorio.getRandomDouble()<prob_cruce)
-                    seleccionados.get(i).Cruce(seleccionados.get(i-1));
+                    _cr.cruza(seleccionados.get(i), seleccionados.get(i-1));
 
             // 3) MUTAMOS LA POBLACIÓN
             for (int i =0;i<_poblacion.size();i++) 
-                _poblacion.get(i).mutacion(prob_mutacion);
-
+                if ( utiles.Aleatorio.getRandomDouble()<prob_mutacion)
+                    _m.muta(_poblacion.get(i));
+                    
 
             // 4) CONSERVAMOS EL TAMAÑO DE LA POBLACIÓN ELIMINANDO LOS PEORES
             Collections.sort(_poblacion);
@@ -168,7 +139,7 @@ public class AlgoritmoGenetico {
             // Evaluamos la población
             evaluarPoblacion();
             
-        }*/
+        }
     }
 
 }

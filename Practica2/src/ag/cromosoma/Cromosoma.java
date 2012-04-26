@@ -26,6 +26,13 @@ public abstract class Cromosoma implements Comparable<Cromosoma>, Cloneable{
     }
 
     public abstract double evaluacion();
+    
+    public abstract void aleatoriza();
+    
+    /**
+     * Devuelve un String con la representacion del cromosoma
+    */
+    public abstract String fenotipo();
 
 
     /**
@@ -39,8 +46,13 @@ public abstract class Cromosoma implements Comparable<Cromosoma>, Cloneable{
      */
     public abstract Cromosoma copia(Cromosoma c);
 
-
-
+    public Cromosoma clone() {
+        Cromosoma nuevo =nuevo();
+        nuevo.copyFrom(this);
+        return nuevo;
+    }
+    
+    public abstract void copyFrom(Cromosoma c);
 
 
     /*

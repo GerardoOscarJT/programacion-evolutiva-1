@@ -15,10 +15,7 @@ import java.util.Collections;
  */
 public abstract class Seleccion {
 
-    ArrayList<Cromosoma> Selecciona(int n, ArrayList<Cromosoma> poblacion) {
-        // TODO: Esto hay que cambiarlo todo
-        return null;
-    }
+    public abstract ArrayList<Cromosoma> selecciona(int n, ArrayList<Cromosoma> poblacion);
     
     
     
