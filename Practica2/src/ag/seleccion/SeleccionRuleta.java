@@ -24,6 +24,11 @@ public class Compare1 extends Comparable {
 
 public class SeleccionRuleta extends Seleccion {
 
+    @Override
+    public ArrayList<Cromosoma> selecciona(int n, ArrayList<Cromosoma> poblacion) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
     /*
     public ArrayList<Cromosoma> Selecciona(int n, ArrayList<Cromosoma> poblacion) {
 

@@ -5,7 +5,7 @@
 package Interfaz;
 
 import ag.AlgoritmoGenetico;
-import ag.cromosoma.Cromosoma;
+import ag.cromosoma.*;
 import ag.gen.Gen;
 import ag.seleccion.*;
 import ag.cruce.*;
@@ -387,7 +387,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularActionPerformed
-        Cromosoma c = null;
+        Cromosoma c = new CromosomaAlumnos();
         Seleccion s = null;
         Cruce cr = null;
         Mutacion m = null;
@@ -416,7 +416,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             case 3 : m = new MutacionHeuristica(); break;
         }
         // Creamos un algoritmo genético nuevo
-        AlgoritmoGenetico ag = new AlgoritmoGenetico(c, s, cr, m, archivo);
+        AlgoritmoGenetico ag = new AlgoritmoGenetico(c, s, cr, m);
 
         // Configuramos las variables del algoritmo desde la GUI
         if (!numGen.getText().isEmpty()) 
@@ -459,6 +459,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "El tamaño de la población debe ser un número entero.");
                 valido=false;
             }
+        
 /*
         if (valido){
             if (variable.getSelectedIndex()==0){
@@ -605,9 +606,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         int returnVal = fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION){
             archivo = fc.getSelectedFile();
-            String nombre = fc.getName();
-            String otro = fc.getName(archivo);
-            System.out.println("Nombre :"+nombre+"otro :"+otro);
+            try {
+                CromosomaAlumnos.leer(archivo);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else{fc.setVisible(false);}
     }//GEN-LAST:event_botonArchivoMouseClicked
 

@@ -5,10 +5,14 @@
 
 package ag.mutacion;
 
+import ag.cromosoma.Cromosoma;
+
 /**
  *
  * @author gerardo
  */
 public abstract class Mutacion {
+    
+    public abstract void muta(Cromosoma c);
 
 }
