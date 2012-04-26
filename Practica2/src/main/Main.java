@@ -7,7 +7,6 @@ package main;
 
 import ag.*;
 import ag.seleccion.*;
-import Practica2.*;
 import Interfaz.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -35,10 +34,10 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         // TODO code application logic here   
 
-        //PantallaPrincipal ventana = new PantallaPrincipal();
-        //ventana.setVisible(true);
-        LeerArchivo lectura = new LeerArchivo();
-        lectura.leer();
+        PantallaPrincipal ventana = new PantallaPrincipal();
+        ventana.setVisible(true);
+        //LeerArchivo lectura = new LeerArchivo();
+        //lectura.leer();
     }
 
 }

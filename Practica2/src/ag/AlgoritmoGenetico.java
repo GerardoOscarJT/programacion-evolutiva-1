@@ -5,7 +5,8 @@
 
 package ag;
 
-import Practica2.*;
+import practica2.LeerArchivo;
+import practica2.Alumno;
 import ag.cromosoma.Cromosoma;
 import ag.seleccion.*;
 import ag.cruce.*;
