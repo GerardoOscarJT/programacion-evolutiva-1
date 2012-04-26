@@ -63,4 +63,14 @@ public class CromosomaE1 extends CromosomaStaticArray {
 
     */
 
+    @Override
+    public double evaluacion() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Cromosoma copia(Cromosoma c) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }
