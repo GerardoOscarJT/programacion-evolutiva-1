@@ -25,24 +25,18 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
 
     /** Alumnos */
     static ArrayList<Alumno> alumnos;
-
     /** Relación de ids, dado el identificador de fichero, devuelve
      el indentificador del array*/
     static Map<Integer, Integer> ids;
-
     /** Número de grupos */
     private static int g;
-
     /** Número de alumnos por grupo */
     public static int m = 3;
-
     /** Factor de desequilibrio (Debe estar entre 0 y 1) */
     public static double a = 0.5;
-    
     public static int numAlumnos = 0;
-    
     public GenEntero[] genesA;
-
+    
     public CromosomaAlumnos() {
         
         ArrayList<Integer> aleatorios = new ArrayList<Integer>(numAlumnos);
@@ -146,10 +140,20 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
             int idEnemigo= ids.get(enemigo);
             alumnos.get(idAlumno).getEnemigos().add(idEnemigo);
         }
-
-
-
     }
+    
+    public static void completa(int n){
+        int resto = numAlumnos % n;
+        if (resto != 0){
+            int contador = 0;
+            for (int i=resto;i<n;i++){
+                Alumno alumno = new Alumno((-contador-1),0);
+                ids.put((-contador-1),numAlumnos+contador);
+                alumnos.add(numAlumnos+contador, alumno);
+                contador++;
+            }
+        }
+    } 
 
 
     public void aleatoriza() {

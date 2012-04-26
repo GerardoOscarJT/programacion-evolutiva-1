@@ -24,18 +24,13 @@ public class Compare1 extends Comparable {
 
 public class SeleccionRuleta extends Seleccion {
 
-    @Override
-    public ArrayList<Cromosoma> selecciona(int n, ArrayList<Cromosoma> poblacion) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
-    /*
-    public ArrayList<Cromosoma> Selecciona(int n, ArrayList<Cromosoma> poblacion) {
+    public ArrayList<Cromosoma> selecciona(int n, ArrayList<Cromosoma> poblacion) {
 
         double sumaTotal = 0;
-        double aux=Math.abs(Collections.min(poblacion).Fitness());
+        double aux=Math.abs(Collections.min(poblacion).evaluacion());
         for (Cromosoma v : poblacion){
-                sumaTotal+=v.Fitness()+aux;
+                sumaTotal+=v.evaluacion()+aux;
         }
         Collections.sort(poblacion);
         Collections.reverse(poblacion);
@@ -44,12 +39,9 @@ public class SeleccionRuleta extends Seleccion {
         acumulado[0] = 0;
 
         for (int i=0; i<poblacion.size(); i++) {
-            acumulado[i+1] = acumulado[i]+(poblacion.get(i).Fitness()+aux)/sumaTotal;
+            acumulado[i+1] = acumulado[i]+(poblacion.get(i).evaluacion()+aux)/sumaTotal;
         }
-
-
-
-
+        
         ArrayList<Cromosoma> resultado = new ArrayList<Cromosoma>(n);
 
         for (int i = 0; i<n; i++) {
@@ -73,5 +65,4 @@ public class SeleccionRuleta extends Seleccion {
     public ArrayList<Cromosoma> selPeorElite(int elite, ArrayList<Cromosoma> poblacion) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-*/
 }

@@ -6,6 +6,7 @@
 package ag.mutacion;
 
 import ag.cromosoma.Cromosoma;
+import ag.cromosoma.CromosomaAlumnos;
 
 /**
  *
@@ -15,7 +16,11 @@ public class MutacionInsercion extends Mutacion {
 
     @Override
     public void muta(Cromosoma c) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        CromosomaAlumnos nuevo = new CromosomaAlumnos();
+        for (int i=0;i<nuevo.genesA.length;i++){
+                int genMuta = utiles.Aleatorio.getRandomInt(nuevo.genesA.length);
+                int valorMuta = utiles.Aleatorio.getRandomInt(nuevo.genesA.length);
+                    nuevo.genesA[genMuta].valor=valorMuta;
+            }
     }
-
-}
+ }
