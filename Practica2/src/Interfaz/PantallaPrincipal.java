@@ -7,11 +7,17 @@ package Interfaz;
 import ag.AlgoritmoGenetico;
 import ag.cromosoma.Cromosoma;
 import ag.gen.Gen;
-import ag.seleccion.Seleccion;
-import ag.seleccion.SeleccionRuleta;
-import ag.seleccion.SeleccionTorneo;
+import ag.seleccion.*;
+import ag.cruce.*;
+import ag.mutacion.*;
 import java.awt.Color;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.math.plot.*;
@@ -21,8 +27,9 @@ import org.math.plot.*;
  * @author Alberto
  */
 public class PantallaPrincipal extends javax.swing.JFrame {
-/*
 
+
+    private static File archivo = null;
     public PantallaPrincipal() {
         modelotabla = new DefaultTableModel();        
         initComponents();
@@ -45,8 +52,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         Error = new javax.swing.JDialog();
         PanelPrincipal = new javax.swing.JPanel();
-        funcion = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
         numGen = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         poblacion = new javax.swing.JTextField();
@@ -55,12 +60,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         probMutacion = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        valorN = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        seleccion = new javax.swing.JComboBox();
+        tipoSeleccion = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
-        cruce = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         elitismo = new javax.swing.JCheckBox();
         jLabel9 = new javax.swing.JLabel();
         calcular = new javax.swing.JButton();
@@ -77,6 +78,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         tamanoElite = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         seleccionados = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        alpha = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        tipoCruce = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
+        tipoMutacion = new javax.swing.JComboBox();
+        botonArchivo = new java.awt.Button();
         frameGrafica = new javax.swing.JInternalFrame();
         scrollResultados = new javax.swing.JScrollPane();
         resultados = new javax.swing.JTextArea();
@@ -93,20 +101,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        funcion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Función 1", "Función 2", "Función 3", "Función 4", "Función 5" }));
-        funcion.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                funcionItemStateChanged(evt);
-            }
-        });
-        funcion.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                funcionPropertyChange(evt);
-            }
-        });
-
-        jLabel1.setText("Función");
 
         numGen.setText("100");
 
@@ -129,20 +123,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jLabel5.setText("Prob. mutación");
 
-        valorN.setText("3");
-        valorN.setEnabled(false);
-
-        jLabel6.setText("Valor de n");
-        jLabel6.setEnabled(false);
-
-        seleccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ruleta", "Torneo" }));
+        tipoSeleccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ruleta", "Torneo aleatorio", "Torneo determinista", "Ranking", "Método propio" }));
 
         jLabel7.setText("Selección");
-
-        cruce.setEnabled(false);
-
-        jLabel8.setText("Cruce");
-        jLabel8.setEnabled(false);
 
         elitismo.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -205,6 +188,25 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         seleccionados.setText("0.6");
         seleccionados.setName(""); // NOI18N
 
+        jLabel16.setText("Factor alpha");
+
+        alpha.setText("0.3");
+
+        jLabel1.setText("Cruce");
+
+        tipoCruce.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PMX", "OX", "Variante OX", "Ordinal", "Método propio" }));
+
+        jLabel6.setText("Mutación");
+
+        tipoMutacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Inserción", "Intercambio", "Inversión", "Heurística" }));
+
+        botonArchivo.setLabel("Archivo");
+        botonArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonArchivoMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelPrincipalLayout = new javax.swing.GroupLayout(PanelPrincipal);
         PanelPrincipal.setLayout(PanelPrincipalLayout);
         PanelPrincipalLayout.setHorizontalGroup(
@@ -214,8 +216,42 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
                         .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
                         .addComponent(variable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(calcular, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                    .addGroup(PanelPrincipalLayout.createSequentialGroup()
+                        .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel16))
+                        .addGap(31, 31, 31)
+                        .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(alpha)
+                            .addComponent(seleccionados, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                            .addComponent(numGen, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                            .addComponent(poblacion, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                            .addComponent(probCruce, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                            .addComponent(probMutacion, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                            .addComponent(tipoSeleccion, 0, 277, Short.MAX_VALUE)
+                            .addComponent(precision, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                            .addGroup(PanelPrincipalLayout.createSequentialGroup()
+                                .addComponent(elitismo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tamanoElite, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(botonArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(PanelPrincipalLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(95, 95, 95)
+                        .addComponent(tipoCruce, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -227,54 +263,25 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(intervalo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(intervalo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
-                        .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(31, 31, 31)
-                        .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(seleccionados, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-                            .addComponent(numGen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-                            .addComponent(poblacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-                            .addComponent(probCruce, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-                            .addComponent(probMutacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-                            .addComponent(valorN, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-                            .addComponent(seleccion, javax.swing.GroupLayout.Alignment.LEADING, 0, 233, Short.MAX_VALUE)
-                            .addComponent(precision, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-                            .addComponent(cruce, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelPrincipalLayout.createSequentialGroup()
-                                .addComponent(elitismo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tamanoElite, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
-                            .addComponent(funcion, 0, 233, Short.MAX_VALUE)))
-                    .addComponent(calcular, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
+                        .addComponent(jLabel6)
+                        .addGap(80, 80, 80)
+                        .addComponent(tipoMutacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         PanelPrincipalLayout.setVerticalGroup(
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(funcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(poblacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(numGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(poblacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel2)
+                    .addComponent(numGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(probCruce, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -285,32 +292,37 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(valorN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel16)
+                    .addComponent(alpha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(seleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(tipoSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(tipoCruce, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(tipoMutacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(precision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cruce, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel9)
                     .addComponent(elitismo)
-                    .addComponent(tamanoElite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tamanoElite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel15)
                     .addComponent(seleccionados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(calcular, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(variable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -354,7 +366,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(scrollResultados, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE))
+                        .addComponent(scrollResultados, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(frameGrafica)))
@@ -377,45 +389,34 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularActionPerformed
         Cromosoma c = null;
         Seleccion s = null;
+        Cruce cr = null;
+        Mutacion m = null;
         Boolean valido=true;
-        //Selecccionamos que funcion ha escogido el usuario
-        switch(funcion.getSelectedIndex()){
-            case 0 : {
-                frameGrafica.setTitle("Grafica Función 1");
-                break;
-            }
-            case 1:{
-                frameGrafica.setTitle("Grafica Función 2");
-                break;
-            }
-            case 2: {
-         
-                frameGrafica.setTitle("Grafica Función 3");
-                break;
-            }
-            case 3: {
-                
-                frameGrafica.setTitle("Grafica Función 4");
-                break;
-            }
-            case 4: {
-              
-                frameGrafica.setTitle("Grafica Función 5");
-
-              
-
-                break;
-            }
-        }
-
         // Escogemos el algoritmo de selección
-        switch(seleccion.getSelectedIndex()){
+        switch(tipoSeleccion.getSelectedIndex()){
             case 0 : s = new SeleccionRuleta(); break;
-            case 1 : s = new SeleccionTorneo(); break;
+            case 1 : s = new SeleccionTorneoAleatorio(); break;
+            case 2 : s = new SeleccionTorneoDeterminista(); break;
+            case 3 : s = new SeleccionRanking(); break;
+            case 4 : s = new SeleccionMetodoPropio(); break;
         }
-
+        //Escogemos el algoritmo de cruce
+        switch(tipoCruce.getSelectedIndex()){
+            case 0 : cr = new CrucePMX(); break;
+            case 1 : cr = new CruceOX(); break;
+            case 2 : cr = new CruceVarianteOX(); break;
+            case 3 : cr = new CruceOrdinal(); break;
+            case 4 : cr = new CruceMetodoPropio(); break;
+        }
+        //Escogemos el algoritmo de mutación
+        switch(tipoMutacion.getSelectedIndex()){
+            case 0 : m = new MutacionInsercion(); break;
+            case 1 : m = new MutacionIntercambio(); break;
+            case 2 : m = new MutacionInversion(); break;
+            case 3 : m = new MutacionHeuristica(); break;
+        }
         // Creamos un algoritmo genético nuevo
-        AlgoritmoGenetico ag = new AlgoritmoGenetico(c, s);
+        AlgoritmoGenetico ag = new AlgoritmoGenetico(c, s, cr, m, archivo);
 
         // Configuramos las variables del algoritmo desde la GUI
         if (!numGen.getText().isEmpty()) 
@@ -458,7 +459,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "El tamaño de la población debe ser un número entero.");
                 valido=false;
             }
-
+/*
         if (valido){
             if (variable.getSelectedIndex()==0){
                 ag.inicializa();
@@ -493,7 +494,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
                 Cromosoma mejor = ag.getMejor();
 
-                resultados.setText("Maximo "+mejor.Fitness()+" "+mejor.Fenotipo());
+                //resultados.setText("Maximo "+mejor.Fitness()+" "+mejor.Fenotipo());
                 scrollResultados.setVisible(true);
 
             } else {
@@ -533,57 +534,46 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                             break;
 
 
-                    }
-                    ag.inicializa();
-                    Cromosoma mejor = ag.getMejor();
-                    if (indice<n) {
-                        ejex[indice]=i;
-                        maximoAbsolutoVarias[indice]=mejor.Fitness();
-                    }
-                    indice++;
-                    //TODO: Calcular media para la gráfica
-                }
-
-                this.setTitle("Completado :D");
-
+                    }*/
+        try {
+                ag.inicializa();
+        }catch (Exception ex){System.out.println("Error al leer fichero.");}
+               /* Cromosoma mejor = ag.getMejor();
                 if (indice<n) {
-                    ejex[indice]=ejex[indice-1];
-                    maximoAbsolutoVarias[indice]=maximoAbsolutoVarias[indice-1];
+                    ejex[indice]=i;
+                    maximoAbsolutoVarias[indice]=mejor.Fitness();
                 }
-
-                Plot2DPanel plot = new Plot2DPanel();
-
-                // define the legend position
-                plot.addLegend("SOUTH");
-                plot.getAxis(0).setLabelText(variable.getSelectedItem().toString());
-                plot.getAxis(1).setLabelText("Evaluación");
-
-
-                // add a line plot to the PlotPanel
-                plot.addLinePlot("Mejor", Color.GREEN,ejex, maximoAbsolutoVarias);
-
-                frameGrafica.setContentPane(plot);
-                frameGrafica.setVisible(true);
+                indice++;
+                //TODO: Calcular media para la gráfica
             }
-        }     
+
+            this.setTitle("Completado :D");
+
+            if (indice<n) {
+                ejex[indice]=ejex[indice-1];
+                maximoAbsolutoVarias[indice]=maximoAbsolutoVarias[indice-1];
+            }
+
+            Plot2DPanel plot = new Plot2DPanel();
+
+            // define the legend position
+            plot.addLegend("SOUTH");
+            plot.getAxis(0).setLabelText(variable.getSelectedItem().toString());
+            plot.getAxis(1).setLabelText("Evaluación");
+
+
+            // add a line plot to the PlotPanel
+            plot.addLinePlot("Mejor", Color.GREEN,ejex, maximoAbsolutoVarias);
+
+            frameGrafica.setContentPane(plot);
+            frameGrafica.setVisible(true);
+        }
+    } */    
     }//GEN-LAST:event_calcularActionPerformed
 
     private void poblacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_poblacionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_poblacionActionPerformed
-
-    private void funcionPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_funcionPropertyChange
-        // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_funcionPropertyChange
-
-    private void funcionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_funcionItemStateChanged
-        // TODO add your handling code here:
-        boolean activo = funcion.getSelectedIndex() == 4;
-        valorN.setEnabled(activo);
-        jLabel6.setEnabled(activo);
-    }//GEN-LAST:event_funcionItemStateChanged
 
     private void variableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_variableItemStateChanged
         // TODO add your handling code here:
@@ -607,6 +597,19 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void elitismoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_elitismoStateChanged
         tamanoElite.setEditable(elitismo.isSelected());
     }//GEN-LAST:event_elitismoStateChanged
+
+    private void botonArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonArchivoMouseClicked
+        //CogerArchivo pantallaArchivo = new CogerArchivo();
+        //pantallaArchivo.setVisible(true);
+        final JFileChooser fc = new JFileChooser();
+        int returnVal = fc.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION){
+            archivo = fc.getSelectedFile();
+            String nombre = fc.getName();
+            String otro = fc.getName(archivo);
+            System.out.println("Nombre :"+nombre+"otro :"+otro);
+        }else{fc.setVisible(false);}
+    }//GEN-LAST:event_botonArchivoMouseClicked
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -638,19 +641,19 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }
 
 
-    */
+ 
 
     private DefaultTableModel modelotabla;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog Error;
     private javax.swing.JPanel PanelPrincipal;
+    private javax.swing.JTextField alpha;
+    private java.awt.Button botonArchivo;
     private javax.swing.JButton calcular;
     private javax.swing.JTextField cotaInf;
     private javax.swing.JTextField cotaSup;
-    private javax.swing.JTextField cruce;
     private javax.swing.JCheckBox elitismo;
     private javax.swing.JInternalFrame frameGrafica;
-    private javax.swing.JComboBox funcion;
     private javax.swing.JTextField intervalo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -659,13 +662,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField numGen;
     private javax.swing.JTextField poblacion;
@@ -674,10 +677,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField probMutacion;
     private javax.swing.JTextArea resultados;
     private javax.swing.JScrollPane scrollResultados;
-    private javax.swing.JComboBox seleccion;
     private javax.swing.JTextField seleccionados;
     private javax.swing.JTextField tamanoElite;
-    private javax.swing.JTextField valorN;
+    private javax.swing.JComboBox tipoCruce;
+    private javax.swing.JComboBox tipoMutacion;
+    private javax.swing.JComboBox tipoSeleccion;
     private javax.swing.JComboBox variable;
     // End of variables declaration//GEN-END:variables
 }
