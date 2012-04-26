@@ -44,7 +44,7 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="scrollResultados" pref="341" max="32767" attributes="0"/>
+                      <Component id="scrollResultados" pref="353" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -79,10 +79,50 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="81" max="32767" attributes="0"/>
+                          <EmptySpace pref="180" max="32767" attributes="0"/>
                           <Component id="variable" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="calcular" alignment="0" pref="400" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jLabel2" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel15" alignment="0" max="32767" attributes="1"/>
+                              </Group>
+                              <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="alpha" max="32767" attributes="0"/>
+                              <Component id="seleccionados" alignment="1" pref="233" max="32767" attributes="0"/>
+                              <Component id="numGen" alignment="0" pref="277" max="32767" attributes="0"/>
+                              <Component id="poblacion" alignment="0" pref="277" max="32767" attributes="0"/>
+                              <Component id="probCruce" alignment="0" pref="277" max="32767" attributes="0"/>
+                              <Component id="probMutacion" alignment="0" pref="277" max="32767" attributes="0"/>
+                              <Component id="tipoSeleccion" alignment="0" pref="277" max="32767" attributes="0"/>
+                              <Component id="precision" alignment="0" pref="233" max="32767" attributes="1"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="elitismo" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="tamanoElite" min="-2" pref="31" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <Component id="botonArchivo" min="-2" pref="119" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                          <Component id="tipoCruce" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
                           <Component id="jLabel13" min="-2" pref="25" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="cotaInf" min="-2" pref="43" max="-2" attributes="0"/>
@@ -94,41 +134,13 @@
                           <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="intervalo" min="-2" pref="49" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel2" alignment="0" max="32767" attributes="1"/>
-                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel15" alignment="0" max="32767" attributes="1"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="seleccionados" pref="233" max="32767" attributes="0"/>
-                              <Component id="numGen" alignment="0" pref="233" max="32767" attributes="0"/>
-                              <Component id="poblacion" alignment="0" pref="233" max="32767" attributes="0"/>
-                              <Component id="probCruce" alignment="0" pref="233" max="32767" attributes="0"/>
-                              <Component id="probMutacion" alignment="0" pref="233" max="32767" attributes="0"/>
-                              <Component id="valorN" alignment="0" pref="233" max="32767" attributes="0"/>
-                              <Component id="seleccion" alignment="0" pref="233" max="32767" attributes="0"/>
-                              <Component id="precision" alignment="0" pref="233" max="32767" attributes="1"/>
-                              <Component id="cruce" alignment="1" pref="233" max="32767" attributes="1"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="elitismo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="tamanoElite" pref="205" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="funcion" alignment="1" pref="233" max="32767" attributes="1"/>
-                          </Group>
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="tipoMutacion" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="calcular" alignment="0" pref="400" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -137,20 +149,15 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <Component id="funcion" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="numGen" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="poblacion" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="poblacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="numGen" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -164,29 +171,35 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="valorN" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="alpha" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="seleccion" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tipoSeleccion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tipoCruce" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tipoMutacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="precision" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="cruce" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <Component id="elitismo" min="-2" max="-2" attributes="0"/>
                       <Component id="tamanoElite" min="-2" max="-2" attributes="0"/>
+                      <Component id="botonArchivo" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
@@ -195,7 +208,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="calcular" min="-2" pref="42" max="-2" attributes="0"/>
-                  <EmptySpace pref="137" max="32767" attributes="0"/>
+                  <EmptySpace pref="110" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="variable" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -215,28 +228,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JComboBox" name="funcion">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Funci&#xf3;n 1"/>
-                <StringItem index="1" value="Funci&#xf3;n 2"/>
-                <StringItem index="2" value="Funci&#xf3;n 3"/>
-                <StringItem index="3" value="Funci&#xf3;n 4"/>
-                <StringItem index="4" value="Funci&#xf3;n 5"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="funcionItemStateChanged"/>
-            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="funcionPropertyChange"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Funci&#xf3;n"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JTextField" name="numGen">
           <Properties>
             <Property name="text" type="java.lang.String" value="100"/>
@@ -280,24 +271,15 @@
             <Property name="text" type="java.lang.String" value="Prob. mutaci&#xf3;n"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="valorN">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="3"/>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Valor de n"/>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="seleccion">
+        <Component class="javax.swing.JComboBox" name="tipoSeleccion">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
+              <StringArray count="5">
                 <StringItem index="0" value="Ruleta"/>
-                <StringItem index="1" value="Torneo"/>
+                <StringItem index="1" value="Torneo aleatorio"/>
+                <StringItem index="2" value="Torneo determinista"/>
+                <StringItem index="3" value="Ranking"/>
+                <StringItem index="4" value="M&#xe9;todo propio"/>
               </StringArray>
             </Property>
           </Properties>
@@ -305,17 +287,6 @@
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
             <Property name="text" type="java.lang.String" value="Selecci&#xf3;n"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="cruce">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Cruce"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="elitismo">
@@ -425,6 +396,59 @@
             <Property name="text" type="java.lang.String" value="0.6"/>
             <Property name="name" type="java.lang.String" value="" noResource="true"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel16">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Factor alpha"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="alpha">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0.3"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cruce"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="tipoCruce">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="5">
+                <StringItem index="0" value="PMX"/>
+                <StringItem index="1" value="OX"/>
+                <StringItem index="2" value="Variante OX"/>
+                <StringItem index="3" value="Ordinal"/>
+                <StringItem index="4" value="M&#xe9;todo propio"/>
+              </StringArray>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel6">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Mutaci&#xf3;n"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="tipoMutacion">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Inserci&#xf3;n"/>
+                <StringItem index="1" value="Intercambio"/>
+                <StringItem index="2" value="Inversi&#xf3;n"/>
+                <StringItem index="3" value="Heur&#xed;stica"/>
+              </StringArray>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="java.awt.Button" name="botonArchivo">
+          <Properties>
+            <Property name="label" type="java.lang.String" value="Archivo"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botonArchivoMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
