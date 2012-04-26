@@ -5,17 +5,24 @@
 
 package ag;
 
+import Practica2.*;
 import ag.cromosoma.Cromosoma;
 import ag.seleccion.*;
+import ag.cruce.*;
+import ag.mutacion.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 /**
  *
  * @author gerardo
  */
 public class AlgoritmoGenetico {
-    /*
+    
     public int tamano = 100;
     public int num_generaciones = 100;
     public double prob_cruce = 0.8;
@@ -23,20 +30,29 @@ public class AlgoritmoGenetico {
     public boolean elitismo;
     public int tamano_elite = 3;
     public double porcentaje_seleccionados = 0.6;
+    public int numAlumnos =0;
+    public int incompatibilidades=0;
 
     protected Cromosoma _c;
     protected Seleccion _s;
+    protected Cruce _cr;
+    protected Mutacion _m;
+    protected File _f;
+    protected HashMap listaAlumnos;
 
-    protected ArrayList<Cromosoma> _poblacion;
+    protected HashMap _alumnos;
     protected ArrayList<Cromosoma> _elite;
 
     public ArrayList<Double> mejor_absoluto;
     public ArrayList<Double> mejor_generacion;
     public ArrayList<Double> media_generacion;
 
-    public AlgoritmoGenetico(Cromosoma c, Seleccion s) {
+    public AlgoritmoGenetico(Cromosoma c, Seleccion s, Cruce cr, Mutacion m, File archivo) {
         _c = c;
         _s = s;
+        _cr = cr;
+        _m = m;
+        _f = archivo;
 
         mejor_generacion = new ArrayList<Double>();
         mejor_absoluto = new ArrayList<Double>();
@@ -48,7 +64,7 @@ public class AlgoritmoGenetico {
         Collections.reverse(_elite);
         return _elite.get(0);
     }
-
+/*
     public void evaluarPoblacion() {
         //////////////////
         // Elegir élite
@@ -80,10 +96,33 @@ public class AlgoritmoGenetico {
         for (Cromosoma c : _poblacion)
             suma+=c.Fitness();
         media_generacion.add(suma/tamano);           
-    }
+    }*/
 
-    public void inicializa() {
+    public void inicializa() throws FileNotFoundException, IOException {
+        String linea;
+        String[] datos;
+        LeerArchivo manejador = new LeerArchivo();
+        linea=manejador.inicializa(_f);
+        datos=linea.split(" ");
+        numAlumnos=Integer.valueOf(datos[0]);
+        incompatibilidades = Integer.valueOf(datos[1]);
+        _alumnos = new HashMap<Integer,Integer>();
+        listaAlumnos = new HashMap<Integer, Integer>();
+        for (int i=0;i<numAlumnos;i++){
+            linea = manejador.dameLinea();
+            datos=linea.split(" ");
+            _alumnos.put(Integer.valueOf(datos[0]), i);
+            Alumno alumno = new Alumno(Integer.valueOf(datos[0]),Integer.valueOf(datos[1]));
+            listaAlumnos.put(i, alumno);
+        }
+        for (int i=0;i<incompatibilidades;i++){
+            linea = manejador.dameLinea();
+            datos=linea.split(" ");
+            Object ind = _alumnos.get(Integer.valueOf(datos[0]));
 
+        }
+/*  
+ *  
         // Creamos la población y la élite inicial
         _elite = new ArrayList<Cromosoma>(tamano_elite);
         _poblacion = new ArrayList<Cromosoma>(tamano);
@@ -128,8 +167,7 @@ public class AlgoritmoGenetico {
             // Evaluamos la población
             evaluarPoblacion();
             
-        }
+        }*/
     }
 
-*/
 }
