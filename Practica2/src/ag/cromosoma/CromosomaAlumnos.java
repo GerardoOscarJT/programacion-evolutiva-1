@@ -8,7 +8,7 @@ package ag.cromosoma;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import practica2.Alumno;
+import Practica2.Alumno;
 
 /**
  *
