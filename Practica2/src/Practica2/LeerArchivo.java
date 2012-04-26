@@ -4,11 +4,9 @@
  */
 package Practica2;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -16,35 +14,32 @@ import java.util.ArrayList;
  */
 public class LeerArchivo {
     private static BufferedReader br;
+    private static File _f;
     private static String linea;
     private static String[] datos;
-    private static ArrayList <Integer> alumnos;
+
     
-    public static ArrayList leer() throws FileNotFoundException, IOException{
-        alumnos = new ArrayList<Integer>();
-        try{
-        br = new BufferedReader(new FileReader("archivo.txt"));
-        linea = br.readLine();
-        datos = linea.split(" ");
-        int n=Integer.valueOf(datos[0]);int r=Integer.valueOf(datos[1]);
-        for (int i=0;i<n;i++){
-            linea=br.readLine();
-            //Leer el alumno y sunota
-            datos = linea.split(" ");
-            //nombre = datos[0], nota =datos[1].
-            System.out.println("Alumno: "+datos[0]+" Nota: "+datos[1]);
+    public String inicializa(File archivo){
+        _f = archivo;
+        if (archivo == null){
+            try{
+                br = new BufferedReader(new FileReader("archivo.txt"));
+                linea = br.readLine();
+            }catch(Exception ex){System.out.println("Error al leer fichero.");}
+        }else{
+           try{
+                br = new BufferedReader(new FileReader(_f));
+                linea = br.readLine();
+            }catch(Exception ex){System.out.println("Error al leer fichero.");} 
         }
-        for (int i=0;i<r;i++){
-            linea=br.readLine();
-            //Leer el alumno y sunota
-            datos = linea.split(" ");
-            //nombre = datos[0], nota =datos[1].
-            System.out.println("Alumno: "+datos[0]+" Enemigo: "+datos[1]);
-        }
-        }
-        catch(Exception ex){System.out.println("Error al leer fichero.");
-        };
-    return null;
+        return linea;
+    };
+        
+    public String dameLinea() throws FileNotFoundException, IOException{
+       try{
+           linea = br.readLine();
+       }catch(Exception ex){System.out.println("Error al leer fichero.");}
+    return linea;
     };
     
 }
