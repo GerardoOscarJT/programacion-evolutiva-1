@@ -6,9 +6,11 @@
 package ag;
 
 import ag.cromosoma.Cromosoma;
+import ag.cromosoma.CromosomaAlumnos;
 import ag.cruce.Cruce;
 import ag.mutacion.Mutacion;
 import ag.seleccion.Seleccion;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,13 +29,17 @@ public class AlgoritmoGenetico {
     public boolean elitismo;
     public int tamano_elite = 3;
     public double porcentaje_seleccionados = 0.6;
-    public int numAlumnos =0;
+    public int numAlumnos = 0;
     public int incompatibilidades=0;
+    public double alpha=0.0;
+    public int tamGrupos=0;
+    public double precision=0.01;
 
     protected Cromosoma _c;
     protected Seleccion _s;
     protected Cruce _cr;
     protected Mutacion _m;
+    protected File _f;
 
     protected ArrayList<Cromosoma> _poblacion;
     protected ArrayList<Cromosoma> _elite;
@@ -42,15 +48,20 @@ public class AlgoritmoGenetico {
     public ArrayList<Double> mejor_generacion;
     public ArrayList<Double> media_generacion;
 
-    public AlgoritmoGenetico(Cromosoma c, Seleccion s, Cruce cr, Mutacion m) {
+    public AlgoritmoGenetico(Cromosoma c, Seleccion s, Cruce cr, Mutacion m, File f) throws FileNotFoundException, IOException {
         _c = c;
         _s = s;
         _cr = cr;
         _m = m;
+        _f = f;
 
         mejor_generacion = new ArrayList<Double>();
         mejor_absoluto = new ArrayList<Double>();
         media_generacion = new ArrayList<Double>();
+        if (_f==null){
+           _f=new File("archivo.txt");
+           CromosomaAlumnos.leer(_f);
+        }
     }
 
     public Cromosoma getMejor() {
