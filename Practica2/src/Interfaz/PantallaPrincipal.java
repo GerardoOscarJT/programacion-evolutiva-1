@@ -412,7 +412,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularActionPerformed
-        //try{
         Cromosoma c = new CromosomaAlumnos();
         Seleccion s = null;
         Cruce cr = null;
@@ -552,7 +551,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
                 Cromosoma mejor = ag.getMejor();
 
-                resultados.setText("Maximo "+mejor.fenotipo());
+                resultados.setText("Maximo "+mejor.toString()+ ", Evaluacion="+mejor.evaluacion());
                 scrollResultados.setVisible(true);
 
             } else {
@@ -596,7 +595,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 Cromosoma mejor = ag.getMejor();
                 if (indice<n) {
                     ejex[indice]=i;
-                    maximoAbsolutoVarias[indice]=mejor.evaluacion();
+                    maximoAbsolutoVarias[indice]=mejor.fenotipo();
                 }
                 indice++;
                 //TODO: Calcular media para la gráfica
@@ -699,7 +698,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {

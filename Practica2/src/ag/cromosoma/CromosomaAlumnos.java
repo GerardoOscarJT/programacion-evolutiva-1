@@ -65,41 +65,7 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
 
     @Override
     public double evaluacion() {
-
-        // Cálculo de la media
-        double media = 0;
-        int alumnos_size = alumnos.size();
-
-        for (int i=0; i<alumnos_size; i++)
-            media += alumnos.get(i).getNota();
-
-        media /= alumnos_size;
-
-        // Calculamos desequilibrio
-        double desequilibrio = 0;
-        double desequilibrio_grupo = 0;
-
-        for (int i=0; i<alumnos_size; i++) {
-            desequilibrio_grupo += alumnos.get(genesA[i].valor).getNota()-media;
-            if (i%m == (m-1)) {
-                desequilibrio += Math.pow(desequilibrio_grupo, 2);
-                desequilibrio_grupo = 0;
-            }
-        }
-
-        // Calculamos incompatibilidades dentro de cada grupo
-        double incompatibilidades = 0; // TODO: cambiar a entero
-        for (int i = 0; i<g; i++)
-            for (int j = i*m; j<(i+1)*m; j++)
-                for (int k = i*m; k<(i+1)*m; k++)
-                    if (j!=k &&   alumnos.get(k).getEnemigos().contains(alumnos.get(j).getId())) 
-                        incompatibilidades++;
-                    
-
-
-        // Calculamos la función de evaluación
-        double resultado = alfa*desequilibrio+(1-alfa)*incompatibilidades;
-        return -resultado;
+        return -fenotipo();
     }
     public static void leer(File f) throws FileNotFoundException, IOException {
 
@@ -155,7 +121,7 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
     }
 
     @Override
-    public String fenotipo() {
+    public String toString() {
         String f = "";
 
         for (int i=0; i<g; i++) {
@@ -175,5 +141,61 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
         for (int i = 0; i<genes.length; i++)
             ca.genes[i] = (Gen) genes[i].clone();
         return ca;
+    }
+
+    public double fenotipo() {
+        // Cálculo de la media
+        /*
+        double media = 0;
+        int alumnos_size = alumnos.size();
+
+        for (int i=0; i<alumnos_size; i++)
+            media += alumnos.get(i).getNota();
+
+        media /= alumnos_size;
+        media /= 100;
+        */
+
+        // Calculamos desequilibrio
+        double desequilibrio = 0;
+
+        
+        for (int i=0; i<g; i++) {
+            // Calculamos la media del grupo i-ésimo
+            double media = 0;
+            for (int j = 0; j<m; j++)
+                media += alumnos.get(genesA[i*m+j].valor).getNota();
+            media /= m;
+            
+            double desequilibrio_grupo = 0;
+            for (int j = 0; j<m; j++)
+                desequilibrio_grupo += Math.abs(alumnos.get(genesA[i*m+j].valor).getNota()-media);
+            
+            desequilibrio += Math.pow(desequilibrio_grupo,2);
+        }
+        
+        /*
+        for (int i=0; i<alumnos_size; i++) {
+            desequilibrio_grupo += Math.abs(alumnos.get(genesA[i].valor).getNota()/100-media);
+            if (i%m == (m-1)) {
+                desequilibrio += Math.pow(desequilibrio_grupo, 1);
+                desequilibrio_grupo = 0;
+            }
+        }*/
+
+        // Calculamos incompatibilidades dentro de cada grupo
+        double incompatibilidades = 0; // TODO: cambiar a entero
+        for (int i = 0; i<g; i++)
+            for (int j = i*m; j<(i+1)*m; j++)
+                for (int k = i*m; k<(i+1)*m; k++)
+                    if (alumnos.get(genesA[j].valor).getEnemigos().contains(genesA[k].valor))
+                        incompatibilidades++;
+
+
+
+        // Calculamos la función de evaluación
+        double resultado = alfa*desequilibrio+(1-alfa)*incompatibilidades;
+        return resultado;
+
     }
 }
