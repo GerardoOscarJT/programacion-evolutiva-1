@@ -142,10 +142,12 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
         }
     }
     
-    public static void completa(int n){
+    public static int completa(int n){
+        m = n;
         int resto = numAlumnos % n;
+        g = (int)Math.ceil((double)numAlumnos/n);
+        int contador = 0;
         if (resto != 0){
-            int contador = 0;
             for (int i=resto;i<n;i++){
                 Alumno alumno = new Alumno((-contador-1),0);
                 ids.put((-contador-1),numAlumnos+contador);
@@ -153,6 +155,8 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
                 contador++;
             }
         }
+        numAlumnos+=contador;
+        return contador;
     } 
 
 

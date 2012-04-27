@@ -514,8 +514,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         
         if (valido){
             
-            CromosomaAlumnos.completa(ag.tamGrupos);
-        
+            int cont =CromosomaAlumnos.completa(ag.tamGrupos);
+            ag.numAlumnos+=cont;
+                    
         
             if (variable.getSelectedIndex()==0){
                 ag.inicializa();
