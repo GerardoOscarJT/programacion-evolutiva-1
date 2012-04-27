@@ -25,5 +25,9 @@ public class GenEntero extends Gen {
         nuevo.valor = ((GenEntero) g).valor;
         return nuevo;
     }
+    
+    public int dameValor(){
+        return valor;
+    }
 
 }
