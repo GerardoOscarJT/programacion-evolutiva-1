@@ -17,7 +17,6 @@ import ag.gen.GenEntero;
  */
 public class MutacionInsercion extends Mutacion {
 
-    @Override
     public void muta(Cromosoma c) {
         CromosomaStaticArray cc = (CromosomaStaticArray)c;
         int longitud = cc.genes.length;
@@ -36,5 +35,5 @@ public class MutacionInsercion extends Mutacion {
         }
         
         cc.genes[b] = aux;
-        }
+     }
  }
