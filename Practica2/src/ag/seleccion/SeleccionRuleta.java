@@ -48,7 +48,7 @@ public class SeleccionRuleta extends Seleccion {
             double r = (double) Aleatorio.getRandomInt(10000)/10000;
             boolean encontrado = false;
             for (int j=0; j<poblacion.size() && !encontrado; j++) {
-                if (acumulado[j]<r && r<acumulado[j+1]) {
+                if (acumulado[j]<=r && r<=acumulado[j+1]) {
                     encontrado = true;
                     resultado.add(poblacion.get(j));
                 }
@@ -58,11 +58,4 @@ public class SeleccionRuleta extends Seleccion {
         return resultado;
     }
 
-    public ArrayList<Cromosoma> selMejorElite(int elite, ArrayList<Cromosoma> poblacion) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public ArrayList<Cromosoma> selPeorElite(int elite, ArrayList<Cromosoma> poblacion) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 }

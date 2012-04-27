@@ -16,18 +16,22 @@ public class GenEntero extends Gen {
         valor = 0;
     }
 
-    public Gen nuevo() {
+    /*public Gen nuevo() {
         return new GenEntero();
     }
+     * 
+     */
 
-    public Gen copia(Gen g) {
-        GenEntero nuevo = new GenEntero();
-        nuevo.valor = ((GenEntero) g).valor;
-        return nuevo;
-    }
+
     
     public int dameValor(){
         return valor;
+    }
+
+    public Object clone() {
+        GenEntero nuevo = new GenEntero();
+        nuevo.valor = valor;
+        return nuevo;
     }
 
 }

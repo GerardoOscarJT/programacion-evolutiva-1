@@ -17,12 +17,14 @@ public abstract class Gen {
     /**
      * Devuelve una instancia del objeto que hereda
      */
-    public abstract Gen nuevo();
+    //public abstract Gen nuevo();
 
     /**
      * Dado un gen devolver la copia
      * TODO : Hacer comprobación de tipos
      */
-    public abstract Gen copia(Gen g);
+    //public abstract Gen copia(Gen g);
+
+    public abstract Object clone();
 
 }
