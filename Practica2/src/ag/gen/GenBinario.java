@@ -16,8 +16,8 @@ public class GenBinario extends Gen {
     }
 
     @Override
-    public Gen copia(Gen g) {
-        // TODO:
+    public Object clone() {
+        // TODO: Completar esto cuando sea necesario
         return null;
     }
 

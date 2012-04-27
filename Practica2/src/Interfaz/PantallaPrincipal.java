@@ -125,6 +125,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jLabel5.setText("Prob. mutación");
 
         tipoSeleccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ruleta", "Torneo aleatorio", "Torneo determinista", "Ranking", "Método propio" }));
+        tipoSeleccion.setSelectedIndex(1);
 
         jLabel7.setText("Selección");
 
@@ -201,6 +202,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jLabel1.setText("Cruce");
 
         tipoCruce.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PMX", "OX", "Variante OX", "Ordinal", "Método propio" }));
+        tipoCruce.setSelectedIndex(3);
 
         jLabel6.setText("Mutación");
 
@@ -268,9 +270,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                     .addComponent(alumPorGrupo)
                                     .addComponent(precision)
                                     .addComponent(seleccionados, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelPrincipalLayout.createSequentialGroup()
-                            .addComponent(calcular, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(calcular, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -282,14 +282,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addComponent(jLabel14)
                         .addGap(18, 18, 18)
-                        .addComponent(intervalo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addContainerGap(11, Short.MAX_VALUE))
+                        .addComponent(intervalo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelPrincipalLayout.setVerticalGroup(
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelPrincipalLayout.createSequentialGroup()
-                .addGap(9, 9, 9)
+                .addGap(12, 12, 12)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(poblacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -372,11 +371,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         frameGrafica.getContentPane().setLayout(frameGraficaLayout);
         frameGraficaLayout.setHorizontalGroup(
             frameGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 477, Short.MAX_VALUE)
         );
         frameGraficaLayout.setVerticalGroup(
             frameGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 288, Short.MAX_VALUE)
+            .addGap(0, 427, Short.MAX_VALUE)
         );
 
         scrollResultados.setEnabled(false);
@@ -392,18 +391,17 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(frameGrafica)
-                    .addComponent(scrollResultados, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollResultados, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                    .addComponent(frameGrafica)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(frameGrafica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(scrollResultados)
+                .addComponent(frameGrafica)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -414,7 +412,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularActionPerformed
-        try{
+        //try{
         Cromosoma c = new CromosomaAlumnos();
         Seleccion s = null;
         Cruce cr = null;
@@ -443,8 +441,19 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             case 2 : m = new MutacionInversion(); break;
             case 3 : m = new MutacionHeuristica(); break;
         }
+
+        // Asignamos el archivo
+        if (archivo==null)
+           try {
+            CromosomaAlumnos.leer(new File("archivo.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         // Creamos un algoritmo genético nuevo
-        AlgoritmoGenetico ag = new AlgoritmoGenetico(c, s, cr, m,archivo);
+        AlgoritmoGenetico ag = new AlgoritmoGenetico(c, s, cr, m);
 
         // Configuramos las variables del algoritmo desde la GUI
         if (!poblacion.getText().isEmpty())
@@ -471,14 +480,16 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Probabilidad de mutación incorrecta.\n Debe ser un número real.");
                 valido=false;}
 
+        
         if (!alpha.getText().isEmpty())
-            try{ag.alpha=Double.valueOf(alpha.getText());}
+            try{CromosomaAlumnos.alfa=Double.valueOf(alpha.getText());}
             catch(NumberFormatException ex){
                 JOptionPane.showMessageDialog(rootPane, "Factor alpha incorrecto.\n Debe ser un número real.");
                 valido=false;}
+
         
         if (!alumPorGrupo.getText().isEmpty())
-            try{ag.tamGrupos=Integer.parseInt(alumPorGrupo.getText());}
+            try{CromosomaAlumnos.m=Integer.parseInt(alumPorGrupo.getText());}
             catch(NumberFormatException ex){
                 JOptionPane.showMessageDialog(rootPane, "Tamaño de población incorrecto.\n Debe ser un número entero.");
                 valido=false;}
@@ -489,14 +500,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Tamaño de población incorrecto.\n Debe ser un número entero.");
                 valido=false;}
         
-        if (!precision.getText().isEmpty())
-            try {
-                ag.precision = Double.valueOf(precision.getText());
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Precision, debe ser un número entre 0 y 1");
-                valido=false;
-            }
-
         ag.elitismo = elitismo.isSelected();
 
         if (!tamanoElite.getText().isEmpty())
@@ -514,9 +517,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         
         if (valido){
             
-            int cont =CromosomaAlumnos.completa(ag.tamGrupos);
-            ag.numAlumnos+=cont;
-                    
+            CromosomaAlumnos.completa(CromosomaAlumnos.m);
         
             if (variable.getSelectedIndex()==0){
                 ag.inicializa();
@@ -551,7 +552,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
                 Cromosoma mejor = ag.getMejor();
 
-                //resultados.setText("Maximo "+mejor.Fitness()+" "+mejor.Fenotipo());
+                resultados.setText("Maximo "+mejor.fenotipo());
                 scrollResultados.setVisible(true);
 
             } else {
@@ -623,7 +624,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             frameGrafica.setVisible(true);
         }
     }
-        }catch(Exception ex){System.out.println("Error al leer fichero.");}
+        //}catch(Exception ex){System.out.println("Error al leer fichero.");}
     }//GEN-LAST:event_calcularActionPerformed
 
     private void poblacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_poblacionActionPerformed

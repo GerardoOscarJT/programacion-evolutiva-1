@@ -16,7 +16,6 @@ import java.util.Set;
 public class Alumno {
 
     private int _id = 0;
-    private String _nombre = "";
     private double _nota = 0;
     private HashSet<Integer>  _enemigos;
 
@@ -36,13 +35,5 @@ public class Alumno {
 
     public Set<Integer> getEnemigos() {
         return _enemigos;
-    }
-
-    public String getNombre() {
-        return _nombre;
-    }
-
-    public void setNombre(String nombre) {
-        _nombre = nombre;
     }
 }

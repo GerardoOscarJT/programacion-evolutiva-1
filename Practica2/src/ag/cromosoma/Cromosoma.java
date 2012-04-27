@@ -25,6 +25,9 @@ public abstract class Cromosoma implements Comparable<Cromosoma>, Cloneable{
         
     }
 
+    /**
+     * Devuelve un double que representa la calidad del cromosoma
+     */
     public abstract double evaluacion();
     
     public abstract void aleatoriza();
@@ -46,14 +49,7 @@ public abstract class Cromosoma implements Comparable<Cromosoma>, Cloneable{
      */
     public abstract Cromosoma copia(Cromosoma c);
 
-    public Cromosoma clone() {
-        Cromosoma nuevo =nuevo();
-        nuevo.copyFrom(this);
-        return nuevo;
-    }
-    
-    public abstract void copyFrom(Cromosoma c);
-
+    public abstract Object clone();
 
     /*
 

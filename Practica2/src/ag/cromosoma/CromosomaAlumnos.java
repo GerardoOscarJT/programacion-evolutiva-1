@@ -33,7 +33,7 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
     /** Número de alumnos por grupo */
     public static int m = 3;
     /** Factor de desequilibrio (Debe estar entre 0 y 1) */
-    public static double a = 0.5;
+    public static double alfa = 0.5;
     public static int numAlumnos = 0;
     public GenEntero[] genesA;
     
@@ -80,7 +80,7 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
         double desequilibrio_grupo = 0;
 
         for (int i=0; i<alumnos_size; i++) {
-            desequilibrio_grupo += alumnos.get(i).getNota()-media;
+            desequilibrio_grupo += alumnos.get(genesA[i].valor).getNota()-media;
             if (i%m == (m-1)) {
                 desequilibrio += Math.pow(desequilibrio_grupo, 2);
                 desequilibrio_grupo = 0;
@@ -88,7 +88,7 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
         }
 
         // Calculamos incompatibilidades dentro de cada grupo
-        double incompatibilidades = 0;
+        double incompatibilidades = 0; // TODO: cambiar a entero
         for (int i = 0; i<g; i++)
             for (int j = i*m; j<(i+1)*m; j++)
                 for (int k = i*m; k<(i+1)*m; k++)
@@ -98,19 +98,9 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
 
 
         // Calculamos la función de evaluación
-        return a*desequilibrio+(1-a)*incompatibilidades;
-
+        double resultado = alfa*desequilibrio+(1-alfa)*incompatibilidades;
+        return -resultado;
     }
-    public void copyFrom(Cromosoma c) {
-        CromosomaAlumnos ca = (CromosomaAlumnos) c;
-        genes = new Gen[ca.genes.length];
-        for (int i = 0; i<genes.length; i++) {
-            Gen g = new GenEntero();
-            g.copia(ca.genes[i]);
-            genes[i] = g;
-        }
-    }
-
     public static void leer(File f) throws FileNotFoundException, IOException {
 
         String linea;
@@ -166,7 +156,24 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
 
     @Override
     public String fenotipo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String f = "";
+
+        for (int i=0; i<g; i++) {
+            f+=" [";
+            for (int j=0; j<m; j++) {
+                f+= alumnos.get(genesA[i*m+j].valor).getId()+", ";
+            }
+            f+=" ] ";
+        }
+
+
+        return f;
     }
 
+    public Object clone() {
+        CromosomaAlumnos ca = new CromosomaAlumnos();
+        for (int i = 0; i<genes.length; i++)
+            ca.genes[i] = (Gen) genes[i].clone();
+        return ca;
+    }
 }
