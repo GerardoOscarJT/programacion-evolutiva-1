@@ -35,7 +35,9 @@ public abstract class Cromosoma implements Comparable<Cromosoma>, Cloneable{
     /**
      * Devuelve un String con la representacion del cromosoma
     */
-    public abstract String fenotipo();
+    public abstract double fenotipo();
+
+    public abstract String toString();
 
 
     /**

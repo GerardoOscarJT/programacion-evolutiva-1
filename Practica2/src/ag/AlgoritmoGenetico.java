@@ -69,8 +69,10 @@ public class AlgoritmoGenetico {
         Collections.reverse(_poblacion);
 
         // Añadimos los N mejores al conjunto de la élite
-        for (int i=0; i<tamano_elite; i++)
+        for (int i=0; i<tamano_elite; i++) {
             _elite.add((Cromosoma) _poblacion.get(i).clone());
+            System.out.println("Elite "+i+"= "+_poblacion.get(i).evaluacion());
+        }
 
         // Mantenemos el tamaño de la élite eliminando los peores
         Collections.sort(_elite);
@@ -83,12 +85,12 @@ public class AlgoritmoGenetico {
         //////////////////////////
 
 
-        mejor_generacion.add(Collections.max(_poblacion).evaluacion());
-        mejor_absoluto.add(_elite.get(0).evaluacion());
+        mejor_generacion.add(Collections.max(_poblacion).fenotipo());
+        mejor_absoluto.add(_elite.get(0).fenotipo());
 
         double suma=0.0;        
         for (Cromosoma c : _poblacion)
-            suma+=c.evaluacion();
+            suma+=c.fenotipo();
         media_generacion.add(suma/tamano);           
     }
 
@@ -136,12 +138,11 @@ public class AlgoritmoGenetico {
                     
 
             // 4) CONSERVAMOS EL TAMAÑO DE LA POBLACIÓN ELIMINANDO LOS PEORES
-            /*
+            
             Collections.sort(_poblacion);
             while (_poblacion.size()>tamano)
                 _poblacion.remove(0);
-             * 
-             */
+             
 
             // Evaluamos la población
             evaluarPoblacion();
