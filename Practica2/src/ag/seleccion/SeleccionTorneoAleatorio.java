@@ -7,6 +7,7 @@ package ag.seleccion;
 
 import ag.cromosoma.Cromosoma;
 import java.util.ArrayList;
+import utiles.Aleatorio;
 
 /**
  *
@@ -18,16 +19,16 @@ public class SeleccionTorneoAleatorio extends Seleccion {
 
     public ArrayList<Cromosoma> selecciona(int n, ArrayList<Cromosoma> poblacion) {
         ArrayList<Cromosoma> resultado = new ArrayList<Cromosoma>(n);
-        Cromosoma mejor;
+        int[] participantes = new int[numParticipantes];
+        Cromosoma elegido = null;
         while (n>0){
-            int x=utiles.Aleatorio.getRandomInt(poblacion.size());
-            mejor=poblacion.get(x);
             for (int i=1;i<numParticipantes;i++){
-                int y=utiles.Aleatorio.getRandomInt(poblacion.size());
-                if (poblacion.get(y).evaluacion()>mejor.evaluacion())
-                    mejor=poblacion.get(x);
+                int x = Aleatorio.getRandomInt(poblacion.size());
+                participantes[i]=x;
+                int eleccion = Aleatorio.getRandomInt(numParticipantes);
+                elegido = poblacion.get(participantes[eleccion]);
             }
-            resultado.add(mejor);
+            resultado.add(elegido);
             n--;
         }
 
