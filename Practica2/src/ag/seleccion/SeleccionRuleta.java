@@ -30,7 +30,7 @@ public class SeleccionRuleta extends Seleccion {
         double sumaTotal = 0;
         double aux=Math.abs(Collections.min(poblacion).evaluacion());
         for (Cromosoma v : poblacion){
-                sumaTotal+=v.evaluacion()+aux;
+                sumaTotal += v.evaluacion()+ aux;
         }
         Collections.sort(poblacion);
         Collections.reverse(poblacion);
@@ -45,7 +45,7 @@ public class SeleccionRuleta extends Seleccion {
         ArrayList<Cromosoma> resultado = new ArrayList<Cromosoma>(n);
 
         for (int i = 0; i<n; i++) {
-            double r = (double) Aleatorio.getRandomInt(10000)/10000;
+            double r = Aleatorio.getRandomDouble();
             boolean encontrado = false;
             for (int j=0; j<poblacion.size() && !encontrado; j++) {
                 if (acumulado[j]<=r && r<=acumulado[j+1]) {
@@ -54,7 +54,6 @@ public class SeleccionRuleta extends Seleccion {
                 }
             }
         }
-
         return resultado;
     }
 

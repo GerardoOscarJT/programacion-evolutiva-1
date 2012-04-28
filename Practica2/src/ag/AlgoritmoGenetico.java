@@ -71,7 +71,6 @@ public class AlgoritmoGenetico {
         // Añadimos los N mejores al conjunto de la élite
         for (int i=0; i<tamano_elite; i++) {
             _elite.add((Cromosoma) _poblacion.get(i).clone());
-            System.out.println("Elite "+i+"= "+_poblacion.get(i).evaluacion());
         }
 
         // Mantenemos el tamaño de la élite eliminando los peores
