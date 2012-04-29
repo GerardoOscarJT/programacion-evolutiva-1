@@ -24,7 +24,7 @@ import practica2.*;
 public class CromosomaAlumnos extends CromosomaStaticArray {
 
     /** Alumnos */
-    static ArrayList<Alumno> alumnos;
+    public static ArrayList<Alumno> alumnos;
     /** Relación de ids, dado el identificador de fichero, devuelve
      el indentificador del array*/
     static Map<Integer, Integer> ids;
