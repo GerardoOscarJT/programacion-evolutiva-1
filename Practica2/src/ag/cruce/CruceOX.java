@@ -24,51 +24,43 @@ public class CruceOX extends Cruce {
         int longitud=aa.genes.length;
         ArrayList<Integer> copiaA = new ArrayList<Integer>(longitud);
         ArrayList<Integer> copiaB = new ArrayList<Integer>(longitud);
-        ArrayList<Integer> reordenA = new ArrayList<Integer>(longitud);
-        ArrayList<Integer> reordenB = new ArrayList<Integer>(longitud);
+        ArrayList<Integer> insertarA = new ArrayList<Integer>(longitud);
+        ArrayList<Integer> insertarB = new ArrayList<Integer>(longitud);
+        int[] reordenA = new int[longitud];
+        int[] reordenB = new int[longitud];
         Gen[] reordenacionA = new Gen[longitud];
         Gen[] reordenacionB = new Gen[longitud];
-        
+      
         int ind1 = Aleatorio.getRandomInt(longitud);
         int ind2 = Aleatorio.getRandomInt(longitud);
-        int min = Math.min(ind1, ind2);
+        int min = Math.min(ind1,ind2);
         int max = Math.max(ind1,ind2);
         for (int i=min;i<=max;i++){
             copiaA.add(((GenEntero)aa.genes[i]).valor);
             copiaB.add(((GenEntero)bb.genes[i]).valor);
         }
-        int indiceA=(max+1)%longitud;
-        int indiceB=(max+1)%longitud;
-        int nA = longitud-(max-min+1);
-        int nB = longitud-(max-min+1);
+        for (int i=0;i<longitud;i++){
+            int indice = (max+i+1)%longitud;
+            if (!copiaA.contains(((GenEntero)bb.genes[indice%longitud]).valor))
+                insertarA.add(((GenEntero)bb.genes[indice%longitud]).valor);
+            if (!copiaB.contains(((GenEntero)aa.genes[indice%longitud]).valor))
+                insertarB.add(((GenEntero)aa.genes[indice%longitud]).valor);
+        }
         for (int i=0;i<longitud;i++){
             int indice = (max+i+1)%longitud;
             if((indice>=min) && (indice<=max)){
-                reordenA.add(((GenEntero)aa.genes[indice]).valor);
-                reordenB.add(((GenEntero)bb.genes[indice]).valor);
+                reordenA[i]=((GenEntero)aa.genes[indice]).valor;
+                reordenB[i]=((GenEntero)bb.genes[indice]).valor;
             }else{
-                while((copiaA.contains(((GenEntero)bb.genes[indiceA%longitud]).valor))&&(nA>0)){
-                    indiceA++;
-                }
-                if (nA>0){
-                    reordenA.add(((GenEntero)bb.genes[indiceA%longitud]).valor);
-                    indiceA++;
-                    nA--;
-                }
-                
-                while((copiaB.contains(((GenEntero)aa.genes[indiceB%longitud]).valor))&&(nB>0)){ 
-                    indiceB++;
-                }
-                if (nB>0){
-                    reordenB.add(((GenEntero)aa.genes[indiceB%longitud]).valor);
-                    indiceB++;
-                    nB--;
-                }
+                reordenA[i]=insertarA.get(0);
+                insertarA.remove(0);
+                reordenB[i]=insertarB.get(0);
+                insertarB.remove(0);
             }
         }
         for (int i=0;i<longitud;i++){
-            reordenacionA[i]=aa.genes[reordenA.get(i)];
-            reordenacionB[i]=bb.genes[reordenB.get(i)];
+            reordenacionA[i]=aa.genes[reordenA[i]];
+            reordenacionB[i]=bb.genes[reordenB[i]];
         }
         for (int i=0;i<longitud;i++){
             aa.genes[i] = reordenacionA[i];
