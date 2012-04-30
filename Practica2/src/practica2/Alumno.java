@@ -19,7 +19,7 @@ public class Alumno {
     private double _nota = 0;
     private HashSet<Integer>  _enemigos;
 
-    public Alumno(int id, int nota) {
+    public Alumno(int id, double nota) {
         _id = id;
         _nota = nota;
         _enemigos = new HashSet<Integer>();
