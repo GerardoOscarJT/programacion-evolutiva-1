@@ -4,6 +4,7 @@
  */
 package Interfaz;
 
+
 import ag.AlgoritmoGenetico;
 import ag.cromosoma.Cromosoma;
 import ag.cromosoma.CromosomaAlumnos;
@@ -20,6 +21,18 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.math.plot.Plot2DPanel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import java.io.File;
+import org.jfree.chart.plot.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Map;
+import javax.swing.JFrame;
+import org.jfree.chart.ChartPanel;
+import org.jfree.data.category.DefaultCategoryDataset;
+import practica2.Alumno;
 
 /**
  *
@@ -29,6 +42,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
 
     private static File archivo = null;
+    private static int alumGrupo=0;
     public PantallaPrincipal() {
         modelotabla = new DefaultTableModel();        
         initComponents();
@@ -488,7 +502,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         
         if (!alumPorGrupo.getText().isEmpty())
-            try{CromosomaAlumnos.m=Integer.parseInt(alumPorGrupo.getText());}
+            try{CromosomaAlumnos.m=Integer.parseInt(alumPorGrupo.getText());
+                alumGrupo=Integer.parseInt(alumPorGrupo.getText());}
             catch(NumberFormatException ex){
                 JOptionPane.showMessageDialog(rootPane, "Tamaño de población incorrecto.\n Debe ser un número entero.");
                 valido=false;}
@@ -549,10 +564,64 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 frameGrafica.setContentPane(plot);
                 frameGrafica.setVisible(true);
 
-                Cromosoma mejor = ag.getMejor();
+                CromosomaAlumnos mejor = (CromosomaAlumnos)ag.getMejor();
 
                 resultados.setText("Maximo "+mejor.toString()+ ", Evaluacion="+mejor.evaluacion());
                 scrollResultados.setVisible(true);
+                
+                //Grafica histograma
+                ArrayList<Alumno> alumnos = mejor.dameAlumnos();
+                Map<Integer, Integer> ids = mejor.dameIds();
+                int grupos=mejor.dameGrupos();
+                int longitud = mejor.genes.length;
+                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                for (int i=0;i<grupos;i++){
+                    
+                    for (int j=0;j<alumGrupo;j++){
+                        int nombre = mejor.genesA[i*alumGrupo+j].valor;
+                        int id = ids.get(nombre);
+                        for (int z=0;z<longitud;z++){
+                            if (alumnos.get(z).getId()==id){
+                               dataset.setValue(alumnos.get(z).getNota(), ""+i,""+i+j); 
+                               break;
+                            }
+                        }
+                    }
+                }
+                    
+                /*DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                dataset.setValue(5, "Compras", "Enero");
+                dataset.setValue(7, "Compras", "Febrero");
+                dataset.setValue(9, "Compras", "Marzo");
+                dataset.setValue(5, "Compras", "Abril");
+                dataset.setValue(10, "Compras", "Mayo");*/
+                /*JFreeChart chart = ChartFactory.createBarChart("Grafica ordenación",
+                        
+                "Grupos", "Nota", dataset, PlotOrientation.VERTICAL, false,
+                
+                true, false);*/
+                JFreeChart chart = ChartFactory.createBarChart3D("Grafica ordenación",
+                        
+                "Grupos", "Nota", dataset, PlotOrientation.VERTICAL, false,
+                
+                true, false);
+                try {
+            ChartUtilities.saveChartAsPNG(new File("chart.png"), chart, 400, 300);
+         // Creación del panel con el gráfico
+            ChartPanel panel = new ChartPanel(chart);
+ 
+            JFrame ventana = new JFrame();
+            ventana.getContentPane().add(panel);
+            ventana.pack();
+            ventana.setVisible(true);
+            ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+               
+                /*antallaGrafica pantallaG = new PantallaGrafica();
+                pantallaG.ponGrafica(chart);
+                pantallaG.setVisible(true);*/
 
             } else {
                 double min=Double.valueOf(cotaInf.getText());
