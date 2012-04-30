@@ -28,6 +28,7 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
     /** Relación de ids, dado el identificador de fichero, devuelve
      el indentificador del array*/
     static Map<Integer, Integer> ids;
+    static Map<Integer, Integer> idsContrario;
     /** Número de grupos */
     private static int g;
     /** Número de alumnos por grupo */
@@ -77,6 +78,7 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
         numAlumnos=Integer.valueOf(datos[0]);
         int incompatibilidades = Integer.valueOf(datos[1]);
         ids = new HashMap<Integer, Integer>(numAlumnos);
+        idsContrario = new HashMap<Integer, Integer>(numAlumnos);
         alumnos = new ArrayList<Alumno>(numAlumnos);
         for (int i=0;i<numAlumnos;i++){
             linea = manejador.dameLinea();
@@ -84,6 +86,7 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
             int id=Integer.valueOf(datos[0]);
             int nota= Integer.valueOf(datos[1]);
             ids.put(id, i);
+            idsContrario.put(i,id);
             Alumno alumno = new Alumno(id,nota);
             alumnos.add(i, alumno);
         }
@@ -144,19 +147,7 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
     }
 
     public double fenotipo() {
-        // Cálculo de la media
-        /*
-        double media = 0;
-        int alumnos_size = alumnos.size();
 
-        for (int i=0; i<alumnos_size; i++)
-            media += alumnos.get(i).getNota();
-
-        media /= alumnos_size;
-        media /= 100;
-        */
-
-        // Calculamos desequilibrio
         double desequilibrio = 0;
 
         
@@ -173,15 +164,6 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
             
             desequilibrio += Math.pow(desequilibrio_grupo,2);
         }
-        
-        /*
-        for (int i=0; i<alumnos_size; i++) {
-            desequilibrio_grupo += Math.abs(alumnos.get(genesA[i].valor).getNota()/100-media);
-            if (i%m == (m-1)) {
-                desequilibrio += Math.pow(desequilibrio_grupo, 1);
-                desequilibrio_grupo = 0;
-            }
-        }*/
 
         // Calculamos incompatibilidades dentro de cada grupo
         double incompatibilidades = 0; // TODO: cambiar a entero
@@ -198,4 +180,8 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
         return resultado;
 
     }
+    
+    public ArrayList<Alumno> dameAlumnos(){return alumnos;}
+    public Map<Integer, Integer> dameIds(){return idsContrario;}
+    public int dameGrupos(){return g;}
 }
