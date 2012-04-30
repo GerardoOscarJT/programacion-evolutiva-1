@@ -84,7 +84,7 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
             linea = manejador.dameLinea();
             datos=linea.split(" ");
             int id=Integer.valueOf(datos[0]);
-            int nota= Integer.valueOf(datos[1]);
+            double nota= Float.valueOf(datos[1]);
             ids.put(id, i);
             idsContrario.put(i,id);
             Alumno alumno = new Alumno(id,nota);
