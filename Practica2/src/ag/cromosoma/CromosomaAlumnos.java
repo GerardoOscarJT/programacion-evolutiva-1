@@ -110,6 +110,7 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
             for (int i=resto;i<n;i++){
                 Alumno alumno = new Alumno((-contador-1),0);
                 ids.put((-contador-1),numAlumnos+contador);
+                idsContrario.put(numAlumnos+contador,(-contador-1));
                 alumnos.add(numAlumnos+contador, alumno);
                 contador++;
             }
