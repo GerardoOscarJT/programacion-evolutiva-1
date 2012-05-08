@@ -147,6 +147,51 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
         return ca;
     }
 
+
+    public double fenotipo() {
+
+        double desequilibrio = 0;
+
+
+        // Nota media individual de cada uno
+        double media = 0;
+        for (int i=0; i<alumnos.size(); i++)
+            media += alumnos.get(i).getNota();
+        media /= alumnos.size();
+
+
+
+
+
+        for (int i=0; i<g; i++) {
+
+            double desequilibrio_grupo = 0;
+            for (int j = 0; j<m; j++)
+                desequilibrio_grupo += (alumnos.get(genesA[i*m+j].valor).getNota()-media);
+                //desequilibrio_grupo += Math.abs(alumnos.get(genesA[i*m+j].valor).getNota()-media);
+
+            desequilibrio += Math.pow(desequilibrio_grupo,2);
+        }
+
+        // Calculamos incompatibilidades dentro de cada grupo
+        double incompatibilidades = 0; // TODO: cambiar a entero
+        for (int i = 0; i<g; i++)
+            for (int j = i*m; j<(i+1)*m; j++)
+                for (int k = i*m; k<(i+1)*m; k++)
+                    if (alumnos.get(genesA[j].valor).getEnemigos().contains(genesA[k].valor))
+                        incompatibilidades++;
+
+
+
+        // Calculamos la función de evaluación
+        double resultado = alfa*desequilibrio+(1-alfa)*incompatibilidades;
+        return resultado;
+
+    }
+
+
+    
+/*
     public double fenotipo() {
 
         double desequilibrio = 0;
@@ -181,6 +226,8 @@ public class CromosomaAlumnos extends CromosomaStaticArray {
         return resultado;
 
     }
+ *
+ */
     
     public ArrayList<Alumno> dameAlumnos(){return alumnos;}
     public Map<Integer, Integer> dameIds(){return idsContrario;}
