@@ -6,7 +6,6 @@
 package ag.cruce;
 
 import ag.cromosoma.Cromosoma;
-import ag.cromosoma.CromosomaAlumnos;
 import ag.cromosoma.CromosomaStaticArray;
 import ag.gen.Gen;
 import ag.gen.GenEntero;
