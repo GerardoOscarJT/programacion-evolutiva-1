@@ -6,7 +6,6 @@
 package ag;
 
 import ag.cromosoma.Cromosoma;
-import ag.cromosoma.CromosomaAlumnos;
 import ag.cruce.Cruce;
 import ag.mutacion.Mutacion;
 import ag.seleccion.Seleccion;

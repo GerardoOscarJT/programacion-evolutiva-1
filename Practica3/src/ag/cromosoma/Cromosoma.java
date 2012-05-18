@@ -49,7 +49,6 @@ public abstract class Cromosoma implements Comparable<Cromosoma>, Cloneable{
      * Dado un gen devolver la copia
      * TODO : Hacer comprobación de tipos
      */
-    public abstract Cromosoma copia(Cromosoma c);
 
     public abstract Object clone();
 
