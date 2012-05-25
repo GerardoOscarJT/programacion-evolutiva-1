@@ -8,7 +8,7 @@ package ag.cromosoma;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import practica3.Arbol;
+import practica3.ArbolOLD;
 import utiles.LeerArchivo;
 
 /**
@@ -20,12 +20,11 @@ public class CromosomaHormiga extends Cromosoma {
     /**
      * Parámetros del problema (En teoría sirve para acotar la búsqueda)
      */
-    static int profundidad_maxima = 6;
-    static int numero_nodos_maximo = 100;
-    static int numero_maximo_pasos = 400;
-    static int comida_maxima = 89;
-    static double factor_de_ajuste = 0.88;
-    static int[][] tablero = new int[32][32];
+    public static int profundidad_maxima = 6;
+    public static int numero_nodos_maximo = 100;
+    public static int numero_maximo_pasos = 400;
+    public static int comida_maxima = 89;
+    public static double factor_de_ajuste = 0.82;
 
     static int board_width = 32;
     static int board_height = 32;
@@ -33,16 +32,12 @@ public class CromosomaHormiga extends Cromosoma {
 
     private double _evaluacion = 0;
 
-    Arbol programa;
+    ArbolOLD programa;
 
     public CromosomaHormiga() {
 
     }
     
-    public CromosomaHormiga(int[][] matriz){
-        tablero = matriz;
-    }
-
     public double evaluacion() {
         return _evaluacion;
     }
@@ -53,7 +48,7 @@ public class CromosomaHormiga extends Cromosoma {
 
     @Override
     public void aleatoriza() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 
     @Override
@@ -70,7 +65,7 @@ public class CromosomaHormiga extends Cromosoma {
 
     @Override
     public Cromosoma nuevo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new CromosomaHormiga();
     }
 
     @Override
