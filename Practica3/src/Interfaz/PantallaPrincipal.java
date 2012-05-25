@@ -7,13 +7,11 @@ package Interfaz;
 
 import ag.AlgoritmoGenetico;
 import ag.cromosoma.Cromosoma;
+import ag.cromosoma.CromosomaHormiga;
 import ag.cruce.*;
 import ag.mutacion.*;
 import ag.seleccion.*;
 import java.awt.Color;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -21,9 +19,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.math.plot.Plot2DPanel;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Map;
 import javax.swing.JFrame;
+import utiles.LeerArchivo;
+
 /**
  *
  * @author Alberto
@@ -34,12 +32,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private static File archivo = null;
     private static int alumGrupo=0;
     private JFrame ventana = null;
+    private static int[][] matriz = new int[32][32];
     
-    public PantallaPrincipal() {
+    public PantallaPrincipal() throws FileNotFoundException, IOException {
         modelotabla = new DefaultTableModel();        
         initComponents();
         frameGrafica.setVisible(false);
         scrollResultados.setVisible(false);
+        CromosomaHormiga.leer(archivo);
       }
     
 
@@ -326,7 +326,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularActionPerformed
-        //Cromosoma c = new Cromosoma();
+        Cromosoma c = new CromosomaHormiga(matriz);
         Seleccion s = null;
         Cruce cr = null;
         Mutacion m = null;
@@ -352,13 +352,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             case 0 : m = new MutacionInsercion(); break;
             case 1 : m = new MutacionIntercambio(); break;
             case 2 : m = new MutacionInversion(); break;
-            //case 3 : m = new MutacionHeuristica(); break;
         }
 
         // Asignamos el archivo
         if (archivo==null)
            try {
-            CromosomaAlumnos.leer(new File("archivo1.txt"));
+            CromosomaHormiga.leer(new File("archivo1.txt"));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -394,19 +393,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 valido=false;}
 
         
-        if (!alpha.getText().isEmpty())
-            try{CromosomaAlumnos.alfa=Double.valueOf(alpha.getText());}
-            catch(NumberFormatException ex){
-                JOptionPane.showMessageDialog(rootPane, "Factor alpha incorrecto.\n Debe ser un número real.");
-                valido=false;}
-
-        
-        if (!alumPorGrupo.getText().isEmpty())
-            try{CromosomaAlumnos.m=Integer.parseInt(alumPorGrupo.getText());
-                alumGrupo=Integer.parseInt(alumPorGrupo.getText());}
-            catch(NumberFormatException ex){
-                JOptionPane.showMessageDialog(rootPane, "Tamaño de población incorrecto.\n Debe ser un número entero.");
-                valido=false;}
         
         if (!poblacion.getText().isEmpty())
             try{ag.tamano=Integer.parseInt(poblacion.getText());}
@@ -431,8 +417,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         
         if (valido){
             
-            CromosomaAlumnos.completa(CromosomaAlumnos.m);
-        
             ag.inicializa();
             double[] regla = new double[ag.mejor_generacion.size()];
             double[] mejorGeneracion = new double[ag.mejor_generacion.size()];
@@ -462,7 +446,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             frameGrafica.setContentPane(plot);
             frameGrafica.setVisible(true);
 
-            CromosomaAlumnos mejor = (CromosomaAlumnos)ag.getMejor();
+            Cromosoma mejor = ag.getMejor();
 
             resultados.setText("Maximo "+mejor.toString()+ ", Evaluacion="+mejor.evaluacion());
             scrollResultados.setVisible(true);
@@ -485,6 +469,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         int returnVal = fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION){
             archivo = fc.getSelectedFile();
+            /*
+             * TODO: Alberto cargar archivo con mapa de hormiga
             try {
                 CromosomaAlumnos.leer(archivo);
             } catch (FileNotFoundException ex) {
@@ -492,6 +478,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
+            */
         }else{fc.setVisible(false);}
     }//GEN-LAST:event_botonArchivoMouseClicked
 
@@ -522,7 +509,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new PantallaPrincipal().setVisible(true);
+                try {
+                    new PantallaPrincipal().setVisible(true);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

@@ -19,20 +19,19 @@ public class LeerArchivo {
     private static String[] datos;
 
     
-    public String inicializa(File archivo){
+    public void inicializa(File archivo){
         _f = archivo;
         if (archivo == null){
             try{
-                br = new BufferedReader(new FileReader("archivo.txt"));
-                linea = br.readLine();
+                br = new BufferedReader(new FileReader("comida.txt"));
+                //linea = br.readLine();
             }catch(Exception ex){System.out.println("Error al leer fichero.");}
         }else{
            try{
                 br = new BufferedReader(new FileReader(_f));
-                linea = br.readLine();
+                //linea = br.readLine();
             }catch(Exception ex){System.out.println("Error al leer fichero.");} 
         }
-        return linea;
     };
         
     public String dameLinea() throws FileNotFoundException, IOException{
