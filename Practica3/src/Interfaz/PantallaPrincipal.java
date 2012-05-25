@@ -153,12 +153,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jLabel1.setText("Cruce");
 
-        tipoCruce.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PMX", "OX", "Variante OX", "Ordinal", "Método propio" }));
-        tipoCruce.setSelectedIndex(3);
+        tipoCruce.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cruce Hormiga" }));
 
         jLabel6.setText("Mutación");
 
-        tipoMutacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Inserción", "Intercambio", "Inversión", "Heurística" }));
+        tipoMutacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Terminal", "Función", "Inicialozación" }));
 
         botonArchivo.setLabel("Archivo");
         botonArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -356,15 +355,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         }
         //Escogemos el algoritmo de cruce
         switch(tipoCruce.getSelectedIndex()){
-            case 0 : cr = new CrucePMX(); break;
-            case 1 : cr = new CruceOX(); break;
-            case 3 : cr = new CruceOrdinal(); break;
+            case 0: cr = new CruceHormiga();break;
+
         }
         //Escogemos el algoritmo de mutación
         switch(tipoMutacion.getSelectedIndex()){
             case 0 : m = new MutacionInsercion(); break;
             case 1 : m = new MutacionIntercambio(); break;
-            case 2 : m = new MutacionInversion(); break;
+            case 2 : m = new MutacionInicializar(); break;
         }
 
         // Asignamos el archivo
@@ -461,7 +459,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
             Cromosoma mejor = ag.getMejor();
 
-            resultados.setText("Maximo "+mejor.toString()+ ", Evaluacion="+mejor.evaluacion());
+            resultados.setText(" Evaluacion="+mejor.evaluacion()+", Maximo "+mejor.toString()+ "\n");
+            
+            resultados.append(((CromosomaHormiga) mejor).toHTML());
+
             scrollResultados.setVisible(true);
                 
         }
@@ -502,7 +503,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
 
         Arbol a = new ArbolNoterminal();
-        a.aletorizar(1);
+        a.aletorizar();
         System.out.println(a.toString());
 
 

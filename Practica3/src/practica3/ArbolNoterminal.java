@@ -19,17 +19,16 @@ public class ArbolNoterminal extends Arbol {
     private int _profundidad = 1;
 
     { // Inicializo la lista de hijos
-        hijos = new Vector<Arbol>(2);
-        hijos.insertElementAt(null, 0);
-        hijos.insertElementAt(null, 1);
+        //hijos = new Vector<Arbol>(2);
+        hijos = new Arbol[2];
     }
 
-    public void aletorizar(int nivel) {
+    public void aletorizar() {
 
         /**
          * Probabilidad de ser o no ser un terminal:
          */
-        double probTerm = 1-Math.pow(1-Math.pow(CromosomaHormiga.factor_de_ajuste, CromosomaHormiga.profundidad_maxima), nivel);
+        double probTerm = 1-Math.pow(1-Math.pow(CromosomaHormiga.factor_de_ajuste, CromosomaHormiga.profundidad_maxima), getNivel());
 
         // TODO: Si hay más restricciones (nodos, profundidad, etc, poner probTerm=1
 
@@ -49,8 +48,8 @@ public class ArbolNoterminal extends Arbol {
             } else { // Meto un noterminal
                 arbol = new ArbolNoterminal();
             }
-            arbol.aletorizar(nivel+1);
             this.insertar(i, arbol);
+            arbol.aletorizar();
 
         }
     }
@@ -61,9 +60,14 @@ public class ArbolNoterminal extends Arbol {
     public void insertar(int pos, Arbol nodo) {
         if (pos < 2) {
             nodo.padre = this;
-            this.num_nodos += nodo.num_nodos;
-            this.setProfundidad(nodo.getProfundidad()+1);
-            hijos.set(pos, nodo);
+            //hijos.set(pos, nodo);
+            hijos[pos] = nodo;
+
+            // Propagar
+            //this.setProfundidad(nodo.getProfundidad()+1);
+            nodo.setNivel(this.getNivel()+1);
+            this.actualizarNodosSubarbol();
+            
         }
     }
 
@@ -82,12 +86,24 @@ public class ArbolNoterminal extends Arbol {
 
     public String toString() {
         String resultado = functor.toString() + " ( ";
-        for (int i=0; i<hijos.size(); i++) {
+        for (int i=0; i<hijos.length; i++) {
             if (i>0) resultado += ", ";
-            resultado += hijos.get(i).toString();
+            resultado += hijos[i].toString();
         }
         resultado += " )";
         return resultado;
+    }
+
+    public void setNivel(int n) {
+        _nivel = n;
+        for (Arbol a:hijos)
+            if (a != null)
+                a.setNivel(n+1);
+    }
+
+
+    public TipoArbol getTipo() {
+        return TipoArbol.NOTERMINAL;
     }
 
 }
