@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import org.math.plot.Plot2DPanel;
 import java.io.*;
 import javax.swing.JFrame;
-import utiles.LeerArchivo;
+import practica3.*;
 
 /**
  *
@@ -32,14 +32,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private static File archivo = null;
     private static int alumGrupo=0;
     private JFrame ventana = null;
-    private static int[][] matriz = new int[32][32];
     
-    public PantallaPrincipal() throws FileNotFoundException, IOException {
+    public PantallaPrincipal() {
         modelotabla = new DefaultTableModel();        
         initComponents();
         frameGrafica.setVisible(false);
         scrollResultados.setVisible(false);
-        CromosomaHormiga.leer(archivo);
       }
     
 
@@ -85,6 +83,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         frameGrafica = new javax.swing.JInternalFrame();
         scrollResultados = new javax.swing.JScrollPane();
         resultados = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout ErrorLayout = new javax.swing.GroupLayout(Error.getContentPane());
         Error.getContentPane().setLayout(ErrorLayout);
@@ -265,7 +264,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                             .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(elitismo)
                                 .addComponent(tamanoElite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                         .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(seleccionados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel15)))
@@ -289,7 +288,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         );
         frameGraficaLayout.setVerticalGroup(
             frameGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 427, Short.MAX_VALUE)
+            .addGap(0, 504, Short.MAX_VALUE)
         );
 
         scrollResultados.setEnabled(false);
@@ -298,12 +297,23 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         resultados.setRows(5);
         scrollResultados.setViewportView(resultados);
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrollResultados, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
@@ -311,22 +321,25 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(frameGrafica)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 90, Short.MAX_VALUE)
-                .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(frameGrafica)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scrollResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularActionPerformed
-        Cromosoma c = new CromosomaHormiga(matriz);
+        Cromosoma c = new CromosomaHormiga();
         Seleccion s = null;
         Cruce cr = null;
         Mutacion m = null;
@@ -357,7 +370,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         // Asignamos el archivo
         if (archivo==null)
            try {
-            CromosomaHormiga.leer(new File("archivo1.txt"));
+            CromosomaHormiga.leer(archivo);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -469,22 +482,31 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         int returnVal = fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION){
             archivo = fc.getSelectedFile();
-            /*
-             * TODO: Alberto cargar archivo con mapa de hormiga
             try {
-                CromosomaAlumnos.leer(archivo);
+                CromosomaHormiga.leer(archivo);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
-            */
+
         }else{fc.setVisible(false);}
     }//GEN-LAST:event_botonArchivoMouseClicked
 
     private void alumPorGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alumPorGrupoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alumPorGrupoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+
+
+        Arbol a = new ArbolNoterminal();
+        a.aletorizar(1);
+        System.out.println(a.toString());
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -509,18 +531,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                try {
-                    new PantallaPrincipal().setVisible(true);
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
-                    Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new PantallaPrincipal().setVisible(true);
             }
         });
     }
-
-
+    
  
 
     private DefaultTableModel modelotabla;
@@ -533,6 +548,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton calcular;
     private javax.swing.JCheckBox elitismo;
     private javax.swing.JInternalFrame frameGrafica;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
