@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import org.math.plot.Plot2DPanel;
 import java.io.*;
 import javax.swing.JFrame;
+import utiles.LeerArchivo;
 
 /**
  *
@@ -31,12 +32,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private static File archivo = null;
     private static int alumGrupo=0;
     private JFrame ventana = null;
+    private static int[][] matriz = new int[32][32];
     
-    public PantallaPrincipal() {
+    public PantallaPrincipal() throws FileNotFoundException, IOException {
         modelotabla = new DefaultTableModel();        
         initComponents();
         frameGrafica.setVisible(false);
         scrollResultados.setVisible(false);
+        CromosomaHormiga.leer(archivo);
       }
     
 
@@ -323,7 +326,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularActionPerformed
-        Cromosoma c = new CromosomaHormiga();
+        Cromosoma c = new CromosomaHormiga(matriz);
         Seleccion s = null;
         Cruce cr = null;
         Mutacion m = null;
@@ -506,7 +509,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new PantallaPrincipal().setVisible(true);
+                try {
+                    new PantallaPrincipal().setVisible(true);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
