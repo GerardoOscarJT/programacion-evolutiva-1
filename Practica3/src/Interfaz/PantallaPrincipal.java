@@ -7,7 +7,6 @@ package Interfaz;
 
 import ag.AlgoritmoGenetico;
 import ag.cromosoma.Cromosoma;
-import ag.cromosoma.CromosomaAlumnos;
 import ag.cruce.*;
 import ag.mutacion.*;
 import ag.seleccion.*;
@@ -25,8 +24,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JFrame;
-import practica2.Alumno;
-
 /**
  *
  * @author Alberto
@@ -329,7 +326,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularActionPerformed
-        Cromosoma c = new CromosomaAlumnos();
+        //Cromosoma c = new Cromosoma();
         Seleccion s = null;
         Cruce cr = null;
         Mutacion m = null;
@@ -348,16 +345,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         switch(tipoCruce.getSelectedIndex()){
             case 0 : cr = new CrucePMX(); break;
             case 1 : cr = new CruceOX(); break;
-            case 2 : cr = new CruceVarianteOX(); break;
             case 3 : cr = new CruceOrdinal(); break;
-            case 4 : cr = new CruceMetodoPropio(); break;
         }
         //Escogemos el algoritmo de mutación
         switch(tipoMutacion.getSelectedIndex()){
             case 0 : m = new MutacionInsercion(); break;
             case 1 : m = new MutacionIntercambio(); break;
             case 2 : m = new MutacionInversion(); break;
-            case 3 : m = new MutacionHeuristica(); break;
+            //case 3 : m = new MutacionHeuristica(); break;
         }
 
         // Asignamos el archivo
