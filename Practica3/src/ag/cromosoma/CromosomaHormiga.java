@@ -17,6 +17,15 @@ import utiles.LeerArchivo;
  */
 public class CromosomaHormiga extends Cromosoma {
 
+    /**
+     * Parámetros del problema (En teoría sirve para acotar la búsqueda)
+     */
+    static int profundidad_maxima = 6;
+    static int numero_nodos_maximo = 100;
+    static int numero_maximo_pasos = 400;
+    static int comida_maxima = 89;
+    static double factor_de_ajuste = 0.88;
+
     static int board_width = 20;
     static int board_height = 15;
     static int[][] tablero_inicial = new int[board_height][board_width];
