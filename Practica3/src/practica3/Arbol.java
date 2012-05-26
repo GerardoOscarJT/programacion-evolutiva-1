@@ -36,4 +36,23 @@ public abstract class Arbol {
         return _nivel;
     }
 
+    public int getDeep() {
+        int md=0;
+        int d;
+        for (Arbol a:hijos) {
+            d = a.getDeep();
+            if (d>md)
+                md = d;
+        }
+        md++;
+        return md;
+    }
+
+    public int getNumNodes() {
+        int n = 1;
+        for (Arbol a:hijos)
+            n+= a.getNumNodes();
+        return n;
+    }
+
 }

@@ -26,7 +26,11 @@ public class ArbolNoterminal extends Arbol {
         /**
          * Probabilidad de ser o no ser un terminal:
          */
-        double probTerm = 1-Math.pow(1-Math.pow(CromosomaHormiga.factor_de_ajuste, CromosomaHormiga.profundidad_maxima), getNivel());
+        double probTerm = 1-Math.pow(
+                1-Math.pow(
+                    CromosomaHormiga.factor_de_ajuste,
+                    CromosomaHormiga.profundidad_maxima),
+                getNivel());
 
         // TODO: Si hay más restricciones (nodos, profundidad, etc, poner probTerm=1
 
