@@ -10,9 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import practica3.Arbol;
 import practica3.ArbolNoterminal;
-import practica3.ArbolOLD;
 import practica3.ArbolTerminal;
-import practica3.TipoArbol;
 import utiles.LeerArchivo;
 
 /**
@@ -50,6 +48,7 @@ public class CromosomaHormiga extends Cromosoma {
     int emu_tablero[][];
     int emu_raciones = 0;
     int emu_avances = 0;
+    int emu_avances_min = 0;
 
     int emu_pos_x = 0;
     int emu_pos_y = 0;
@@ -75,6 +74,7 @@ public class CromosomaHormiga extends Cromosoma {
         emu_pos_y = 0;
         emu_raciones = 0;
         emu_avances = 0;
+        emu_avances_min = 0;
 
         // Copio el tablero
         emu_tablero = new int[board_height][board_width];
@@ -88,11 +88,18 @@ public class CromosomaHormiga extends Cromosoma {
         }
 
         _fenotipo = emu_raciones;
-        _evaluacion = (double) emu_raciones / (double) (p+1);
         _evaluacion = emu_raciones;
 
-        // TODO: si se pasa del nº máximo de nodos, divir por 2
-        // TODO: si se pasa de la profundidad máxima, divir otra vez por dos
+        // Penalizar el exceso de profundidad
+            // Opción 1: Todos se penalizan por igual
+            _evaluacion /= programa.getDeep();
+
+            // Opción 2: Penalizar en función de un umbral
+            
+            //if (programa.getDeep() > profundidad_maxima)
+                //_evaluacion /= programa.getDeep();
+            
+        
     }
 
     private void ejecutarArbol(Arbol a) {
@@ -105,6 +112,7 @@ public class CromosomaHormiga extends Cromosoma {
                         if (emu_tablero[emu_pos_y][emu_pos_x] == 1) {
                             emu_tablero[emu_pos_y][emu_pos_x] = 3;
                             emu_raciones++;
+                            emu_avances_min = emu_avances;
                         } else if (emu_tablero[emu_pos_y][emu_pos_x] == 0) {
                             emu_tablero[emu_pos_y][emu_pos_x] = 2;
                         }
