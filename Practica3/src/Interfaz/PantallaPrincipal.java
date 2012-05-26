@@ -71,19 +71,16 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         tamanoElite = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         seleccionados = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        alpha = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         tipoCruce = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         tipoMutacion = new javax.swing.JComboBox();
         botonArchivo = new java.awt.Button();
-        alumPorGrupo = new javax.swing.JTextField();
+        profundidadMaxima = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         frameGrafica = new javax.swing.JInternalFrame();
         scrollResultados = new javax.swing.JScrollPane();
         resultados = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout ErrorLayout = new javax.swing.GroupLayout(Error.getContentPane());
         Error.getContentPane().setLayout(ErrorLayout);
@@ -124,6 +121,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jLabel7.setText("Selección");
 
+        elitismo.setSelected(true);
         elitismo.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 elitismoStateChanged(evt);
@@ -147,17 +145,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         seleccionados.setText("0.6");
         seleccionados.setName(""); // NOI18N
 
-        jLabel16.setText("Factor alpha");
-
-        alpha.setText("0.3");
-
         jLabel1.setText("Cruce");
 
         tipoCruce.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cruce Hormiga" }));
 
         jLabel6.setText("Mutación");
 
-        tipoMutacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Terminal", "Función", "Inicialozación" }));
+        tipoMutacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Terminal", "Función", "Inicialización" }));
 
         botonArchivo.setLabel("Archivo");
         botonArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -166,14 +160,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        alumPorGrupo.setText("2");
-        alumPorGrupo.addActionListener(new java.awt.event.ActionListener() {
+        profundidadMaxima.setText("6");
+        profundidadMaxima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                alumPorGrupoActionPerformed(evt);
+                profundidadMaximaActionPerformed(evt);
             }
         });
 
-        jLabel8.setText("Alumnos/Grupo");
+        jLabel8.setText("Profundidad max");
 
         javax.swing.GroupLayout PanelPrincipalLayout = new javax.swing.GroupLayout(PanelPrincipal);
         PanelPrincipal.setLayout(PanelPrincipalLayout);
@@ -182,44 +176,47 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             .addGroup(PanelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel1)
-                    .addGroup(PanelPrincipalLayout.createSequentialGroup()
-                        .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(PanelPrincipalLayout.createSequentialGroup()
-                                .addComponent(elitismo)
-                                .addGap(18, 18, 18)
-                                .addComponent(tamanoElite, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(69, 69, 69)
-                                .addComponent(botonArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(tipoSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(alpha, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(probMutacion, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(probCruce, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(numGen, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(poblacion, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tipoCruce, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tipoMutacion, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(alumPorGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(seleccionados, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(calcular, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel1)
+                        .addGroup(PanelPrincipalLayout.createSequentialGroup()
+                            .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(31, 31, 31)
+                            .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(PanelPrincipalLayout.createSequentialGroup()
+                                    .addComponent(elitismo)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tamanoElite, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(69, 69, 69)
+                                    .addComponent(botonArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tipoSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(probMutacion, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(probCruce, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(numGen, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(poblacion, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tipoCruce, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tipoMutacion, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(seleccionados, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(profundidadMaxima, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(calcular, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel8))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         PanelPrincipalLayout.setVerticalGroup(
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelPrincipalLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(profundidadMaxima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(poblacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -235,11 +232,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(probMutacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(alpha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(30, 30, 30)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(tipoSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -251,10 +244,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(tipoMutacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(alumPorGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
@@ -283,7 +273,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         frameGrafica.getContentPane().setLayout(frameGraficaLayout);
         frameGraficaLayout.setHorizontalGroup(
             frameGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 477, Short.MAX_VALUE)
+            .addGap(0, 464, Short.MAX_VALUE)
         );
         frameGraficaLayout.setVerticalGroup(
             frameGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,26 +286,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         resultados.setRows(5);
         scrollResultados.setViewportView(resultados);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)))
+                .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollResultados, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                    .addComponent(scrollResultados, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
                     .addComponent(frameGrafica)))
         );
         layout.setVerticalGroup(
@@ -323,10 +302,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                        .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(frameGrafica)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -360,8 +336,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         }
         //Escogemos el algoritmo de mutación
         switch(tipoMutacion.getSelectedIndex()){
-            case 0 : m = new MutacionInsercion(); break;
-            case 1 : m = new MutacionIntercambio(); break;
+            case 0 : m = new MutacionTerminal(); break;
+            case 1 : m = new MutacionNoTerminal(); break;
             case 2 : m = new MutacionInicializar(); break;
         }
 
@@ -385,16 +361,22 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Tamaño de población incorrecto.\n Debe ser un número entero.");
                 valido=false;}
         
-        if (!numGen.getText().isEmpty()) 
+        if (!numGen.getText().isEmpty())
             try{ag.num_generaciones=Integer.parseInt(numGen.getText());}
             catch(NumberFormatException ex){
                 JOptionPane.showMessageDialog(rootPane, "Numero de generaciones incorrecto.\n Debe ser un número entero.");
                 valido=false;}
-        
-        if (!probCruce.getText().isEmpty())
-            try{ag.prob_cruce=Double.valueOf(probCruce.getText());}
+
+        if (!numGen.getText().isEmpty())
+            try{ag.num_generaciones=Integer.parseInt(numGen.getText());}
             catch(NumberFormatException ex){
-                JOptionPane.showMessageDialog(rootPane, "Probabilidad de cruce incorrecta.\n Debe ser un número real.");
+                JOptionPane.showMessageDialog(rootPane, "Numero de generaciones incorrecto.\n Debe ser un número entero.");
+                valido=false;}
+
+        if (!profundidadMaxima.getText().isEmpty())
+            try{CromosomaHormiga.profundidad_maxima=Integer.valueOf(profundidadMaxima.getText());}
+            catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(rootPane, "Profundidad máxima incorrecta.\n Debe ser un número entero.");
                 valido=false;}
 
         if (!probMutacion.getText().isEmpty())
@@ -459,10 +441,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
             Cromosoma mejor = ag.getMejor();
 
-            resultados.setText(" Evaluacion="+mejor.evaluacion()+", Maximo "+mejor.toString()+ "\n");
-            
+            resultados.setText("Fenotipo="+mejor.fenotipo()+"\nEvaluacion="+mejor.evaluacion()+"\n Maximo "+mejor.toString()+ "\n");
             resultados.append(((CromosomaHormiga) mejor).toHTML());
 
+            resultados.select(1, 1);
+
+            
             scrollResultados.setVisible(true);
                 
         }
@@ -494,20 +478,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         }else{fc.setVisible(false);}
     }//GEN-LAST:event_botonArchivoMouseClicked
 
-    private void alumPorGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alumPorGrupoActionPerformed
+    private void profundidadMaximaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profundidadMaximaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_alumPorGrupoActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-
-
-        Arbol a = new ArbolNoterminal();
-        a.aletorizar();
-        System.out.println(a.toString());
-
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_profundidadMaximaActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -543,16 +516,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog Error;
     private javax.swing.JPanel PanelPrincipal;
-    private javax.swing.JTextField alpha;
-    private javax.swing.JTextField alumPorGrupo;
     private java.awt.Button botonArchivo;
     private javax.swing.JButton calcular;
     private javax.swing.JCheckBox elitismo;
     private javax.swing.JInternalFrame frameGrafica;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -565,6 +534,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField poblacion;
     private javax.swing.JTextField probCruce;
     private javax.swing.JTextField probMutacion;
+    private javax.swing.JTextField profundidadMaxima;
     private javax.swing.JTextArea resultados;
     private javax.swing.JScrollPane scrollResultados;
     private javax.swing.JTextField seleccionados;

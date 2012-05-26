@@ -19,7 +19,9 @@ import practica3.TipoArbol;
 public class CruceHormiga extends Cruce {
 
     public void cruza(Cromosoma a, Cromosoma b) {
-        /*
+        if (a == b)
+            return;
+
         CromosomaHormiga ca = (CromosomaHormiga) a;
         CromosomaHormiga cb = (CromosomaHormiga) b;
 
@@ -37,19 +39,15 @@ public class CruceHormiga extends Cruce {
         Arbol hijo_a = padre_a.hijos[ha];
         Arbol hijo_b = padre_b.hijos[hb];
 
-        // Intercambiamos las movidas
-        hijo_b.padre = padre_a;
-        hijo_a.padre = padre_b;
+        Arbol nuevo_hijo_a = (Arbol) hijo_b.clone();
+        Arbol nuevo_hijo_b = (Arbol) hijo_a.clone();
 
-        hijo_b.padre = null;
-        hijo_a.padre = null;
 
-        padre_a.insertar(ha, hijo_b);
-        padre_b.insertar(hb, hijo_a);
+        padre_a.insertar(ha, nuevo_hijo_a);
+        padre_b.insertar(hb, nuevo_hijo_b);
 
         ca.recalcularEvaluacion();
         cb.recalcularEvaluacion();
-        */
 
     }
 

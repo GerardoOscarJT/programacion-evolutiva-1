@@ -40,16 +40,10 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="PanelPrincipal" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+              <Component id="PanelPrincipal" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scrollResultados" pref="479" max="32767" attributes="0"/>
+                  <Component id="scrollResultados" pref="466" max="32767" attributes="0"/>
                   <Component id="frameGrafica" alignment="0" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -60,11 +54,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="48" max="32767" attributes="0"/>
-                      <Component id="PanelPrincipal" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="PanelPrincipal" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="frameGrafica" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -85,51 +75,56 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="1"/>
-                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel15" alignment="0" min="-2" pref="92" max="-2" attributes="1"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="elitismo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="tamanoElite" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                                  <Component id="botonArchivo" min="-2" pref="119" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="1"/>
+                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel15" alignment="0" min="-2" pref="92" max="-2" attributes="1"/>
                               </Group>
-                              <Component id="tipoSeleccion" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
-                              <Component id="alpha" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
-                              <Component id="probMutacion" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
-                              <Component id="probCruce" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
-                              <Component id="numGen" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
-                              <Component id="poblacion" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
-                              <Component id="tipoCruce" min="-2" pref="334" max="-2" attributes="0"/>
-                              <Component id="tipoMutacion" min="-2" pref="334" max="-2" attributes="0"/>
-                              <Component id="alumPorGrupo" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
-                              <Component id="seleccionados" min="-2" pref="70" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="elitismo" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="tamanoElite" min="-2" pref="31" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                                      <Component id="botonArchivo" min="-2" pref="119" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="tipoSeleccion" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
+                                  <Component id="probMutacion" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
+                                  <Component id="probCruce" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
+                                  <Component id="numGen" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
+                                  <Component id="poblacion" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
+                                  <Component id="tipoCruce" min="-2" pref="334" max="-2" attributes="0"/>
+                                  <Component id="tipoMutacion" min="-2" pref="334" max="-2" attributes="0"/>
+                                  <Component id="seleccionados" min="-2" pref="70" max="-2" attributes="0"/>
+                                  <Component id="profundidadMaxima" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
+                          <Component id="calcular" alignment="1" min="-2" pref="457" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="calcular" alignment="1" min="-2" pref="457" max="-2" attributes="0"/>
+                      <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="25" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="profundidadMaxima" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="poblacion" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -149,12 +144,7 @@
                       <Component id="probMutacion" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="alpha" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tipoSeleccion" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -169,11 +159,7 @@
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tipoMutacion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                      <Component id="alumPorGrupo" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
@@ -267,6 +253,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="elitismo">
+          <Properties>
+            <Property name="selected" type="boolean" value="true"/>
+          </Properties>
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="elitismoStateChanged"/>
           </Events>
@@ -301,16 +290,6 @@
             <Property name="name" type="java.lang.String" value="" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel16">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Factor alpha"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="alpha">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="0.3"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cruce"/>
@@ -336,7 +315,7 @@
               <StringArray count="3">
                 <StringItem index="0" value="Terminal"/>
                 <StringItem index="1" value="Funci&#xf3;n"/>
-                <StringItem index="2" value="Inicialozaci&#xf3;n"/>
+                <StringItem index="2" value="Inicializaci&#xf3;n"/>
               </StringArray>
             </Property>
           </Properties>
@@ -349,17 +328,17 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botonArchivoMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="alumPorGrupo">
+        <Component class="javax.swing.JTextField" name="profundidadMaxima">
           <Properties>
-            <Property name="text" type="java.lang.String" value="2"/>
+            <Property name="text" type="java.lang.String" value="6"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="alumPorGrupoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="profundidadMaximaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Alumnos/Grupo"/>
+            <Property name="text" type="java.lang.String" value="Profundidad max"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -373,7 +352,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="477" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="464" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -401,13 +380,5 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jButton1"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-      </Events>
-    </Component>
   </SubComponents>
 </Form>

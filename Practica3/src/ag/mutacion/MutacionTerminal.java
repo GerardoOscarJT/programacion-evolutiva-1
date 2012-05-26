@@ -9,15 +9,15 @@ import ag.cromosoma.Cromosoma;
 import ag.cromosoma.CromosomaHormiga;
 import java.util.ArrayList;
 import practica3.Arbol;
+import practica3.TipoArbol;
 
 /**
  *
- * Este método de mutación sólo es compatible con el cromosoma CromosomaHormiga
+ * @author gerardo
  */
-public class MutacionInicializar extends Mutacion {
+public class MutacionTerminal extends Mutacion {
 
     public void muta(Cromosoma c) {
-        
         CromosomaHormiga ch = (CromosomaHormiga) c;
 
         ArrayList<Arbol> l = new ArrayList<Arbol>();
@@ -26,11 +26,12 @@ public class MutacionInicializar extends Mutacion {
         l.get(utiles.Aleatorio.getRandomInt(l.size())).aletorizar();
 
         ch.recalcularEvaluacion();
-        
     }
 
     private void buscarNodo(Arbol a, ArrayList<Arbol> l) {
-        l.add(a);
+        if (a.getTipo() == TipoArbol.TERMINAL)
+            l.add(a);
+
         for(Arbol n:a.hijos)
             buscarNodo(n, l);
     }

@@ -35,6 +35,7 @@ public class CromosomaHormiga extends Cromosoma {
     static int[][] tablero_inicial = new int[board_height][board_width];
 
     private double _evaluacion = 0;
+    private double _fenotipo = 0;
 
     public Arbol programa;
 
@@ -63,6 +64,7 @@ public class CromosomaHormiga extends Cromosoma {
     }
     
     public double evaluacion() {
+        //recalcularEvaluacion();
         return _evaluacion;
     }
 
@@ -80,11 +82,14 @@ public class CromosomaHormiga extends Cromosoma {
             for (int j=0; j<board_height; j++)
                     emu_tablero[i][j] = this.tablero_inicial[i][j];
 
-        for (int p=0; p<(numero_maximo_pasos-emu_avances); p++) {
+        int p;
+        for (p=0; p<(numero_maximo_pasos-emu_avances); p++) {
             ejecutarArbol(programa);
         }
 
-        _evaluacion = emu_raciones;// /(emu_avances+1);
+        _fenotipo = emu_raciones;
+        _evaluacion = (double) emu_raciones / (double) (p+1);
+        _evaluacion = emu_raciones;
 
         // TODO: si se pasa del nº máximo de nodos, divir por 2
         // TODO: si se pasa de la profundidad máxima, divir otra vez por dos
@@ -145,7 +150,7 @@ public class CromosomaHormiga extends Cromosoma {
     }
 
     public double fenotipo() {
-        return _evaluacion;
+        return _fenotipo;
     }
 
     public String toString() {
@@ -190,15 +195,16 @@ public class CromosomaHormiga extends Cromosoma {
         return html;
     }
 
-    @Override
     public Cromosoma nuevo() {
         return new CromosomaHormiga();
     }
 
-    @Override
     public Object clone() {
         CromosomaHormiga ca = new CromosomaHormiga();
-        // TODO: Copiar arbol, _evaluacion, etc.
+        ca.programa = (Arbol) this.programa.clone();
+        ca._evaluacion = this._evaluacion;
+        ca._fenotipo = this._fenotipo;
+        ca.recalcularEvaluacion();
         return ca;
     }
 
