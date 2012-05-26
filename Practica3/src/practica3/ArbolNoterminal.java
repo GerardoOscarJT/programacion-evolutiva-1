@@ -16,8 +16,6 @@ public class ArbolNoterminal extends Arbol {
 
     public Noterminales functor = Noterminales.PROGN2;
 
-    private int _profundidad = 1;
-
     { // Inicializo la lista de hijos
         //hijos = new Vector<Arbol>(2);
         hijos = new Arbol[2];
@@ -63,25 +61,8 @@ public class ArbolNoterminal extends Arbol {
             //hijos.set(pos, nodo);
             hijos[pos] = nodo;
 
-            // Propagar
-            //this.setProfundidad(nodo.getProfundidad()+1);
             nodo.setNivel(this.getNivel()+1);
-            this.actualizarNodosSubarbol();
-            
         }
-    }
-
-
-    public void setProfundidad(int p) {
-        if (p>this._profundidad) {
-            this._profundidad = p;
-            if (this.padre != null)
-                this.padre.setProfundidad(this._profundidad+1);
-        }
-    }
-
-    public int getProfundidad() {
-        return _profundidad;
     }
 
     public String toString() {
@@ -94,16 +75,37 @@ public class ArbolNoterminal extends Arbol {
         return resultado;
     }
 
+
     public void setNivel(int n) {
         _nivel = n;
+
+        if (n>100)
+            System.out.print(n);
+
         for (Arbol a:hijos)
             if (a != null)
                 a.setNivel(n+1);
     }
+    
 
 
     public TipoArbol getTipo() {
         return TipoArbol.NOTERMINAL;
+    }
+
+
+    public Object clone() {
+        ArbolNoterminal at = new ArbolNoterminal();
+        at.functor = this.functor;
+        at.padre = this.padre;
+        at._nivel = this._nivel;
+
+        for (int i=0; i<this.hijos.length; i++) {
+            Arbol b = (Arbol) hijos[i].clone();
+            at.insertar(i, b);
+        }
+
+        return at;
     }
 
 }

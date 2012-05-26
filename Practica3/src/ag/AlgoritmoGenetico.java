@@ -58,6 +58,7 @@ public class AlgoritmoGenetico {
         Collections.reverse(_elite);
         return _elite.get(0);
     }
+    
     public void evaluarPoblacion() {
         //////////////////
         // Elegir élite
@@ -72,7 +73,7 @@ public class AlgoritmoGenetico {
             _elite.add((Cromosoma) _poblacion.get(i).clone());
         }
 
-        // Mantenemos el tamaño de la élite eliminando los peores
+        // Mantenemos el tamaño de la elite eliminando los peores
         Collections.sort(_elite);
         while (_elite.size()>tamano_elite)
             _elite.remove(0);
@@ -136,7 +137,7 @@ public class AlgoritmoGenetico {
                     
 
             // 4) CONSERVAMOS EL TAMAÑO DE LA POBLACIÓN ELIMINANDO LOS PEORES
-            
+
             Collections.sort(_poblacion);
             while (_poblacion.size()>tamano)
                 _poblacion.remove(0);

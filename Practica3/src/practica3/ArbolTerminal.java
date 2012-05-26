@@ -20,14 +20,6 @@ public class ArbolTerminal extends Arbol {
         hijos = new Arbol[0];
     }
 
-    public void setProfundidad(int p) {
-        // No hace nada, porque es una hoja. La profundidad es siempre 1
-    }
-
-    public int getProfundidad() {
-        return 1;
-    }
-
     public String toString() {
         return functor.toString();
     }
@@ -57,11 +49,11 @@ public class ArbolTerminal extends Arbol {
         _nivel = n;
     }
 
-
-    public void setNodosSubarbol(int n) {
-        // No hago nada :)
+    public Object clone() {
+        ArbolTerminal at = new ArbolTerminal();
+        at.functor = this.functor;
+        at._nivel = this._nivel;
+        return at;
     }
-
-
 
 }
